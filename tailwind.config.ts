@@ -9,6 +9,7 @@ export default {
 	theme: {
 		extend: {}
 	},
+	darkMode: 'class',
 
 	plugins: [typography, forms, containerQueries]
 } satisfies Config;

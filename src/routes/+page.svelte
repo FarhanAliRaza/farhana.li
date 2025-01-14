@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import Backdrop from './Backdrop.svelte';
+	import Header from './Header.svelte';
+	import Hero from './Hero.svelte';
+</script>
+
+<Backdrop />
+
+<Header />
+
+<Hero />

@@ -1,3 +1,197 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* Font declarations */
+@font-face {
+  font-family: "Bricolage Grotesque Variable";
+  src: url('/fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2');
+  font-weight: 200 800;
+}
+
+@font-face {
+  font-family: "Public Sans Variable";
+  src: url('/fonts/public-sans-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Public Sans Variable";
+  src: url('/fonts/public-sans-latin-wght-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Chivo Mono Variable";
+  src: url('/fonts/chivo-mono-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Chivo Mono Variable";
+  src: url('/fonts/chivo-mono-latin-wght-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 100 900;
+}
+
+/* Root variables */
+:root {
+  --font-sans: "Public Sans Variable", sans-serif;
+  --font-mono: "Chivo Mono Variable", monospace;
+  --font-display: "Bricolage Grotesque Variable", sans-serif;
+
+  /* Light theme */
+  --color-bg: #ffffff;
+  --color-text: rgba(0, 0, 0, 0.867);
+  --color-border: rgba(0, 0, 0, 0.867);
+  --color-bg-code: rgba(0, 0, 0, 0.055);
+  --color-bg-secondary: #eee;
+  --color-brand: #00a6f5;
+
+  --rem: 16;
+  --viewport-padding: clamp(1rem, 0.4rem + 2vw, 2rem);
+  --max-page-width: 64rem;
+  --max-prose-width: 44rem;
+  --icon-size: 1.25em;
+  --content-pi: max(var(--viewport-padding), (100vw - var(--max-page-width)) / 2);
+  --prose-pi: max(var(--viewport-padding), (100vw - var(--max-prose-width)) / 2);
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 99999px;
+  --scale-000: 0.75rem;
+  --scale-00: 0.875rem;
+  --scale-0: 1rem;
+  --scale-1: 1.125rem;
+  --scale-2: 1.25rem;
+  --scale-3: 1.5rem;
+  --scale-4: 1.875rem;
+  --scale-5: 2.25rem;
+  --scale-6: 3rem;
+  --scale-7: 3.75rem;
+  --scale-8: 4.5rem;
+  --scale-9: 6rem;
+  --scale-10: 8rem;
+  --scale-00-0: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+  --scale-1-2: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+  --radius-break-out: var(--radius-md);
+}
+
+/* Dark theme */
+:root[class~="dark"] {
+  --color-bg: #000000;
+  --color-text: hsla(0, 0%, 100%, 0.8);
+  --color-border: hsla(0, 0%, 100%, 0.8);
+  --color-bg-code: hsla(0, 0%, 100%, 0.122);
+  --color-bg-secondary: #1b1b1b;
+  --color-brand: #219eff;
+}
+
+/* Base styles */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    @apply bg-[var(--color-bg)] text-[var(--color-text)];
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  h1, h2 {
+    font-family: var(--font-display);
+  }
+}
+
+/* Backdrop gradients */
+/* Backdrop gradients */
+.backdrop {
+    bottom: auto;
+    height: 70vh;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 1.5s linear;
+    z-index: -1;
+    --cl-1: rgba(255,232,145,.412);
+    --cl-2: rgba(255,134,177,.278);
+    --cl-3: rgba(135,195,255,.341);
+    --cl-4: rgba(100,178,255,.369);
+    --cd-1: rgba(169,132,0,.251);
+    --cd-2: rgba(117,0,54,.671);
+    --cd-3: rgba(0,58,96,.62);
+    --cd-4: rgba(0,64,155,.439);
+  }
+  
+  .backdrop.visible {
+    opacity: 1;
+  }
+  
+  @supports (height: 1lvh) {
+    .backdrop {
+      height: 70lvh;
+    }
+  }
+  
+  .backdrop .blobs {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .backdrop .blobs:after,
+  .backdrop .blobs:before {
+    background: radial-gradient(20% 80% ellipse at 0 0, var(--color-bg-1) 0, transparent 100%),
+                radial-gradient(40% 50% ellipse at 16% -25%, var(--color-bg-2) 0, var(--color-bg-2) 50%, transparent 100%),
+                radial-gradient(70% 50% ellipse at 70% -25%, var(--color-bg-3) 0, var(--color-bg-3) 50%, transparent 100%),
+                radial-gradient(35% 100% ellipse at 110% -10%, var(--color-bg-4) 0, var(--color-bg-4) 50%, transparent 100%);
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  
+  .backdrop .blobs:before {
+    display: block;
+    --color-bg-1: var(--color-light-1);
+    --color-bg-2: var(--color-light-2);
+    --color-bg-3: var(--color-light-3);
+    --color-bg-4: var(--color-light-4);
+  }
+  
+  .backdrop .blobs:after {
+    display: none;
+    --color-bg-1: var(--color-dark-1);
+    --color-bg-2: var(--color-dark-2);
+    --color-bg-3: var(--color-dark-3);
+    --color-bg-4: var(--color-dark-4);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) .blobs:before {
+      display: none;
+    }
+  
+    html:not(.light) .blobs:after {
+      display: block;
+    }
+  }
+  
+  html.dark .blobs:before {
+    display: none;
+  }
+  
+  html.dark .blobs:after {
+    display: block;
+  }
+  
