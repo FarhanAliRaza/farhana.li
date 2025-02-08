@@ -92,5 +92,7 @@
 </script>
 
 <div class="relative">
-	<canvas id="webglCanvas" class="test absolute left-0 top-0 z-10 h-[480px] w-full touch-none" />
+	<canvas id="webglCanvas" class="test absolute left-0 top-0 z-10 h-[500px] w-full touch-none">
+		Your browser does not support the canvas element.
+	</canvas>
 </div>
