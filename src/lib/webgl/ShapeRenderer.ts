@@ -269,12 +269,14 @@ export class ShapeRenderer {
 
 		this.currentData = this.shapeDataMap.get(shapeName)!;
 
-		// Apply initial transformation as in reference
+		// Adjust scale factor for better shape definition
+		const SCALE_FACTOR = 4.0; // Changed from 6.0 to 4.0
+		const Z_OFFSET = -12; // Adjusted for better depth
 		for (let i = 0; i < this.POINT_LIMIT; i++) {
 			const idx = i * 3;
-			this.pointData[idx] = this.currentData[idx] * 1.4;
-			this.pointData[idx + 1] = this.currentData[idx + 1] * 1.4;
-			this.pointData[idx + 2] = this.currentData[idx + 2] - 7;
+			this.pointData[idx] = this.currentData[idx] * SCALE_FACTOR;
+			this.pointData[idx + 1] = this.currentData[idx + 1] * SCALE_FACTOR;
+			this.pointData[idx + 2] = this.currentData[idx + 2] + Z_OFFSET;
 		}
 	}
 
@@ -286,10 +288,10 @@ export class ShapeRenderer {
 
 		this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
 
-		// Adjusted field of view for better visibility
-		const fieldOfView = Math.PI / 3; // Changed from PI/4 for wider view
+		// Use wider field of view
+		const fieldOfView = Math.PI / 5; // Changed from PI/3 for wider view
 		const aspect = this.canvas.width / this.canvas.height;
-		this.projectionMatrix = this.createPerspectiveMatrix(fieldOfView, aspect, 0.1, 100);
+		this.projectionMatrix = this.createPerspectiveMatrix(fieldOfView, aspect, 0.1, 200); // Increased far plane
 	}
 
 	private createPerspectiveMatrix(
@@ -403,12 +405,12 @@ export class ShapeRenderer {
 		this.gl.useProgram(program);
 		this.program = program;
 
-		// Set initial uniforms
+		// Adjust z-offset and reduce point size
 		const zOffsetLocation = this.gl.getUniformLocation(program, 'u_z_offset');
-		this.gl.uniform1f(zOffsetLocation, -7.0);
+		this.gl.uniform1f(zOffsetLocation, -12.0);
 
 		const scaleLocation = this.gl.getUniformLocation(program, 'u_scale');
-		this.gl.uniform1f(scaleLocation, this.devicePixelRatio * 2);
+		this.gl.uniform1f(scaleLocation, this.devicePixelRatio * 1.5); // Reduced from 4 to 1.5
 
 		// Set initial colors
 		this.updateColors();
