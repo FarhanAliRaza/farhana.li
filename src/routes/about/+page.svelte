@@ -15,10 +15,11 @@
 	});
 </script>
 
-<div class="relative min-h-screen bg-black">
+<div class="relative min-h-screen bg-black overflow-hidden">
 	<!-- Main gradient background -->
 	<div
-		class="bg-gradient-radial pointer-events-none absolute inset-0 from-[rgba(33,158,255,0.06)] via-transparent to-transparent"
+		class="bg-gradient-radial pointer-events-none absolute inset-0 from-[rgba(33,158,255,0.3)] to-transparent z-0"
+		style="background-position: center top; background-size: 100% 100%;"
 	></div>
 
 	<main class="container relative z-10 mx-auto px-6 py-16">
@@ -377,21 +378,5 @@
 
 	.animate-skill {
 		width: attr(data-width);
-	}
-
-	/* Add the gradient styling */
-	:global(:root) {
-		--from: rgba(33, 158, 255, 0.06);
-		--via: transparent;
-		--to: transparent;
-	}
-
-	.bg-gradient-radial {
-		background-image: radial-gradient(
-			circle at 50% 0%,
-			var(--from),
-			var(--via) 50%,
-			var(--to) 100%
-		);
 	}
 </style>

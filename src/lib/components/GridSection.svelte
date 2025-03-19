@@ -17,15 +17,13 @@
 	}>();
 </script>
 
-<section class={`relative py-24 ${bgClass} ${extraClass}`}>
-	<div class="container mx-auto px-6">
-		<div class="mb-16 flex items-center justify-between">
-			<h2 class="text-[2.5rem] font-bold leading-tight text-white">
-				{#if highlightedText}
-					{title} <span class="text-[var(--color-brand)]">{highlightedText}</span>
-				{:else}
-					{title}
-				{/if}
+<section class={`relative py-12 md:py-24 ${bgClass} ${extraClass}`}>
+	<div class="container mx-auto px-4 md:px-6">
+		<div class="mb-8 md:mb-16 flex flex-col md:flex-row md:items-center justify-between">
+			<h2
+				class="text-[2rem] md:text-[2.5rem] font-bold leading-tight text-[var(--color-brand)] mb-4 md:mb-0"
+			>
+				{title}
 			</h2>
 			{#if viewAllLink}
 				<a

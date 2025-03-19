@@ -7,7 +7,11 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(circle at center top, var(--tw-gradient-stops))'
+			}
+		}
 	},
 	darkMode: 'class',
 

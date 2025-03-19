@@ -19,10 +19,12 @@
 	let displayLogs = $derived(limit > 0 ? logs.slice(0, limit) : logs);
 </script>
 
-<section class="relative py-24">
-	<div class="container mx-auto px-6">
-		<div class="mb-16 flex items-center justify-between">
-			<h2 class="text-[2.5rem] font-bold leading-tight text-[var(--color-brand)]">
+<section class="relative py-12 md:py-24">
+	<div class="container mx-auto px-4 md:px-6">
+		<div class="mb-8 md:mb-16 flex flex-col md:flex-row md:items-center justify-between">
+			<h2
+				class="text-[2rem] md:text-[2.5rem] font-bold leading-tight text-[var(--color-brand)] mb-4 md:mb-0"
+			>
 				{title}
 			</h2>
 			{#if viewAllLink}
@@ -53,12 +55,12 @@
 		<div class="relative">
 			<!-- Glass rod shadow for depth -->
 			<div
-				class="absolute bottom-0 left-4 top-0 h-full w-2 rounded-full bg-[#0a1525]/90 blur-[1px] md:left-1/2 md:-ml-1"
+				class="absolute bottom-0 left-3 md:left-1/2 top-0 h-full w-1 md:w-2 rounded-full bg-[#0a1525]/90 blur-[1px] md:-ml-1"
 			></div>
 
 			<!-- Glass rod with internal light -->
 			<div
-				class="glass-rod absolute bottom-0 left-4 top-0 z-[5] h-full w-2 overflow-hidden rounded-full md:left-1/2 md:-ml-1"
+				class="glass-rod absolute bottom-0 left-3 md:left-1/2 top-0 z-[5] h-full w-1 md:w-2 overflow-hidden rounded-full md:-ml-1"
 			>
 				<!-- We'll make the glass more transparent to see the light inside better -->
 				<div
@@ -85,9 +87,11 @@
 				<div class="absolute inset-0 rounded-full border border-[#21C6FB]/50"></div>
 			</div>
 
-			{#each displayLogs as log, i}
-				<LogCard {log} timeline={true} animation={true} index={i} />
-			{/each}
+			<div class="space-y-0 md:space-y-4">
+				{#each displayLogs as log, i}
+					<LogCard {log} timeline={true} animation={true} index={i} />
+				{/each}
+			</div>
 		</div>
 	</div>
 </section>

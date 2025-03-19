@@ -4,12 +4,12 @@ import type { Post } from '$lib/types';
 
 // Function to get all blog posts
 async function getAllPosts() {
-    const paths = import.meta.glob('/src/content/posts/*.md', { eager: true });
+    const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
     const posts: Post[] = [];
 
     for (const path in paths) {
         const file = paths[path];
-        const slug = path.split('/').at(-1)?.replace('.md', '');
+        const slug = path.split('/').slice(-2)[0];
 
         if (file && typeof file === 'object' && 'metadata' in file && slug) {
             const metadata = file.metadata as Omit<Post, 'slug'>;
@@ -46,7 +46,7 @@ function findRelatedPosts(currentSlug: string, currentTags: string[], allPosts: 
 export const load: PageLoad = async ({ params }) => {
     try {
         // Load the current post
-        const post = await import(`../../../content/posts/${params.slug}.md`);
+        const post = await import(`../../../content/posts/${params.slug}/index.md`);
         
         // Get all posts to find related posts
         const allPosts = await getAllPosts();

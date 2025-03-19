@@ -6,6 +6,7 @@
 	import GridSection from '$lib/components/GridSection.svelte';
 	import BlogCard from '$lib/components/BlogCard.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
+	import ProductsSection from '$lib/components/ProductsSection.svelte';
 
 	let { data } = $props<{
 		data: {
@@ -17,9 +18,7 @@
 
 	const { projects, posts, logs } = data;
 
-	console.log(projects);
 	console.log(posts);
-	console.log(logs);
 </script>
 
 <Header />
@@ -28,7 +27,8 @@
 <main class="relative bg-black">
 	<!-- Main gradient background -->
 	<div
-		class="bg-gradient-radial pointer-events-none absolute inset-0 from-[rgba(33,158,255,0.06)] via-transparent to-transparent"
+		class="bg-gradient-radial pointer-events-none absolute inset-0 from-[rgba(33,158,255,0.3)] to-transparent z-0"
+		style="background-position: center top; background-size: 100% 100%;"
 	></div>
 
 	<!-- Logs Timeline Section -->
@@ -46,6 +46,8 @@
 		</div>
 	</section>
 
+	<!-- Products Section -->
+
 	<!-- Projects Section with Grid -->
 	<section class="relative">
 		<!-- Projects specific gradient -->
@@ -57,13 +59,12 @@
 		></div>
 
 		<GridSection
-			title="Featured"
-			highlightedText="Projects"
+			title="Featured Projects"
 			viewAllLink="/projects"
 			viewAllText="View all projects"
 			bgClass="relative z-10 backdrop-blur-sm"
 		>
-			<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+			<div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
 				{#each projects as project}
 					<ProjectCard {project} />
 				{/each}
@@ -92,13 +93,14 @@
 		></div>
 
 		<GridSection
-			title="Latest"
-			highlightedText="Blog Posts"
+			title="Latest Blog Posts"
 			viewAllLink="/blog"
 			viewAllText="View all posts"
 			bgClass="relative z-10 backdrop-blur-sm"
 		>
-			<div class="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+			<div
+				class="grid grid-cols-1 gap-6 gap-y-8 sm:gap-y-12 sm:gap-x-8 md:grid-cols-2 lg:grid-cols-3"
+			>
 				{#each posts as post}
 					<BlogCard {post} />
 				{/each}

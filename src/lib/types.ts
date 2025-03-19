@@ -26,4 +26,20 @@ export interface Project {
     published: boolean;
     github?: string;
     demo?: string;
+}
+
+export interface Product {
+    title: string;
+    slug: string;
+    description: string;
+    price: number;
+    salePrice?: number;
+    currency?: string;
+    date: string;
+    tags: string[];
+    image: string;
+    published: boolean;
+    inStock: boolean;
+    buyLink: string;
+    features?: string[];
 } 

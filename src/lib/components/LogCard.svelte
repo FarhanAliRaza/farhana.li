@@ -21,45 +21,51 @@
 
 {#if timeline}
 	<div
-		class="relative mb-20 flex md:justify-center"
+		class="relative mb-10 md:mb-20 flex md:justify-center"
 		style={animation ? `--delay: ${index * 0.15}s` : ''}
 	>
-		<!-- Timeline dot with pulse effect -->
+		<!-- Timeline dot with pulse effect - smaller on mobile -->
 		<div
-			class="absolute left-4 top-12 z-20 flex h-12 w-12 -translate-x-1/2 items-center justify-center md:left-1/2"
+			class="absolute left-3 md:left-1/2 top-10 md:top-12 z-20 flex h-8 w-8 md:h-12 md:w-12 -translate-x-1/2 items-center justify-center"
 		>
 			<!-- Inner solid dot with gradient -->
-			<span class="absolute h-6 w-6 rounded-full bg-gradient-to-br from-[#21C6FB] to-[#1E85FB]"
+			<span
+				class="absolute h-4 w-4 md:h-6 md:w-6 rounded-full bg-gradient-to-br from-[#21C6FB] to-[#1E85FB]"
 			></span>
 			<!-- Pulse animation -->
-			<span class="absolute h-6 w-6 animate-ping rounded-full bg-[#21C6FB] opacity-75"></span>
+			<span class="absolute h-4 w-4 md:h-6 md:w-6 animate-ping rounded-full bg-[#21C6FB] opacity-75"
+			></span>
 			<!-- Outer ring with gradient -->
 			<span
-				class="absolute h-12 w-12 rounded-full border-2 border-[#21C6FB] bg-gradient-to-br from-[#21C6FB]/10 to-[#1E85FB]/5 opacity-80"
+				class="absolute h-8 w-8 md:h-12 md:w-12 rounded-full border-2 border-[#21C6FB] bg-gradient-to-br from-[#21C6FB]/10 to-[#1E85FB]/5 opacity-80"
 			></span>
 			<!-- Glow effect -->
-			<span class="absolute h-14 w-14 rounded-full bg-[#21C6FB]/20 blur-md"></span>
+			<span
+				class="absolute h-10 w-10 md:h-14 md:w-14 rounded-full bg-[#21C6FB]/20 blur-sm md:blur-md"
+			></span>
 		</div>
 
 		<!-- Content with glass morphism (alternating sides on desktop) -->
 		<div
 			class="{isEven
 				? 'md:ml-16 md:mr-auto'
-				: 'md:ml-auto md:mr-16'} ml-16 w-full rounded-xl border border-white/10 bg-black/30 p-7 backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:bg-black/40 md:w-[45%] md:max-w-md"
+				: 'md:ml-auto md:mr-16'} ml-10 w-full rounded-xl border border-white/10 bg-black/30 p-4 md:p-7 backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:bg-black/40 md:w-[45%] md:max-w-md"
 		>
 			<div class="flex items-center justify-between">
-				<time class="text-sm font-medium text-[#21C6FB]">{formatDate(log.date)}</time>
+				<time class="text-xs md:text-sm font-medium text-[#21C6FB]">{formatDate(log.date)}</time>
 			</div>
 
-			<h3 class="mb-3 mt-2 text-xl font-semibold text-white">
+			<h3 class="mb-2 md:mb-3 mt-1 md:mt-2 text-lg md:text-xl font-semibold text-white">
 				<a href="/logs/{log.slug}" class="transition-colors hover:text-[#21C6FB]">
 					{log.title}
 				</a>
 			</h3>
 
-			<div class="flex flex-wrap gap-2">
+			<div class="flex flex-wrap gap-1 md:gap-2">
 				{#each log.tags as tag}
-					<span class="rounded-full bg-[#21C6FB]/10 px-3 py-1 text-sm font-medium text-[#21C6FB]">
+					<span
+						class="rounded-full bg-[#21C6FB]/10 px-2 md:px-3 py-1 text-xs md:text-sm font-medium text-[#21C6FB]"
+					>
 						#{tag}
 					</span>
 				{/each}

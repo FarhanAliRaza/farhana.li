@@ -12,15 +12,17 @@
 	const { logs } = data;
 </script>
 
-<!-- Subtle background gradient -->
-<section class="relative">
-	<TimelineSection {logs} title="Development Logs" viewAllLink="/logs" />
+<div class="min-h-screen bg-black relative overflow-hidden">
+	<!-- Header section with gradient background -->
+	<div
+		class="bg-gradient-radial pointer-events-none absolute inset-0 from-[rgba(33,158,255,0.3)] to-transparent z-0"
+		style="background-position: center top; background-size: 100% 100%;"
+	></div>
 
-	<!-- Divider with glow effect -->
-	<div class="absolute bottom-0 left-0 right-0 h-px w-full overflow-hidden">
-		<div
-			class="via-[var(--color-brand)]/20 h-px w-full bg-gradient-to-r from-transparent to-transparent"
-		></div>
-		<div class="bg-[var(--color-brand)]/30 mx-auto -mt-[1px] h-1 w-1/3 rounded-full blur-sm"></div>
-	</div>
-</section>
+	<!-- Timeline section -->
+	<section class="relative py-12 md:py-24 z-10">
+		<div class="container mx-auto px-4 md:px-6">
+			<TimelineSection {logs} title="All Logs" />
+		</div>
+	</section>
+</div>
