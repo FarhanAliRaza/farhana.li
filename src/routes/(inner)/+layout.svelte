@@ -10,7 +10,7 @@
 		style="background-position: center top; background-size: 100% 100%;"
 	></div>
 	<div class="">
-		<div class="p-8">
+		<div class="pt-8">
 			{@render children()}
 		</div>
 	</div>
