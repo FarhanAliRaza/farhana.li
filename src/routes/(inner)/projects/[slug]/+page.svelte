@@ -19,11 +19,6 @@
 	const { content, meta } = data;
 </script>
 
-<div class="min-h-screen bg-black">
-	<!-- Subtle background gradient -->
-	<div
-		class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[rgba(33,158,255,0.03)] to-transparent"
-	></div>
 
 	<div class="container mx-auto max-w-5xl px-4 py-16">
 		<!-- Back to projects navigation -->
@@ -162,8 +157,7 @@
 				</div>
 			</div>
 		</article>
-	</div>
-</div>
+
 
 <style>
 	/* Enhance the visual styling of the markdown content */

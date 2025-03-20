@@ -2,6 +2,7 @@ import {
 	vertexShader as vertexShaderSource,
 	fragmentShader as fragmentShaderSource
 } from './shaders';
+import { WorkerManager } from './WorkerManager';
 
 export interface ContainerInfo {
 	width: number;
@@ -38,7 +39,9 @@ export class ShapeRenderer {
 	private mouse: [number, number] = [-1000, -1000];
 	private scroll: number = 0;
 
-	private shapeChangeTimer?: number = 6000; // Add this line
+	private shapeChangeTimer?: number = 6000;
+	private workerManager?: WorkerManager;
+	private useWorker: boolean = false;
 
 	private readonly predefinedShapes = new Set([
 		'imac',
@@ -87,6 +90,7 @@ export class ShapeRenderer {
 		this.handleResize = this.handleResize.bind(this);
 		this.updateColors = this.updateColors.bind(this);
 		this.updatePoints = this.updatePoints.bind(this);
+		this.onWorkerPointsUpdated = this.onWorkerPointsUpdated.bind(this);
 	}
 
 	public async init(options: ShapeRendererOptions) {
@@ -97,10 +101,13 @@ export class ShapeRenderer {
 		this.devicePixelRatio = options.devicePixelRatio;
 		this.debugOptions = options.debug;
 
+		// Initialize WorkerManager for offloading point calculations
+		this.workerManager = new WorkerManager(this.debugOptions, this.onWorkerPointsUpdated);
+
 		await this.initWebGL();
 		this.handleResize();
 		this.startRenderLoop();
-		this.startShapeChangeTimer(); // Add this line
+		this.startShapeChangeTimer();
 	}
 
 	private async initWebGL() {
@@ -119,14 +126,32 @@ export class ShapeRenderer {
 		await this.loadInitialShape();
 	}
 
+	// Callback for when worker updates point data
+	private onWorkerPointsUpdated(newPointData: Float32Array, rotationAngle: number) {
+		// Update the point data with worker-calculated values
+		this.pointData = newPointData;
+		this.rotationAngle = rotationAngle;
+		
+		// Update WebGL buffer with new data
+		if (this.gl && this.buffer) {
+			this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
+			this.gl.bufferData(this.gl.ARRAY_BUFFER, this.pointData, this.gl.DYNAMIC_DRAW);
+		}
+	}
+
 	private render() {
 		if (!this.gl || !this.currentData) return;
 
-		this.updatePoints();
-
-		// Update buffer with new point positions
-		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer!);
-		this.gl.bufferData(this.gl.ARRAY_BUFFER, this.pointData, this.gl.DYNAMIC_DRAW);
+		// Update point positions - use worker if available, otherwise use local calculation
+		if (this.useWorker && this.workerManager) {
+			this.workerManager.updatePoints(this.mouse, this.scroll);
+		} else {
+			this.updatePoints();
+			
+			// Update buffer with new point positions (only needed for non-worker mode)
+			this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer!);
+			this.gl.bufferData(this.gl.ARRAY_BUFFER, this.pointData, this.gl.DYNAMIC_DRAW);
+		}
 
 		// Update uniforms
 		if (this.program) {
@@ -278,6 +303,23 @@ export class ShapeRenderer {
 			this.pointData[idx + 1] = this.currentData[idx + 1] * SCALE_FACTOR;
 			this.pointData[idx + 2] = this.currentData[idx + 2] + Z_OFFSET;
 		}
+
+		// Initialize worker with new shape data if available
+		if (this.workerManager && this.currentData) {
+			this.useWorker = this.workerManager.init(
+				this.pointData,
+				this.currentData,
+				this.jitterArray,
+				this.temporaryArray,
+				this.mouse,
+				this.scroll,
+				this.rotationAngle
+			);
+			
+			if (this.debugOptions.localData) {
+				console.log(`Using ${this.useWorker ? 'worker' : 'main thread'} for animation calculations`);
+			}
+		}
 	}
 
 	private handleResize() {
@@ -352,6 +394,13 @@ export class ShapeRenderer {
 		if (this.animationTimer) {
 			cancelAnimationFrame(this.animationTimer);
 		}
+		
+		// Clean up worker
+		if (this.workerManager) {
+			this.workerManager.destroy();
+			this.workerManager = undefined;
+		}
+		
 		if (this.gl) {
 			const ext = this.gl.getExtension('WEBGL_lose_context');
 			ext?.loseContext();

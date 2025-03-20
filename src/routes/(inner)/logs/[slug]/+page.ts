@@ -57,7 +57,7 @@ function findRelatedLogs(currentSlug: string, currentTags: string[], allLogs: Lo
 export const load: PageLoad = async ({ params }) => {
     try {
         // Load the current log
-        const log = await import(`../../../content/logs/${params.slug}.md`);
+        const log = await import(`../../../../content/logs/${params.slug}.md`);
         
         // Get all logs
         const allLogs = await getAllLogs();

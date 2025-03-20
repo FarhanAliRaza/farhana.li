@@ -7,6 +7,7 @@
 	import BlogCard from '$lib/components/BlogCard.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 	import ProductsSection from '$lib/components/ProductsSection.svelte';
+	import { siteConfig } from '$lib/config';
 
 	let { data } = $props<{
 		data: {
@@ -17,8 +18,6 @@
 	}>();
 
 	const { projects, posts, logs } = data;
-
-	console.log(posts);
 </script>
 
 <Header />
@@ -27,7 +26,7 @@
 <main class="relative bg-black">
 	<!-- Main gradient background -->
 	<div
-		class="bg-gradient-radial pointer-events-none absolute inset-0 from-[rgba(33,158,255,0.3)] to-transparent z-0"
+		class="pointer-events-none absolute inset-0 z-0 bg-gradient-radial from-[rgba(33,158,255,0.3)] to-transparent"
 		style="background-position: center top; background-size: 100% 100%;"
 	></div>
 
@@ -99,7 +98,7 @@
 			bgClass="relative z-10 backdrop-blur-sm"
 		>
 			<div
-				class="grid grid-cols-1 gap-6 gap-y-8 sm:gap-y-12 sm:gap-x-8 md:grid-cols-2 lg:grid-cols-3"
+				class="grid grid-cols-1 gap-6 gap-y-8 sm:gap-x-8 sm:gap-y-12 md:grid-cols-2 lg:grid-cols-3"
 			>
 				{#each posts as post}
 					<BlogCard {post} />
@@ -131,15 +130,18 @@
 		<!-- Logo and tagline -->
 		<div class="md:col-span-4">
 			<div class="mb-4 text-2xl font-bold text-white">
-				<span class="text-[var(--color-brand)]">Dev</span>Portfolio
+				<h5
+					class="bg-gradient-to-b from-[var(--color-brand)] to-[var(--color-text)] bg-clip-text text-[clamp(2.3rem,2rem+3vw,5rem)] font-bold leading-tight text-transparent"
+				>
+					Farhan
+				</h5>
 			</div>
-			<p class="mb-6 text-white/60">
-				Building modern web experiences with cutting-edge technology.
-			</p>
+			<p class="mb-6 text-white/60">Engineering solutions, sculpting ideas</p>
 			<div class="flex space-x-4">
 				<a
-					href="https://github.com/yourusername"
+					href={siteConfig.links.github}
 					target="_blank"
+					aria-label="GitHub"
 					rel="noopener noreferrer"
 					class="text-white/60 transition-colors hover:text-[var(--color-brand)]"
 				>
@@ -159,8 +161,9 @@
 					>
 				</a>
 				<a
-					href="https://linkedin.com/in/yourusername"
+					href={siteConfig.links.linkedin}
 					target="_blank"
+					aria-label="LinkedIn"
 					rel="noopener noreferrer"
 					class="text-white/60 transition-colors hover:text-[var(--color-brand)]"
 				>
@@ -181,8 +184,9 @@
 					>
 				</a>
 				<a
-					href="https://twitter.com/yourusername"
+					href={siteConfig.links.twitter}
 					target="_blank"
+					aria-label="Twitter"
 					rel="noopener noreferrer"
 					class="text-white/60 transition-colors hover:text-[var(--color-brand)]"
 				>
@@ -278,27 +282,10 @@
 						stroke-width="2"
 						stroke-linecap="round"
 						stroke-linejoin="round"
-						><path
-							d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-						></path></svg
-					>
-					<span>(123) 456-7890</span>
-				</li>
-				<li class="flex items-center gap-2 text-white/60">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
 						><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
 						></path><polyline points="22,6 12,13 2,6"></polyline></svg
 					>
-					<span>hello@example.com</span>
+					<span>{siteConfig.email}</span>
 				</li>
 			</ul>
 		</div>
@@ -308,7 +295,7 @@
 	<div class="container mx-auto mt-12 border-t border-gray-800 px-6 pt-8">
 		<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
 			<p class="text-center text-sm text-white/40 md:text-left">
-				© {new Date().getFullYear()} Your Name. All rights reserved.
+				© {new Date().getFullYear()} Farhan Ali Raza. All rights reserved.
 			</p>
 			<p class="text-center text-sm text-white/40 md:text-right">
 				Built with <a

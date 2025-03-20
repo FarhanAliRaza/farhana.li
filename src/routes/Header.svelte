@@ -46,10 +46,10 @@
 	</div>
 
 	<!-- Black overlay to deepen the background -->
-	<div class="absolute inset-0 z-5 bg-black/20"></div>
+	<div class="z-5 absolute inset-0 bg-black/20"></div>
 
 	<!-- Canvas container - balanced approach for mobile -->
-	<div class="canvas-container absolute z-15 {isMobile ? 'inset-x-0 top-0 h-[50vh]' : 'inset-0'}">
+	<div class="canvas-container z-15 absolute {isMobile ? 'inset-x-0 top-0 h-[50vh]' : 'inset-0'}">
 		{#if container}
 			<Canvas {container} />
 		{/if}
@@ -70,24 +70,23 @@
 		<h1
 			class="bg-gradient-to-b from-[var(--color-brand)] to-[var(--color-text)] bg-clip-text py-2 text-center text-[clamp(2.3rem,2rem+3vw,5rem)] font-bold leading-tight text-transparent"
 		>
-			Code<br />&amp; Craft
+			Code<br />&amp; Cosmos
 		</h1>
 
 		<!-- Description with better styling and spacing -->
 		<div
-			class="mt-8 md:mt-8 max-w-md md:px-8 px-5 text-center glassmorphic-card relative z-[190] pointer-events-auto"
+			class="glassmorphic-card pointer-events-auto relative z-[190] mt-8 max-w-md px-5 text-center md:mt-8 md:px-8"
 		>
-			<p class="md:text-base text-sm text-white/90 md:my-3 my-2">
-				Full-stack developer building SaaS products and modern web experiences with cutting-edge
-				technology.
+			<p class="my-2 text-sm text-white/90 md:my-3 md:text-base">
+				Engineering solutions, sculpting ideas
 			</p>
-			<div class="flex justify-center gap-4 md:pt-2 pt-1 md:pb-4 pb-3">
+			<div class="flex justify-center gap-4 pb-3 pt-1 md:pb-4 md:pt-2">
 				<a
 					href="/about"
-					class="inline-block text-[var(--color-brand)] hover:text-[var(--color-brand)]/80 hover:underline relative z-[200]"
+					class="hover:text-[var(--color-brand)]/80 relative z-[200] inline-block text-[var(--color-brand)] hover:underline"
 					style="touch-action: manipulation;"
 				>
-					<span class="flex items-center md:text-lg text-base">
+					<span class="flex items-center text-base md:text-lg">
 						More About Me
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

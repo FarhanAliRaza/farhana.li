@@ -47,7 +47,9 @@ const config = {
 	},
 	vitePlugin: {
 		experimental: {
-			inspector: true,
+			toggleKeyCombo: 'alt-x',
+			showToggleButton: 'always',
+			toggleButtonPos: 'bottom-right'
 		},
 		plugins: [enhancedImages()]
 	}

@@ -21,9 +21,9 @@
 
 <section class="relative py-12 md:py-24">
 	<div class="container mx-auto px-4 md:px-6">
-		<div class="mb-8 md:mb-16 flex flex-col md:flex-row md:items-center justify-between">
+		<div class="mb-8 flex flex-col justify-between md:mb-16 md:flex-row md:items-center">
 			<h2
-				class="text-[2rem] md:text-[2.5rem] font-bold leading-tight text-[var(--color-brand)] mb-4 md:mb-0"
+				class="mb-4 text-[2rem] font-bold leading-tight text-[var(--color-brand)] md:mb-0 md:text-[2.5rem]"
 			>
 				{title}
 			</h2>
@@ -55,12 +55,12 @@
 		<div class="relative">
 			<!-- Glass rod shadow for depth -->
 			<div
-				class="absolute bottom-0 left-3 md:left-1/2 top-0 h-full w-1 md:w-2 rounded-full bg-[#0a1525]/90 blur-[1px] md:-ml-1"
+				class="absolute bottom-0 left-3 top-0 h-full w-1 rounded-full bg-[#0a1525]/90 blur-[1px] md:left-1/2 md:-ml-1 md:w-2"
 			></div>
 
 			<!-- Glass rod with internal light -->
 			<div
-				class="glass-rod absolute bottom-0 left-3 md:left-1/2 top-0 z-[5] h-full w-1 md:w-2 overflow-hidden rounded-full md:-ml-1"
+				class="glass-rod absolute bottom-0 left-3 top-0 z-[5] h-full w-1 overflow-hidden rounded-full md:left-1/2 md:-ml-1 md:w-2"
 			>
 				<!-- We'll make the glass more transparent to see the light inside better -->
 				<div
