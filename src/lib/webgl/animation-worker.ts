@@ -33,6 +33,13 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
 
   switch (message.type) {
     case 'init':
+      // Validate data integrity before initializing
+      if (!message.data.pointData || message.data.pointData.length === 0 ||
+          !message.data.currentShapeData || message.data.currentShapeData.length === 0) {
+        self.postMessage({ type: 'error', message: 'Invalid initialization data' });
+        return;
+      }
+      
       // Initialize worker state
       state = {
         pointData: message.data.pointData,
@@ -45,11 +52,16 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
         elapsedTime: message.data.elapsedTime
       };
       lastFrameTime = performance.now();
+      
+      // Confirm successful initialization
+      self.postMessage({ type: 'initComplete', success: true });
       break;
 
     case 'update':
       // Update state with new inputs
-      if (!state) return;
+      if (!state) {
+        return;
+      }
       
       const deltaTime = (performance.now() - lastFrameTime) / 1000;
       lastFrameTime = performance.now();
@@ -58,6 +70,13 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
       state.mouse = message.data.mouse;
       state.scroll = message.data.scroll;
       state.elapsedTime = message.data.elapsedTime || state.elapsedTime + deltaTime * 1000;
+      
+      // IMPORTANT: Copy incoming buffer data to replace our empty buffer
+      // This ensures we have a populated buffer to work with
+      if (message.data.pointData && message.data.pointData.length > 0) {
+        // Use the received back buffer as our new point data buffer
+        state.pointData = message.data.pointData;
+      }
       
       // Process animation step
       updatePoints(deltaTime);
@@ -68,9 +87,8 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
         rotationAngle: state.rotationAngle
       };
       
-      // Use transferable objects to avoid copying the buffer
-      const transferList: Transferable[] = [state.pointData.buffer];
-      self.postMessage(result, transferList);
+      // Fix postMessage format by using proper options object
+      self.postMessage(result, { transfer: [state.pointData.buffer] });
       
       // Lost reference to buffer due to transfer, need to update reference
       state.pointData = new Float32Array(0); // Initialize with empty array
@@ -78,7 +96,9 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
 
     case 'newShape':
       // Update shape data
-      if (!state) return;
+      if (!state) {
+        return;
+      }
       
       state.currentShapeData = message.data.shapeData;
       state.pointData = message.data.pointData;
@@ -93,7 +113,9 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
 };
 
 function updatePoints(deltaTime: number): void {
-  if (!state) return;
+  if (!state) {
+    return;
+  }
 
   // Increment rotation angle
   state.rotationAngle += 0.22 * deltaTime;

@@ -62,7 +62,7 @@
 
 	<!-- Content container with better spacing, adjusted for mobile -->
 	<div
-		class="relative z-[150] flex flex-col items-center justify-center px-4 pt-20 md:pt-24 {isMobile
+		class="relative flex flex-col items-center justify-center px-4 pt-20 md:pt-24 {isMobile
 			? ''
 			: 'pointer-events-none'}"
 		style="height: {isMobile ? '50vh' : '75vh'};"

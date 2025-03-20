@@ -34,18 +34,20 @@ export class WorkerManager {
     scroll: number,
     rotationAngle: number
   ): boolean {
+    // Verify we have valid data before proceeding
+    if (!pointData || pointData.length === 0 || !currentData || currentData.length === 0) {
+      return false;
+    }
+    
+    // Set our initial buffer to ensure we have valid data to work with later
+    this.pointBuffer = new Float32Array(pointData);
+    
     if (!this.workerSupported) {
-      if (this.debugOptions.localData) {
-        console.warn('Web Workers not supported in this browser. Using main thread instead.');
-      }
       return false;
     }
 
     // On non-mobile devices, we can skip worker offloading if performance is good
     if (!this.isMobile && !this.debugOptions.localData) {
-      if (this.debugOptions.localData) {
-        console.info('Non-mobile device detected, using main thread for animation.');
-      }
       return false;
     }
 
@@ -56,17 +58,27 @@ export class WorkerManager {
       });
 
       this.worker.onmessage = this.handleWorkerMessage.bind(this);
-
+      this.worker.onerror = (error) => {
+        this.worker = null;
+        return false;
+      };
+      
+      // Clone all data to ensure we don't transfer the originals
+      const pointDataCopy = new Float32Array(pointData); 
+      const currentDataCopy = new Float32Array(currentData);
+      const jitterArrayCopy = new Float32Array(jitterArray);
+      const temporaryArrayCopy = new Float32Array(temporaryArray);
+      
       // Initialize worker with initial state
       sendToWorker(
         this.worker,
         {
           type: 'init',
           data: {
-            pointData: pointData.slice(), // Clone to avoid transferring initial buffer
-            currentShapeData: currentData.slice(),
-            jitterArray: jitterArray.slice(),
-            temporaryArray: temporaryArray.slice(),
+            pointData: pointDataCopy,
+            currentShapeData: currentDataCopy,
+            jitterArray: jitterArrayCopy,
+            temporaryArray: temporaryArrayCopy,
             mouse,
             scroll,
             rotationAngle,
@@ -75,13 +87,8 @@ export class WorkerManager {
         }
       );
 
-      if (this.debugOptions.localData) {
-        console.log('WebGL animation worker initialized successfully');
-      }
-
       return true;
     } catch (err) {
-      console.error('Failed to initialize WebGL animation worker:', err);
       return false;
     }
   }
@@ -90,8 +97,26 @@ export class WorkerManager {
   private handleWorkerMessage(event: MessageEvent): void {
     const data = event.data;
 
+    // Handle error messages from worker
+    if (data.type === 'error') {
+      this.isProcessing = false;
+      return;
+    }
+    
+    // Handle initialization complete
+    if (data.type === 'initComplete') {
+      this.isProcessing = false;
+      return;
+    }
+    
     // Handle point data updates
     if (data.pointData) {
+      // Verify the point data is valid
+      if (data.pointData.length === 0) {
+        this.isProcessing = false;
+        return;
+      }
+      
       // Store the updated point data
       this.pointBuffer = data.pointData;
       
@@ -108,47 +133,70 @@ export class WorkerManager {
 
   // Request a new animation frame calculation
   public updatePoints(mouse: [number, number], scroll: number): void {
-    if (!this.worker || this.isProcessing) return;
+    if (!this.worker || this.isProcessing) {
+      return;
+    }
 
-    // Prepare the back buffer for transfer
+    // Check if our buffers are valid
+    if (this.pointBuffer.length === 0) {
+      return;
+    }
+
+    // Create a new back buffer with a copy of the current point data
+    // This ensures the worker has valid data to start with
     this.backBuffer = new Float32Array(this.POINT_LIMIT * 3);
+    
+    // If we have valid point data, copy it to the back buffer
+    if (this.pointBuffer.length > 0) {
+      this.backBuffer.set(this.pointBuffer);
+    }
     
     // Mark as processing to prevent concurrent updates
     this.isProcessing = true;
     
     // Send update request to worker
-    sendToWorker(
-      this.worker,
-      {
-        type: 'update',
-        data: {
-          mouse,
-          scroll,
-          pointData: this.backBuffer,
-          elapsedTime: performance.now()
-        }
-      },
-      [this.backBuffer.buffer]
-    );
+    try {
+      sendToWorker(
+        this.worker,
+        {
+          type: 'update',
+          data: {
+            mouse,
+            scroll,
+            pointData: this.backBuffer,
+            elapsedTime: performance.now()
+          }
+        },
+        [this.backBuffer.buffer]
+      );
+    } catch (err) {
+      this.isProcessing = false;
+    }
   }
 
   // Update with a new shape
   public updateShape(shapeData: Float32Array, pointData: Float32Array): void {
-    if (!this.worker || this.isProcessing) return;
+    if (!this.worker || this.isProcessing) {
+      return;
+    }
     
     this.isProcessing = true;
     
     // Send new shape data to worker
-    sendToWorker(
-      this.worker,
-      {
-        type: 'newShape',
-        data: {
-          shapeData: shapeData.slice(),
-          pointData: pointData.slice()
+    try {
+      sendToWorker(
+        this.worker,
+        {
+          type: 'newShape',
+          data: {
+            shapeData: shapeData.slice(),
+            pointData: pointData.slice()
+          }
         }
-      }
-    );
+      );
+    } catch (err) {
+      this.isProcessing = false;
+    }
   }
 
   // Clean up resources

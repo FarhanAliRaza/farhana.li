@@ -8,11 +8,18 @@
 	let lastTouchDistance = 0;
 	let canvasElement: HTMLCanvasElement;
 	let isMobile = $state(false);
+	let initializationTimestamp: number = 0;
+	let lastTouchEvent: number = 0;
 	let touchResetTimer: number | null = null;
 
 	// Check if device is mobile
 	function checkMobile() {
+		const wasMobile = isMobile;
 		isMobile = window.innerWidth < 768;
+
+		if (isMobile !== wasMobile) {
+			// Device type changed
+		}
 	}
 
 	function getCanvasCoordinates(e: MouseEvent | Touch) {
@@ -68,17 +75,13 @@
 	function resetMouseAfterDelay(delay = 100) {
 		// Clear any existing timer
 		if (touchResetTimer !== null) {
-			console.log('Clearing existing reset timer');
 			clearTimeout(touchResetTimer);
 		}
 
-		console.log('Setting reset timer with delay:', delay);
 		// Set a new timer
 		touchResetTimer = setTimeout(() => {
-			console.log('Reset timer fired, isDragging:', isDragging);
 			// Only reset if not dragging (no active touches)
 			if (!isDragging && renderer) {
-				console.log('Resetting mouse position to off-screen');
 				renderer.setMouse(-1000, -1000);
 			}
 			touchResetTimer = null;
@@ -86,9 +89,10 @@
 	}
 
 	function initRenderer() {
+		initializationTimestamp = performance.now();
+
 		canvasElement = document.getElementById('webglCanvas') as HTMLCanvasElement;
 		if (!canvasElement) {
-			console.error('Canvas element not found');
 			return;
 		}
 
@@ -101,15 +105,19 @@
 			height: container.offsetHeight
 		};
 
-		renderer = new ShapeRenderer();
-		renderer.init({
-			canvas: canvasElement,
-			containerInfo,
-			colorScheme: 'dark',
-			scroll: 0,
-			devicePixelRatio: window.devicePixelRatio || 1,
-			debug: { localData: false }
-		});
+		try {
+			renderer = new ShapeRenderer();
+			renderer.init({
+				canvas: canvasElement,
+				containerInfo,
+				colorScheme: 'dark',
+				scroll: 0,
+				devicePixelRatio: window.devicePixelRatio || 1,
+				debug: { localData: false }
+			});
+		} catch (err) {
+			// Silently handle renderer errors
+		}
 
 		// Mouse events
 		const handleMouseMove = (e: MouseEvent) => {
@@ -126,18 +134,18 @@
 
 		// Touch events - works on both mobile and desktop
 		const handleTouchStart = (e: TouchEvent) => {
-			console.log('Touch start', e.touches.length, 'touches');
+			const now = performance.now();
+			lastTouchEvent = now;
+
 			// Only prevent default on desktop or when touching the canvas directly on mobile
 			if (!isMobile || e.target === canvasElement) {
 				e.preventDefault();
 			}
 
 			isDragging = true;
-			console.log('isDragging set to true');
 
 			// Clear any reset timer when a new touch starts
 			if (touchResetTimer !== null) {
-				console.log('Clearing reset timer on touch start');
 				clearTimeout(touchResetTimer);
 				touchResetTimer = null;
 			}
@@ -146,7 +154,6 @@
 			if (e.touches.length > 0) {
 				const touch = e.touches[0];
 				const coords = getCanvasCoordinates(touch);
-				console.log('Setting mouse position on touch start:', coords);
 				renderer.setMouse(coords.x, coords.y);
 			}
 
@@ -155,34 +162,33 @@
 		};
 
 		const handleTouchEnd = (e: TouchEvent) => {
-			console.log('Touch end, remaining touches:', e.touches.length);
+			const now = performance.now();
+			lastTouchEvent = now;
+
 			// If no touches remain, reset dragging state
 			if (e.touches.length === 0) {
-				console.log('No touches remain, setting isDragging to false');
 				isDragging = false;
 				lastTouchDistance = 0;
 				// Schedule mouse position reset after a short delay
-				console.log('Scheduling mouse reset');
 				resetMouseAfterDelay(200); // Using a longer delay for more reliable reset
 			} else {
-				console.log('Still has touches, updating with remaining');
 				// Still has touches, update with the remaining ones
 				handleMultiTouch(e);
 			}
 		};
 
 		const handleTouchCancel = (e: TouchEvent) => {
-			console.log('Touch cancel event');
+			const now = performance.now();
+			lastTouchEvent = now;
+
 			// Ensure we reset everything on cancel
 			isDragging = false;
 			lastTouchDistance = 0;
 			// Reset mouse immediately on cancel events
-			console.log('Resetting mouse immediately on cancel');
 			renderer.setMouse(-1000, -1000);
 
 			// Clear any pending reset timers
 			if (touchResetTimer !== null) {
-				console.log('Clearing reset timer on touch cancel');
 				clearTimeout(touchResetTimer);
 				touchResetTimer = null;
 			}
@@ -190,9 +196,9 @@
 
 		// Global touch event handlers to ensure we catch all end events
 		const handleGlobalTouchEnd = (e: TouchEvent) => {
-			console.log('Global touch end, touches:', e.touches.length);
+			const now = performance.now();
+
 			if (e.touches.length === 0) {
-				console.log('Global: No touches remain, resetting state');
 				isDragging = false;
 				lastTouchDistance = 0;
 				renderer.setMouse(-1000, -1000);
@@ -200,21 +206,20 @@
 		};
 
 		const handleTouchMove = (e: TouchEvent) => {
+			const now = performance.now();
+			lastTouchEvent = now;
+
 			// Only prevent default on desktop or when touching the canvas directly on mobile
 			if (!isMobile || e.target === canvasElement) {
 				e.preventDefault();
 			}
 
 			if (!isDragging) {
-				console.log('Touch move but not dragging, ignoring');
 				return;
 			}
 
-			console.log('Touch move, touches:', e.touches.length);
-
 			// Reset any pending timers during active movement
 			if (touchResetTimer !== null) {
-				console.log('Clearing reset timer during touch move');
 				clearTimeout(touchResetTimer);
 				touchResetTimer = null;
 			}
@@ -223,11 +228,9 @@
 			if (e.touches.length > 0) {
 				const touch = e.touches[0];
 				const coords = getCanvasCoordinates(touch);
-				console.log('Setting mouse position on touch move:', coords);
 				renderer.setMouse(coords.x, coords.y);
 			} else {
 				// No touches detected during move - this is likely a stuck touch
-				console.log('No touches during move - detected stuck touch');
 				isDragging = false;
 				renderer.setMouse(-1000, -1000);
 			}
@@ -270,12 +273,15 @@
 			checkMobile();
 			if (!canvasElement) return;
 
-			canvasElement.width = container.offsetWidth;
-			canvasElement.height = container.offsetHeight;
+			const width = container.offsetWidth;
+			const height = container.offsetHeight;
+
+			canvasElement.width = width;
+			canvasElement.height = height;
 
 			renderer.updateContainerInfo({
-				width: container.offsetWidth,
-				height: container.offsetHeight
+				width,
+				height
 			});
 		};
 
@@ -285,13 +291,9 @@
 		// Initial check
 		checkMobile();
 
-		// After renderer is initialized, add a debug interval
+		// Debug interval
 		const debugInterval = setInterval(() => {
-			if (isDragging) {
-				// Safely access renderer mouse property (it's private)
-				const mouseState = renderer ? 'Active' : 'Not initialized';
-				console.log('Debug: isDragging:', isDragging, 'Renderer state:', mouseState);
-			}
+			// Keep empty but available for future debugging
 		}, 1000);
 
 		return {

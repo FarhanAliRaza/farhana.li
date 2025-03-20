@@ -75,6 +75,8 @@ export class ShapeRenderer {
 	private readonly dampingFactor = 0.06;
 	private readonly baseCycle = 400;
 	private readonly amplitude = 1000;
+	private frameCount: number = 0;
+	private lastFrameLog: number = 0;
 
 	constructor() {
 		this.startTime = performance.now();
@@ -104,10 +106,14 @@ export class ShapeRenderer {
 		// Initialize WorkerManager for offloading point calculations
 		this.workerManager = new WorkerManager(this.debugOptions, this.onWorkerPointsUpdated);
 
-		await this.initWebGL();
-		this.handleResize();
-		this.startRenderLoop();
-		this.startShapeChangeTimer();
+		try {
+			await this.initWebGL();
+			this.handleResize();
+			this.startRenderLoop();
+			this.startShapeChangeTimer();
+		} catch (err) {
+			// Handle initialization errors silently
+		}
 	}
 
 	private async initWebGL() {
@@ -128,6 +134,30 @@ export class ShapeRenderer {
 
 	// Callback for when worker updates point data
 	private onWorkerPointsUpdated(newPointData: Float32Array, rotationAngle: number) {
+		this.frameCount++;
+		
+		// Check if we received valid point data
+		if (newPointData.length === 0) {
+			// If we got empty data multiple times, fall back to local animation
+			if (this.frameCount > 10 && this.useWorker) {
+				this.useWorker = false;
+				
+				// Ensure we have valid local data to work with
+				if (this.currentData) {
+					// Reset all point data based on the current shape
+					const SCALE_FACTOR = 4.0;
+					const Z_OFFSET = -12;
+					for (let i = 0; i < this.POINT_LIMIT; i++) {
+						const idx = i * 3;
+						this.pointData[idx] = this.currentData[idx] * SCALE_FACTOR;
+						this.pointData[idx + 1] = this.currentData[idx + 1] * SCALE_FACTOR;
+						this.pointData[idx + 2] = this.currentData[idx + 2] + Z_OFFSET;
+					}
+				}
+			}
+			return;
+		}
+		
 		// Update the point data with worker-calculated values
 		this.pointData = newPointData;
 		this.rotationAngle = rotationAngle;
@@ -140,7 +170,9 @@ export class ShapeRenderer {
 	}
 
 	private render() {
-		if (!this.gl || !this.currentData) return;
+		if (!this.gl || !this.currentData) {
+			return;
+		}
 
 		// Update point positions - use worker if available, otherwise use local calculation
 		if (this.useWorker && this.workerManager) {
@@ -149,19 +181,24 @@ export class ShapeRenderer {
 			this.updatePoints();
 			
 			// Update buffer with new point positions (only needed for non-worker mode)
-			this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer!);
-			this.gl.bufferData(this.gl.ARRAY_BUFFER, this.pointData, this.gl.DYNAMIC_DRAW);
+			if (this.gl && this.buffer) {
+				this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer!);
+				this.gl.bufferData(this.gl.ARRAY_BUFFER, this.pointData, this.gl.DYNAMIC_DRAW);
+			}
 		}
 
 		// Update uniforms
 		if (this.program) {
 			const matrixLocation = this.gl.getUniformLocation(this.program, 'u_matrix');
-			this.gl.uniformMatrix4fv(matrixLocation, false, this.projectionMatrix);
+			if (matrixLocation) {
+				this.gl.uniformMatrix4fv(matrixLocation, false, this.projectionMatrix);
+			}
 		}
 
 		// Clear and draw
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 		this.gl.drawArrays(this.gl.POINTS, 0, this.POINT_LIMIT);
+		this.frameCount++;
 
 		// Request next frame
 		this.animationTimer = requestAnimationFrame(this.render);
@@ -174,7 +211,9 @@ export class ShapeRenderer {
 	}
 
 	private updatePoints() {
-		if (!this.currentData) return;
+		if (!this.currentData) {
+			return;
+		}
 
 		const [deltaTime, elapsedTime] = this.frameTime();
 		this.rotationAngle += 0.22 * deltaTime; // Use exact rotation speed from reference
@@ -259,6 +298,10 @@ export class ShapeRenderer {
 
 		// Create and bind buffer
 		this.buffer = this.gl.createBuffer();
+		if (!this.buffer) {
+			return;
+		}
+		
 		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
 		this.gl.bufferData(this.gl.ARRAY_BUFFER, this.pointData, this.gl.DYNAMIC_DRAW);
 
@@ -282,12 +325,13 @@ export class ShapeRenderer {
 		if (!this.shapeDataMap.has(shapeName)) {
 			try {
 				const response = await fetch(`/dat/${shapeName}.dat`);
-				if (!response.ok) throw new Error(`Failed to load shape: ${shapeName}`);
+				if (!response.ok) {
+					throw new Error(`Failed to load shape: ${shapeName}`);
+				}
 				const buffer = await response.arrayBuffer();
 				const data = new Float32Array(buffer);
 				this.shapeDataMap.set(shapeName, data);
 			} catch (error) {
-				console.error('Error loading shape:', error);
 				return;
 			}
 		}
@@ -315,15 +359,13 @@ export class ShapeRenderer {
 				this.scroll,
 				this.rotationAngle
 			);
-			
-			if (this.debugOptions.localData) {
-				console.log(`Using ${this.useWorker ? 'worker' : 'main thread'} for animation calculations`);
-			}
 		}
 	}
 
 	private handleResize() {
-		if (!this.gl || !this.canvas || !this.containerInfo) return;
+		if (!this.gl || !this.canvas || !this.containerInfo) {
+			return;
+		}
 
 		this.canvas.width = this.containerInfo.width * this.devicePixelRatio;
 		this.canvas.height = this.containerInfo.height * this.devicePixelRatio;
@@ -378,7 +420,9 @@ export class ShapeRenderer {
 	}
 
 	private updateColors() {
-		if (!this.gl || !this.program) return;
+		if (!this.gl || !this.program) {
+			return;
+		}
 
 		const colors = this.colorScheme === 'light' ? this.lightColors : this.darkColors;
 		const [topColor, bottomColor] = colors;
@@ -438,31 +482,36 @@ export class ShapeRenderer {
 
 	private async initShaders() {
 		if (!this.gl) return;
-		const vertexShader = this.compileShader(this.gl.VERTEX_SHADER, vertexShaderSource);
-		const fragmentShader = this.compileShader(this.gl.FRAGMENT_SHADER, fragmentShaderSource);
-		const program = this.gl.createProgram();
-		if (!program) throw new Error('Unable to create shader program');
+		
+		try {
+			const vertexShader = this.compileShader(this.gl.VERTEX_SHADER, vertexShaderSource);
+			const fragmentShader = this.compileShader(this.gl.FRAGMENT_SHADER, fragmentShaderSource);
+			const program = this.gl.createProgram();
+			if (!program) throw new Error('Unable to create shader program');
 
-		this.gl.attachShader(program, vertexShader);
-		this.gl.attachShader(program, fragmentShader);
-		this.gl.linkProgram(program);
+			this.gl.attachShader(program, vertexShader);
+			this.gl.attachShader(program, fragmentShader);
+			this.gl.linkProgram(program);
 
-		if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
-			throw new Error('Failed to link shader program: ' + this.gl.getProgramInfoLog(program));
+			if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
+				throw new Error('Failed to link shader program: ' + this.gl.getProgramInfoLog(program));
+			}
+
+			this.gl.useProgram(program);
+			this.program = program;
+
+			// Adjust z-offset and reduce point size
+			const zOffsetLocation = this.gl.getUniformLocation(program, 'u_z_offset');
+			this.gl.uniform1f(zOffsetLocation, -12.0);
+
+			const scaleLocation = this.gl.getUniformLocation(program, 'u_scale');
+			this.gl.uniform1f(scaleLocation, this.devicePixelRatio * 1.5); // Reduced from 4 to 1.5
+
+			// Set initial colors
+			this.updateColors();
+		} catch (err) {
+			throw err;
 		}
-
-		this.gl.useProgram(program);
-		this.program = program;
-
-		// Adjust z-offset and reduce point size
-		const zOffsetLocation = this.gl.getUniformLocation(program, 'u_z_offset');
-		this.gl.uniform1f(zOffsetLocation, -12.0);
-
-		const scaleLocation = this.gl.getUniformLocation(program, 'u_scale');
-		this.gl.uniform1f(scaleLocation, this.devicePixelRatio * 1.5); // Reduced from 4 to 1.5
-
-		// Set initial colors
-		this.updateColors();
 	}
 
 	private setupWebGLContext() {
