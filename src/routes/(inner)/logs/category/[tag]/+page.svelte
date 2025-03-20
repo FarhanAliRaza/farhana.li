@@ -12,6 +12,27 @@
 	const { tag, logs } = data;
 </script>
 
+<svelte:head>
+	<title>{tag} - Logs Category - Farhan's Portfolio</title>
+	<meta
+		name="description"
+		content={`Explore Farhan's development logs about ${tag.toLowerCase()}`}
+	/>
+	<meta property="og:title" content={`${tag} - Logs Category - Farhan's Portfolio`} />
+	<meta
+		property="og:description"
+		content={`Explore Farhan's development logs about ${tag.toLowerCase()}`}
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={`https://farhana.li/logs/category/${tag.toLowerCase()}`} />
+	<meta name="twitter:title" content={`${tag} - Logs Category - Farhan's Portfolio`} />
+	<meta
+		name="twitter:description"
+		content={`Explore Farhan's development logs about ${tag.toLowerCase()}`}
+	/>
+	<link rel="canonical" href={`https://farhana.li/logs/category/${tag.toLowerCase()}`} />
+</svelte:head>
+
 <div class="container mx-auto px-4 py-16">
 	<!-- Navigation back to all logs -->
 	<div class="mb-8">

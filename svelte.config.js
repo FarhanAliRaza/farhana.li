@@ -43,6 +43,9 @@ const config = {
 		// Add enhanced images plugin
 		alias: {
 			'$content': 'src/content'
+		},
+		prerender: {
+			entries: ['/sitemap.xml']
 		}
 	},
 	vitePlugin: {

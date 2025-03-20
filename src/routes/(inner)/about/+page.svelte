@@ -16,6 +16,26 @@
 	});
 </script>
 
+<svelte:head>
+	<title>About Farhan - Developer Portfolio</title>
+	<meta
+		name="description"
+		content="Learn more about Farhan's background, skills, and experience as a developer."
+	/>
+	<meta property="og:title" content="About Farhan - Developer Portfolio" />
+	<meta
+		property="og:description"
+		content="Learn more about Farhan's background, skills, and experience as a developer."
+	/>
+	<meta property="og:url" content="https://farhana.li/about" />
+	<meta name="twitter:title" content="About Farhan - Developer Portfolio" />
+	<meta
+		name="twitter:description"
+		content="Learn more about Farhan's background, skills, and experience as a developer."
+	/>
+	<link rel="canonical" href="https://farhana.li/about" />
+</svelte:head>
+
 <main class="container relative z-10 mx-auto px-6 py-16">
 	<!-- Header Section -->
 	<header class="mb-16 text-center">

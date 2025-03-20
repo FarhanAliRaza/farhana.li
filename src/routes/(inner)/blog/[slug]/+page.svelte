@@ -13,6 +13,7 @@
 				date: string;
 				tags: string[];
 				image?: string;
+				slug: string;
 			};
 			relatedPosts: (Post & { relevance: number })[];
 		};
@@ -20,6 +21,25 @@
 
 	const { content, meta, relatedPosts } = data;
 </script>
+
+<svelte:head>
+	<title>{meta.title} - Farhan's Blog</title>
+	<meta name="description" content={meta.description} />
+	<meta property="og:title" content={meta.title} />
+	<meta property="og:description" content={meta.description} />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content={`https://farhana.li/blog/${meta.slug}`} />
+	{#if meta.image}
+		<meta property="og:image" content={meta.image} />
+		<meta name="twitter:image" content={meta.image} />
+	{/if}
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={meta.title} />
+	<meta name="twitter:description" content={meta.description} />
+	<meta property="article:published_time" content={new Date(meta.date).toISOString()} />
+	<meta property="article:tag" content={meta.tags.join(',')} />
+	<link rel="canonical" href={`https://farhana.li/blog/${meta.slug}`} />
+</svelte:head>
 
 <div class="container mx-auto max-w-4xl px-4 py-16">
 	<!-- Back to blog navigation -->

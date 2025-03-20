@@ -10,6 +10,23 @@
 	const { projects } = data;
 </script>
 
+<svelte:head>
+	<title>Projects - Farhan's Developer Portfolio</title>
+	<meta name="description" content="Explore Farhan's development projects and coding work." />
+	<meta property="og:title" content="Projects - Farhan's Developer Portfolio" />
+	<meta
+		property="og:description"
+		content="Explore Farhan's development projects and coding work."
+	/>
+	<meta property="og:url" content="https://farhana.li/projects" />
+	<meta name="twitter:title" content="Projects - Farhan's Developer Portfolio" />
+	<meta
+		name="twitter:description"
+		content="Explore Farhan's development projects and coding work."
+	/>
+	<link rel="canonical" href="https://farhana.li/projects" />
+</svelte:head>
+
 <GridSection
 	title="Projects Case Studies"
 	highlightedText=""

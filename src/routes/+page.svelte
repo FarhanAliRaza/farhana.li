@@ -20,6 +20,26 @@
 	const { projects, posts, logs } = data;
 </script>
 
+<svelte:head>
+	<title>Farhan - Developer Portfolio</title>
+	<meta
+		name="description"
+		content="Welcome to Farhan's portfolio website featuring projects, blogs, and development logs."
+	/>
+	<meta property="og:title" content="Farhan - Developer Portfolio" />
+	<meta
+		property="og:description"
+		content="Welcome to Farhan's portfolio website featuring projects, blogs, and development logs."
+	/>
+	<meta property="og:url" content="https://farhana.li/" />
+	<meta name="twitter:title" content="Farhan - Developer Portfolio" />
+	<meta
+		name="twitter:description"
+		content="Welcome to Farhan's portfolio website featuring projects, blogs, and development logs."
+	/>
+	<link rel="canonical" href="https://farhana.li/" />
+</svelte:head>
+
 <Header />
 
 <!-- Main content starts after the header -->

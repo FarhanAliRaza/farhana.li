@@ -9,6 +9,7 @@
 				title: string;
 				date: string;
 				tags: string[];
+				slug: string;
 			};
 			nextLogs: Log[];
 			relatedLogs: (Log & { relevance: number })[];
@@ -17,6 +18,21 @@
 
 	const { content, meta, nextLogs, relatedLogs } = data;
 </script>
+
+<svelte:head>
+	<title>{meta.title} - Dev Log - Farhan's Portfolio</title>
+	<meta name="description" content={`Development log entry: ${meta.title}`} />
+	<meta property="og:title" content={`${meta.title} - Dev Log - Farhan's Portfolio`} />
+	<meta property="og:description" content={`Development log entry: ${meta.title}`} />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content={`https://farhana.li/logs/${meta.slug}`} />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content={`${meta.title} - Dev Log - Farhan's Portfolio`} />
+	<meta name="twitter:description" content={`Development log entry: ${meta.title}`} />
+	<meta property="article:published_time" content={new Date(meta.date).toISOString()} />
+	<meta property="article:tag" content={meta.tags.join(',')} />
+	<link rel="canonical" href={`https://farhana.li/logs/${meta.slug}`} />
+</svelte:head>
 
 <div class="container mx-auto max-w-4xl px-4 py-16">
 	<!-- Back to logs navigation -->

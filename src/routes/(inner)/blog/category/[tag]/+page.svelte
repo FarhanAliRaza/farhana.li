@@ -12,6 +12,24 @@
 	const { tag, posts } = data;
 </script>
 
+<svelte:head>
+	<title>{tag} - Blog Category - Farhan's Portfolio</title>
+	<meta name="description" content={`Explore Farhan's blog posts about ${tag.toLowerCase()}`} />
+	<meta property="og:title" content={`${tag} - Blog Category - Farhan's Portfolio`} />
+	<meta
+		property="og:description"
+		content={`Explore Farhan's blog posts about ${tag.toLowerCase()}`}
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={`https://farhana.li/blog/category/${tag.toLowerCase()}`} />
+	<meta name="twitter:title" content={`${tag} - Blog Category - Farhan's Portfolio`} />
+	<meta
+		name="twitter:description"
+		content={`Explore Farhan's blog posts about ${tag.toLowerCase()}`}
+	/>
+	<link rel="canonical" href={`https://farhana.li/blog/category/${tag.toLowerCase()}`} />
+</svelte:head>
+
 <div class="min-h-screen bg-black">
 	<!-- Subtle background gradient -->
 	<div
