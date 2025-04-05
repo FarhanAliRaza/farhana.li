@@ -123,7 +123,7 @@
 				class="prose prose-lg prose-invert relative z-10 mx-auto max-w-none p-8 leading-relaxed md:prose-xl"
 			>
 				<div
-					class="prose-headings:font-bold prose-headings:text-[var(--color-brand)] prose-a:text-[var(--color-brand)] prose-a:no-underline prose-a:hover:underline prose-strong:text-white prose-code:rounded prose-code:bg-black/50 prose-code:p-1 prose-code:text-[var(--color-brand)] prose-hr:border-gray-800"
+					class="prose-headings:font-bold prose-headings:text-[var(--color-brand)] prose-a:text-[var(--color-brand)] prose-a:no-underline prose-a:hover:underline prose-strong:text-white prose-code:rounded prose-hr:border-gray-800"
 				>
 					{@render content()}
 				</div>
@@ -210,12 +210,12 @@
 <style>
 	/* Enhance the visual styling of the markdown content */
 	:global(.prose pre) {
-		background-color: rgba(0, 0, 0, 0.3);
 		border-radius: 0.5rem;
 		margin: 1.5rem 0;
 		padding: 1rem;
 		border: 1px solid rgba(33, 158, 255, 0.2);
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+		background-color: #282c34 !important; /* Force consistent dark background */
 	}
 
 	:global(.prose img) {

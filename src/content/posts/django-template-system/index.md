@@ -28,7 +28,7 @@ Node.render(context) -> string of rendered node
 Usage
 Template class
 TemplateSyntaxError if template is not right
-
+```
 > > > c = template.Context({'test':True, 'varvalue': 'Hello'})
 > > > t.render(c)
 > > > '<html><h1>Hello</h1></html>'
@@ -36,3 +36,4 @@ TemplateSyntaxError if template is not right
 > > > t.render(c)
 > > > '<html></html>'
 > > > """
+```
