@@ -10,6 +10,7 @@
 				date: string;
 				tags: string[];
 				slug: string;
+				excerpt: string;
 			};
 			nextLogs: Log[];
 			relatedLogs: (Log & { relevance: number })[];
@@ -21,9 +22,9 @@
 
 <svelte:head>
 	<title>{meta.title} - Dev Log - Farhan's Portfolio</title>
-	<meta name="description" content={`Development log entry: ${meta.title}`} />
+	<meta name="description" content={meta.excerpt} />
 	<meta property="og:title" content={`${meta.title} - Dev Log - Farhan's Portfolio`} />
-	<meta property="og:description" content={`Development log entry: ${meta.title}`} />
+	<meta property="og:description" content={meta.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content={`https://farhana.li/logs/${meta.slug}`} />
 	<meta name="twitter:card" content="summary" />
