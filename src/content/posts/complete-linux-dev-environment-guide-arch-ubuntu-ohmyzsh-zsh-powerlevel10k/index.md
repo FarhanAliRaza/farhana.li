@@ -122,12 +122,6 @@ Install [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh/tree/master) using the of
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-This will:
-
-- Install Oh My Zsh
-- Backup your existing shell configuration
-- Set Zsh as your default shell
-
 ## Step 5: Install Powerlevel10k Theme
 
 Clone the Powerlevel10k theme repository:
