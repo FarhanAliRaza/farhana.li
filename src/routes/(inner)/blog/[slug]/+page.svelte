@@ -41,7 +41,7 @@
 	<link rel="canonical" href={`https://farhana.li/blog/${meta.slug}`} />
 </svelte:head>
 
-<div class="container mx-auto max-w-4xl px-4 py-16">
+<div class="container mx-auto max-w-4xl py-16 md:px-4">
 	<!-- Back to blog navigation -->
 	<div class="mb-8">
 		<a
@@ -97,9 +97,9 @@
 			</h1>
 
 			<!-- Description if available -->
-			{#if meta.description}
+			<!-- {#if meta.description}
 				<p class="mb-6 text-lg text-white/80">{meta.description}</p>
-			{/if}
+			{/if} -->
 
 			<!-- Tags as clickable links -->
 			<div class="flex flex-wrap gap-2">
@@ -120,7 +120,7 @@
 				class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[rgba(33,158,255,0.03)] to-transparent"
 			></div>
 			<div
-				class="prose prose-lg prose-invert relative z-10 mx-auto max-w-none p-8 leading-relaxed md:prose-xl"
+				class="prose prose-lg prose-invert relative z-10 mx-auto max-w-none p-4 leading-relaxed md:prose-xl md:p-8"
 			>
 				<div
 					class="prose-headings:font-bold prose-headings:text-[var(--color-brand)] prose-a:text-[var(--color-brand)] prose-a:no-underline prose-a:hover:underline prose-strong:text-white prose-code:rounded prose-hr:border-gray-800"
@@ -216,6 +216,7 @@
 		border: 1px solid rgba(33, 158, 255, 0.2);
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 		background-color: #282c34 !important; /* Force consistent dark background */
+		position: relative; /* For copy button positioning */
 	}
 
 	:global(.prose img) {
@@ -240,5 +241,74 @@
 			var(--via) 50%,
 			var(--to) 100%
 		);
+	}
+
+	/* Copy button styling */
+	:global(button[data-code]) {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		padding: 0.5rem;
+		background-color: rgba(33, 158, 255, 0.1);
+		border: 1px solid rgba(33, 158, 255, 0.3);
+		border-radius: 0.25rem;
+		color: #219eff !important;
+		cursor: pointer;
+		opacity: 0.7;
+		transition: all 0.2s ease;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+	}
+
+	/* Copy icon (default state) */
+	:global(button[data-code] .ready) {
+		display: block;
+		width: 16px;
+		height: 16px;
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23219eff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3e%3cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3e%3c/svg%3e");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+
+	/* Success icon (copied state) */
+	:global(button[data-code] .success) {
+		display: none;
+		width: 16px;
+		height: 16px;
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='20,6 9,17 4,12'/%3e%3c/svg%3e");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+
+	/* Show success icon when copied */
+	:global(button[data-code].copied .ready) {
+		display: none;
+	}
+
+	:global(button[data-code].copied .success) {
+		display: block;
+	}
+
+	:global(button[data-code]:hover) {
+		background-color: rgba(33, 158, 255, 0.2);
+		border-color: #219eff;
+		opacity: 1;
+		transform: scale(1.05);
+	}
+
+	:global(pre:hover button[data-code]) {
+		opacity: 1;
+	}
+
+	:global(button[data-code].copied) {
+		background-color: rgba(34, 197, 94, 0.2);
+		border-color: #22c55e;
+		color: #22c55e !important;
 	}
 </style>
