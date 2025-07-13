@@ -157,6 +157,7 @@
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">TypeScript</span>
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">React</span>
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Svelte</span>
+<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Flutter</span>
 				</div>
 			</div>
 
@@ -179,7 +180,7 @@
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">GitHub</span>
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">API Design & Integration</span>
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Unit Testing</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Flutter</span>
+					
 				</div>
 			</div>
 		</div>
