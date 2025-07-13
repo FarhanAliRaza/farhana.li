@@ -50,39 +50,8 @@
 	</header>
 
 	<!-- Profile Section -->
-	<div class="mb-16 grid gap-12 md:grid-cols-3">
-		<!-- Profile Image -->
-		<div class="flex justify-center md:col-span-1">
-			<div
-				class="border-[var(--color-brand)]/30 relative h-64 w-64 overflow-hidden rounded-full border-2"
-			>
-				<div
-					class="from-[var(--color-brand)]/10 absolute inset-0 bg-gradient-to-b to-transparent"
-				></div>
-				<!-- Replace with your profile picture -->
-				<div
-					class="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900 text-[var(--color-brand)]"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="64"
-						height="64"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-						<circle cx="12" cy="7" r="4"></circle>
-					</svg>
-				</div>
-			</div>
-		</div>
-
-		<!-- Profile Info -->
-		<div class="md:col-span-2">
+	<div class="mb-16">
+		<div class="max-w-4xl mx-auto">
 			<h2 class="mb-4 text-2xl font-semibold text-white">About Me</h2>
 
 			<p class="mb-4 text-white/70">
@@ -115,23 +84,6 @@
 					</svg>
 					<span>farhanalirazaazeemi@gmail.com</span>
 				</a>
-				<div class="flex items-center gap-2 text-white/70">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-						></path>
-					</svg>
-					<span>+92 303 8279454</span>
-				</div>
 				<div class="flex items-center gap-2 text-white/70">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
