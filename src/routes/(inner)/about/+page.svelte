@@ -145,6 +145,8 @@
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django</span>
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django Rest Framework</span>
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">FastAPI</span>
+<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Go Lang</span>
+<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Node JS</span>
 				</div>
 			</div>
 
