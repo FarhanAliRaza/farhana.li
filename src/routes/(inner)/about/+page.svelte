@@ -17,21 +17,21 @@
 </script>
 
 <svelte:head>
-	<title>About Farhan - Developer Portfolio</title>
+	<title>About Farhan Ali - Full Stack Developer</title>
 	<meta
 		name="description"
-		content="Learn more about Farhan's background, skills, and experience as a developer."
+		content="Learn about Farhan Ali, a results-oriented Full Stack Developer with over 5 years of experience in building scalable web applications and AI systems."
 	/>
-	<meta property="og:title" content="About Farhan - Developer Portfolio" />
+	<meta property="og:title" content="About Farhan Ali - Full Stack Developer" />
 	<meta
 		property="og:description"
-		content="Learn more about Farhan's background, skills, and experience as a developer."
+		content="Learn about Farhan Ali, a results-oriented Full Stack Developer with over 5 years of experience in building scalable web applications and AI systems."
 	/>
 	<meta property="og:url" content="https://farhana.li/about" />
-	<meta name="twitter:title" content="About Farhan - Developer Portfolio" />
+	<meta name="twitter:title" content="About Farhan Ali - Full Stack Developer" />
 	<meta
 		name="twitter:description"
-		content="Learn more about Farhan's background, skills, and experience as a developer."
+		content="Learn about Farhan Ali, a results-oriented Full Stack Developer with over 5 years of experience in building scalable web applications and AI systems."
 	/>
 	<link rel="canonical" href="https://farhana.li/about" />
 </svelte:head>
@@ -43,51 +43,19 @@
 			<span
 				class="bg-gradient-to-r from-[var(--color-brand)] to-white bg-clip-text text-transparent"
 			>
-				About Me
+				Farhan Ali
 			</span>
 		</h1>
+		<h2 class="text-xl text-white/80 md:text-2xl">Full Stack Developer</h2>
 	</header>
 
 	<!-- Profile Section -->
-	<div class="mb-16 grid gap-12 md:grid-cols-3">
-		<!-- Profile Image -->
-		<div class="flex justify-center md:col-span-1">
-			<div
-				class="border-[var(--color-brand)]/30 relative h-64 w-64 overflow-hidden rounded-full border-2"
-			>
-				<div
-					class="from-[var(--color-brand)]/10 absolute inset-0 bg-gradient-to-b to-transparent"
-				></div>
-				<!-- Replace with your profile picture -->
-				<div
-					class="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900 text-[var(--color-brand)]"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="64"
-						height="64"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-						<circle cx="12" cy="7" r="4"></circle>
-					</svg>
-				</div>
-			</div>
-		</div>
-
-		<!-- Profile Info -->
-		<div class="md:col-span-2">
+	<div class="mb-16">
+		<div class="max-w-4xl mx-auto">
 			<h2 class="mb-4 text-2xl font-semibold text-white">About Me</h2>
 
 			<p class="mb-4 text-white/70">
-				I am full stack developer with a passion for building scalable and efficient web
-				applications. Software for me is not an abstract thing, i see it as a solution to a problem.
-				I love to build products that help people and make their lives easier.
+				A results-oriented Full Stack Developer with over 5 years of experience architecting and building scalable web applications and complex AI systems. Proven expertise in solving real-world problems, demonstrated by single-handedly developing <b>MedGebra</b>, an AI-powered medical chatbot, and an email validation system that has processed over 100 million emails. Currently contributing to the core of a major open-source project as a Google Summer of Code 2025 participant with the Django Software Foundation.
 			</p>
 
 			<!-- Contact Info -->
@@ -114,14 +82,31 @@
 						></path>
 						<polyline points="22,6 12,13 2,6"></polyline>
 					</svg>
-					<span>{siteConfig.email}</span>
+					<span>farhanalirazaazeemi@gmail.com</span>
 				</a>
+				<div class="flex items-center gap-2 text-white/70">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+						<circle cx="12" cy="10" r="3"></circle>
+					</svg>
+					<span>Bahawalnagar, Pakistan</span>
+				</div>
 			</div>
 
 			<!-- Social Links -->
 			<div class="flex gap-4">
 				<a
-					href={siteConfig.links.github}
+					href="https://github.com/FarhanAliRaza"
 					target="_blank"
 					aria-label="GitHub"
 					rel="noopener noreferrer"
@@ -143,55 +128,6 @@
 						></path>
 					</svg>
 				</a>
-
-				<a
-					href={siteConfig.links.linkedin}
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label="LinkedIn"
-					class="rounded-full bg-gray-800 p-2 text-white/70 transition-colors hover:text-[var(--color-brand)]"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="20"
-						height="20"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-						></path>
-						<rect x="2" y="9" width="4" height="12"></rect>
-						<circle cx="4" cy="4" r="2"></circle>
-					</svg>
-				</a>
-
-				<a
-					href={siteConfig.links.twitter}
-					target="_blank"
-					aria-label="Twitter"
-					rel="noopener noreferrer"
-					class="rounded-full bg-gray-800 p-2 text-white/70 transition-colors hover:text-[var(--color-brand)]"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="20"
-						height="20"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path
-							d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
-						></path>
-					</svg>
-				</a>
 			</div>
 		</div>
 	</div>
@@ -202,154 +138,242 @@
 
 		<div class="grid gap-8 md:grid-cols-2">
 			<!-- Technical Skills -->
-
-			<!-- Technologies -->
 			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">Technologies that i have worked with</h3>
-
+				<h3 class="mb-4 text-xl font-medium text-white/90">Backend</h3>
 				<div class="flex flex-wrap gap-3">
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Python</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django Rest Framework</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">FastAPI</span>
+<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Go Lang</span>
+<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Node JS</span>
+				</div>
+			</div>
+
+			<div>
+				<h3 class="mb-4 text-xl font-medium text-white/90">Frontend</h3>
+				<div class="flex flex-wrap gap-3">
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">JavaScript</span>
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">TypeScript</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Go Lang</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django Rest Framework</span
-					>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">SvelteKit</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">React | Next.js</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Flutter</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">React</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Svelte</span>
+				</div>
+			</div>
+
+			<div>
+				<h3 class="mb-4 text-xl font-medium text-white/90">GenAI</h3>
+				<div class="flex flex-wrap gap-3">
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Natural Language Processing</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">RAG</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Vector Databases</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Prompt Engineering</span>
+				</div>
+			</div>
+
+			<div>
+				<h3 class="mb-4 text-xl font-medium text-white/90">DevOps & Tools</h3>
+				<div class="flex flex-wrap gap-3">
 					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Docker</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">CI/CD</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Git</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">GitHub</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">API Design & Integration</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Unit Testing</span>
+					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Flutter</span>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<!-- Experience Section -->
-	<section>
-		<h2 class="mb-8 text-2xl font-semibold text-white">Experience & Education</h2>
+	<section class="mb-16">
+		<h2 class="mb-8 text-2xl font-semibold text-white">Work Experience</h2>
+
+		<div class="space-y-8">
+			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+				<h4 class="text-xl font-bold text-white mb-2">Google Summer of Code 2025 Contributor</h4>
+				<p class="text-[var(--color-brand)]/80 mb-4">Django Software Foundation</p>
+				<div class="space-y-3">
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Selected for the highly competitive Google Summer of Code program to contribute to the Django web framework. 
+							<a href="https://summerofcode.withgoogle.com/programs/2025/projects/YqdTk30V" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View Project</a>
+						</p>
+					</div>
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Actively working on integrating the django-template-partials library into the Django core, a project aimed at enhancing developer experience for thousands of users globally.
+						</p>
+					</div>
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Collaborating with experienced mentors and the open-source community, adhering to rigorous coding standards and contributing to a widely-used framework.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+				<h4 class="text-xl font-bold text-white mb-2">Lead Developer</h4>
+				<p class="text-[var(--color-brand)]/80 mb-4">
+					<a href="https://medical-chatbot.medgebra.com" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">Medgebra</a>
+				</p>
+				<div class="space-y-3">
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Architected and solely developed <b>MedGebra</b>, an AI-powered medical assistant that provides doctors with resource-cited answers to complex queries.
+						</p>
+					</div>
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Engineered a secure integration with Hospital Information Systems (HIS) to access patient data, enabling personalized and context-aware clinical decision support.
+						</p>
+					</div>
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Built and maintain an extensive embedding database from over 100,000 chunked medical PDFs, creating a proprietary knowledge base for providing accurate, verifiable information with citations.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+				<h4 class="text-xl font-bold text-white mb-2">Technical Cofounder</h4>
+				<p class="text-[var(--color-brand)]/80 mb-4">
+					<a href="https://bulkmailverifier.org" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">Bulk Mail Verifier</a>
+				</p>
+				<div class="space-y-3">
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Architected and developed a scalable web application for bulk email validation, successfully processing a volume of over 100 million emails to date.
+						</p>
+					</div>
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Designed and implemented robust RESTful APIs, enabling seamless integration for clients and enhancing the product's marketability.
+						</p>
+					</div>
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Established and maintained CI/CD pipelines, significantly reducing deployment time and ensuring high availability and consistent performance of the validation service.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+				<h4 class="text-xl font-bold text-white mb-2">Full Stack Developer</h4>
+				<p class="text-[var(--color-brand)]/80 mb-4">
+					<a href="https://fiverr.com/users/backendev/" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">Fiverr (Freelance)</a>
+				</p>
+				<div class="space-y-3">
+					<div class="flex items-start gap-3">
+						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+						<p class="text-white/70">
+							Successfully delivered over 50 projects for clients worldwide with a consistent 5-star rating, specializing in API integrations and custom web development using Django, React, and Svelte.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Personal Projects Section -->
+	<section class="mb-16">
+		<h2 class="mb-8 text-2xl font-semibold text-white">Personal Projects</h2>
+
+		<div class="space-y-6">
+			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+				<h4 class="text-xl font-bold text-white mb-3">PAI - Terminal Coding Agent</h4>
+				<div class="flex items-start gap-3">
+					<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+					<p class="text-white/70">
+						Built a simple AI coding assistant that runs directly in the terminal, showcasing skills in creating practical AI-powered developer tools. 
+						<a href="https://github.com/FarhanAliRaza/pai" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View on GitHub</a>
+					</p>
+				</div>
+			</div>
+
+			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+				<h4 class="text-xl font-bold text-white mb-3">Djinn - Django REST Framework Code Generator</h4>
+				<div class="flex items-start gap-3">
+					<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+					<p class="text-white/70">
+						Created a CLI tool to accelerate backend development by automatically generating starter templates and boilerplate code for Django REST Framework projects.
+						<a href="https://github.com/FarhanAliRaza/Djinn" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View on GitHub</a>
+					</p>
+				</div>
+			</div>
+
+			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+				<h4 class="text-xl font-bold text-white mb-3">Toy Programming Language</h4>
+				<div class="flex items-start gap-3">
+					<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
+					<p class="text-white/70">
+						Designed and built an interpreter for a custom programming language with syntax in the Urdu language. This project involved creating a lexer, parser, and evaluator from scratch, demonstrating a deep understanding of language design and computer science fundamentals.
+						<a href="https://github.com/FarhanAliRaza/URDU-PROGRAMMING-LANGUAGE" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View on GitHub</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Education & Languages Section -->
+	<section class="mb-16">
+		<h2 class="mb-8 text-2xl font-semibold text-white">Education & Languages</h2>
 
 		<div class="grid gap-12 md:grid-cols-2">
-			<!-- Work Experience -->
+			<!-- Education -->
 			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">Work Experience</h3>
-
+				<h3 class="mb-4 text-xl font-medium text-white/90">Education</h3>
 				<div class="space-y-8">
 					<div class="relative border-l border-gray-800 pl-6">
 						<div
 							class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
 						></div>
-						<h4 class="text-lg font-medium text-white/90">Founder</h4>
-						<p class="text-[var(--color-brand)]/80">Self Employed - 2024 to Present</p>
+						<h4 class="text-lg font-medium text-white/90">BS in Computer Science</h4>
+						<p class="text-[var(--color-brand)]/80">2019 - 2023</p>
 						<p class="mt-2 text-white/70">
-							I have been developing and maintaining multiple projects of my own you can see them
-							<a class="text-[var(--color-brand)] underline" href="/products">here</a>
-							<br />
-						</p>
-					</div>
-					<div class="relative border-l border-gray-800 pl-6">
-						<div
-							class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
-						></div>
-						<h4 class="text-lg font-medium text-white/90">Software Engineer</h4>
-						<p class="text-[var(--color-brand)]/80">MedGebra - 2024 to Present</p>
-						<p class="mt-2 text-white/70">
-							Responsible for developing, scaling and maintaining the medical chatbot for doctors. I
-							have built a pipeline for processing 100s of GBs of pdf files and generating emeddings
-							and chunking and then using them into a chatbot. This is now used by 100s of doctors
-							worldwide.
-							<br />
-							Tech Stack: Python, Django, Django Rest Framework, Next.js, PostgreSQL, Docker, Redis,
-							TailwindCSS
-						</p>
-					</div>
-					<div class="relative border-l border-gray-800 pl-6">
-						<div
-							class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
-						></div>
-						<h4 class="text-lg font-medium text-white/90">Software Engineer</h4>
-						<p class="text-[var(--color-brand)]/80">Bulk Email Verifier - 2020 to Present</p>
-						<p class="mt-2 text-white/70">
-							Responsible for developing, scaling and maintaining the bulk email verifier
-							application. Learned a lot about backend development and SMTP protocols and scraping
-							tools and task queues and scaled the project to 1000s of users validating millions of
-							emails.
-							<br />
-							Tech Stack: Python, Golang, Django, Django Rest Framework, PostgreSQL, Docker, OVH Baremetal,
-							SvelteKit, RabbitMQ, Redis, Puppeteer
-						</p>
-					</div>
-
-					<div class="relative border-l border-gray-800 pl-6">
-						<div
-							class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
-						></div>
-						<h4 class="text-lg font-medium text-white/90">Freelance</h4>
-						<p class="text-[var(--color-brand)]/80">Fiverr & Upwork - 2020 to Present</p>
-						<p class="mt-2 text-white/70">
-							Developed multiple web application for clients using different technologies and
-							frameworks. 5 stars rating on Fiverr after delivering 50+ projects and 100% project
-							success rate on Upwork.
+							<b>Courses:</b> Data Structures & Algorithms, Machine Learning, Web Services & API Development, Artificial Intelligence.
 						</p>
 					</div>
 				</div>
 			</div>
 
-			<!-- Education -->
-			<div class="space-y-8">
-				<div class="">
-					<h3 class="mb-4 text-xl font-medium text-white/90">Education</h3>
-
-					<div class="space-y-8">
-						<div class="relative border-l border-gray-800 pl-6">
-							<div
-								class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
-							></div>
-							<h4 class="text-lg font-medium text-white/90">Bachelor's in Computer Science</h4>
-							<p class="text-[var(--color-brand)]/80">
-								Islamia University of Bahawalpur - 2019 to 2023
-							</p>
-							<p class="mt-2 text-white/70">
-								Core focus on programming fundamentals, data structures, and algorithms.
-							</p>
-						</div>
+			<!-- Languages -->
+			<div>
+				<h3 class="mb-4 text-xl font-medium text-white/90">Languages</h3>
+				<div class="space-y-4">
+					<div class="flex justify-between">
+						<span class="text-white/70">English</span>
+						<span class="text-[var(--color-brand)]">80%</span>
 					</div>
-				</div>
-				<div>
-					<h3 class="mb-4 text-xl font-medium text-white/90">Open Source Contributions</h3>
-
-					<div class="space-y-8">
-						<div class="relative border-l border-gray-800 pl-6">
-							<div
-								class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
-							></div>
-							<h4 class="text-lg font-medium text-white/90">Djangnaut Space Session Organizer</h4>
-							<p class="text-[var(--color-brand)]/80">Djangonaut Space - 2025</p>
-							<p class="mt-2 text-white/70">
-								As a session organizer, I was responsible for organizing and running sessions for
-								the Djangonauts.
-							</p>
-						</div>
-						<div class="relative border-l border-gray-800 pl-6">
-							<div
-								class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
-							></div>
-							<h4 class="text-lg font-medium text-white/90">Djangnaut</h4>
-							<p class="text-[var(--color-brand)]/80">Djangonaut Space - 2024</p>
-							<p class="mt-2 text-white/70">
-								This program places an emphasis on group-learning, sustainability and longevity.
-								Djangonauts are members of the community who wish to level up their current Django
-								code contributions and potentially take on leadership roles in Django in the future.
-								🦄 This is a free, 8-week group mentoring program where individuals will work
-								self-paced in a semi-structured learning environment.
-								<br />
-								<span class="underline">
-									My 14 Pull requests got merged into djangopackages.org
-								</span>
-							</p>
-						</div>
+					<div class="flex justify-between">
+						<span class="text-white/70">Urdu</span>
+						<span class="text-[var(--color-brand)]">100%</span>
 					</div>
 				</div>
 			</div>
+		</div>
+	</section>
+
+	<!-- Interests Section -->
+	<section class="mb-16">
+		<h2 class="mb-8 text-2xl font-semibold text-white">Interests</h2>
+		<div class="flex flex-wrap gap-3">
+			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Cricket</span>
+			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Rockets & Space</span>
+			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Chess</span>
+			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Computer and Electronics</span>
 		</div>
 	</section>
 </main>
