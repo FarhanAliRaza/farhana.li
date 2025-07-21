@@ -62,7 +62,7 @@
 			>
 				<path d="m15 18-6-6 6-6"></path>
 			</svg>
-			<span>Back to blog</span>
+			<span>Back to blogs</span>
 		</a>
 	</div>
 
