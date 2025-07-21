@@ -30,7 +30,7 @@ As a kid, I was that annoying child who took apart every toy to see how it worke
 
 But life had other plans. Due to some circumstances (story for another time), I ended up doing pre-medical in high school. There I was, stuck with biology and chemistry, when everything changed in 11th grade through the most unexpected source: a Bollywood movie about hacking!
 
-That movie opened up a whole new world. I went down the hacking rabbit hole and discovered this thing called "coding." I tried Python first but it was impossibly hard. I had zero computer science background. HTML and CSS, though? That was magical! I could type something and immediately see it happen on the screen [Thanks to Head First book for making it fun](https://paulinoposada.github.io/web/websites/paulino/books/technical/head_first_html.pdf). That instant feedback was addictive.
+That movie opened up a whole new world. I went down the hacking rabbit hole and discovered this thing called "coding." I tried Python first but it was impossibly hard. I had zero computer science background. HTML and CSS, though? That was magical! I could type something and immediately see it happen on the screen ([Thanks to Head First book for making it fun](https://paulinoposada.github.io/web/websites/paulino/books/technical/head_first_html.pdf)). That instant feedback was addictive.
 
 After pre-med, I shocked everyone by deciding to pursue computer science. When I told my father, his response was priceless: "Do you want to become a computer operator?" He was genuinely thinking of the people who operate computers for government clerks. 😄
 
