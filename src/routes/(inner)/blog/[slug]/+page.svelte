@@ -2,6 +2,7 @@
 	import { formatDate } from '$lib/utils';
 	import BlogCard from '$lib/components/BlogCard.svelte';
 	import type { Post } from '$lib/types';
+	import '$lib/prose-styles.css';
 
 	// Fix destructuring to get content and meta from data
 	let { data } = $props<{
@@ -207,108 +208,3 @@
 	{/if}
 </div>
 
-<style>
-	/* Enhance the visual styling of the markdown content */
-	:global(.prose pre) {
-		border-radius: 0.5rem;
-		margin: 1.5rem 0;
-		padding: 1rem;
-		border: 1px solid rgba(33, 158, 255, 0.2);
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-		background-color: #282c34 !important; /* Force consistent dark background */
-		position: relative; /* For copy button positioning */
-	}
-
-	:global(.prose img) {
-		border-radius: 0.5rem;
-		border: 1px solid rgba(33, 158, 255, 0.2);
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-	}
-
-	:global(.prose blockquote) {
-		border-left-color: var(--color-brand);
-		background-color: rgba(33, 158, 255, 0.05);
-		padding: 1rem;
-		border-radius: 0 0.5rem 0.5rem 0;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	}
-
-	/* Radial gradient for background */
-	.bg-gradient-radial {
-		background-image: radial-gradient(
-			circle at 50% 0%,
-			var(--from),
-			var(--via) 50%,
-			var(--to) 100%
-		);
-	}
-
-	/* Copy button styling */
-	:global(button[data-code]) {
-		position: absolute;
-		top: 0.5rem;
-		right: 0.5rem;
-		padding: 0.5rem;
-		background-color: rgba(33, 158, 255, 0.1);
-		border: 1px solid rgba(33, 158, 255, 0.3);
-		border-radius: 0.25rem;
-		color: #219eff !important;
-		cursor: pointer;
-		opacity: 0.7;
-		transition: all 0.2s ease;
-		z-index: 10;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 32px;
-		height: 32px;
-	}
-
-	/* Copy icon (default state) */
-	:global(button[data-code] .ready) {
-		display: block;
-		width: 16px;
-		height: 16px;
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23219eff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3e%3cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3e%3c/svg%3e");
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: contain;
-	}
-
-	/* Success icon (copied state) */
-	:global(button[data-code] .success) {
-		display: none;
-		width: 16px;
-		height: 16px;
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='20,6 9,17 4,12'/%3e%3c/svg%3e");
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: contain;
-	}
-
-	/* Show success icon when copied */
-	:global(button[data-code].copied .ready) {
-		display: none;
-	}
-
-	:global(button[data-code].copied .success) {
-		display: block;
-	}
-
-	:global(button[data-code]:hover) {
-		background-color: rgba(33, 158, 255, 0.2);
-		border-color: #219eff;
-		opacity: 1;
-		transform: scale(1.05);
-	}
-
-	:global(pre:hover button[data-code]) {
-		opacity: 1;
-	}
-
-	:global(button[data-code].copied) {
-		background-color: rgba(34, 197, 94, 0.2);
-		border-color: #22c55e;
-		color: #22c55e !important;
-	}
-</style>
