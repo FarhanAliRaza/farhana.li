@@ -23,6 +23,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
+      lucide-svelte:
+        specifier: ^0.533.0
+        version: 0.533.0(svelte@5.23.2)
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0
@@ -1454,6 +1457,11 @@ packages:
 
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
+
+  lucide-svelte@0.533.0:
+    resolution: {integrity: sha512-Y7R4bTGOzdeeZpwzUgoo+5ShL6YdXvq+/+njUrCV3Sx1jq5Lw4We0gM5gRhmGEXv/LqM0H1LN3Mfl4Ptbdmc0g==}
+    peerDependencies:
+      svelte: ^3 || ^4 || ^5.0.0-next.42
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -3393,6 +3401,10 @@ snapshots:
   lodash.merge@4.6.2: {}
 
   lru-cache@10.4.3: {}
+
+  lucide-svelte@0.533.0(svelte@5.23.2):
+    dependencies:
+      svelte: 5.23.2
 
   magic-string@0.30.17:
     dependencies:
