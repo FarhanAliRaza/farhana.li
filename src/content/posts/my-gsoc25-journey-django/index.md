@@ -62,8 +62,7 @@ Remember when I said it would be mostly copy-pasting? HAHAHA. _laughs in debuggi
 
 First surprise: Partials defined AFTER they're used? Yeah, that's a thing people do. Who knew? 🤷 Solution: [Lazy loading](https://github.com/FarhanAliRaza/django/blob/6bd7bc83e66bd7779628aef237a241f264a49080/django/utils/datastructures.py#L350C1-L365C56) to the rescue!
 
-Second surprise: _Parse time vs render time_. Didn't even think about this when writing my proposal! 🤦 Turns out `{% partialdef %}` stores the nodelist at parse time, but `{% partial %}` executes it at render time.
-But wait, there's more! (foreshadowing alert 🔮)
+Second surprise: _Parse time vs render time_. Didn't even think about this when writing my proposal! 🤦. Spent a dlot of coding time at start dealing with problems becuase of this.
 
 ### Django's Template System: Crash Course 📚
 
@@ -77,10 +76,11 @@ Let me paint you a picture of how Django templates actually work:
 6. **The Backends** 🎨: Django Template Language, Jinja2... pick your poison!
 
 Our mission? Sneak partials into the Django backend (the one everyone uses) with that sweet `template.html#partial` syntax.
+Some of our code runs at parse time to save the partials into `Template.extra_data` as `TemplateProxy` and then at render time we render those partials with the context.
 
 ### Act 3: Code goes where? 🗺️
 
-Here's where things get REALLY interesting. We put our partial loading logic in `django.template.backends.django.DjangoTemplates(BaseEngine)`. Seemed logical, right? WRONG!
+We put our partial loading logic in `django.template.backends.django.DjangoTemplates(BaseEngine)`. Seemed logical, right? WRONG!
 
 The `include` tag was like "Nah, I don't see your partials, bro." 🙈
 
