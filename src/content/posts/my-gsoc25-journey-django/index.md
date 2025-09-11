@@ -62,7 +62,7 @@ Remember when I said it would be mostly copy-pasting? HAHAHA. _laughs in debuggi
 
 First surprise: Partials defined AFTER they're used? Yeah, that's a thing people do. Who knew? 🤷 Solution: [Lazy loading](https://github.com/FarhanAliRaza/django/blob/6bd7bc83e66bd7779628aef237a241f264a49080/django/utils/datastructures.py#L350C1-L365C56) to the rescue!
 
-Second surprise: _Parse time vs render time_. Didn't even think about this when writing my proposal! 🤦. Spent a dlot of coding time at start dealing with problems becuase of this.
+Second surprise: _Parse time vs render time_. Didn't even think about this when writing my proposal! 🤦. Spent a lot of coding time at start dealing with problems becuase of this.
 
 ### Django's Template System: Crash Course 📚
 
@@ -70,17 +70,18 @@ Let me paint you a picture of how Django templates actually work:
 
 1. **The Lexer** 🔍: Takes your beautiful template string and chops it into tokens (TEXT, VAR, BLOCK - like a word salad)
 2. **The Parser** 🎭: Gobbles up those tokens and spits out a compiled template (basically a list of Node objects)
-3. **The Nodes** 🌳: VariableNode, IfNode, ForNode, PartialNode, PartialDefNode, etc
+3. **The Nodes** 🌳: VariableNode, IfNode, ForNode, PartialNode, PartialDefNode, etc (Actually renders the html for browser with context)
 4. **The Engine** 🚂: The conductor that makes everything work together
-5. **The Loaders** 📦: These bad boys fetch templates from filesystem, memory, wherever
-6. **The Backends** 🎨: Django Template Language, Jinja2... pick your poison!
+5. **The Loaders** 📦: These bad boys fetch template string from filesystem, memory, cache
+6. **The Backends** 🎨: Django Template Language, Jinja2... pick your poison! (That actually provides tags and syntax sugar for html. They are actually [DSLs](https://en.wikipedia.org/wiki/Domain-specific_language))
 
-Our mission? Sneak partials into the Django backend (the one everyone uses) with that sweet `template.html#partial` syntax.
-Some of our code runs at parse time to save the partials into `Template.extra_data` as `TemplateProxy` and then at render time we render those partials with the context.
+Our mission? Sneak partials into the Django backend (the one everyone uses by default).
+
+So some of our code runs at parse time to save the partials into `Template.extra_data` as `TemplateProxy` and then at render time we render those partials with the context.
 
 ### Act 3: Code goes where? 🗺️
 
-We put our partial loading logic in `django.template.backends.django.DjangoTemplates(BaseEngine)`. Seemed logical, right? WRONG!
+We put our partial loading logic in `django.template.backends.django.DjangoTemplates extends BaseEngine`. Seemed logical, right? WRONG!
 
 The `include` tag was like "Nah, I don't see your partials, bro." 🙈
 
