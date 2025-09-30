@@ -22,7 +22,7 @@ export interface Project {
     description: string;
     date: string;
     tags: string[];
-    image: string;
+    image?: string;
     published: boolean;
     github?: string;
     demo?: string;

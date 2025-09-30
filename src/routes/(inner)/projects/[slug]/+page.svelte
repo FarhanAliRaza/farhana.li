@@ -9,7 +9,7 @@
 				description: string;
 				date: string;
 				tags: string[];
-				image: string;
+				image?: string;
 				github?: string;
 				demo?: string;
 				slug: string;
@@ -27,11 +27,15 @@
 	<meta property="og:description" content={meta.description} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content={`https://farhana.li/projects/${meta.slug}`} />
-	<meta property="og:image" content={meta.image} />
+	{#if meta.image}
+		<meta property="og:image" content={meta.image} />
+	{/if}
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={`${meta.title} - Project - Farhan's Portfolio`} />
 	<meta name="twitter:description" content={meta.description} />
-	<meta name="twitter:image" content={meta.image} />
+	{#if meta.image}
+		<meta name="twitter:image" content={meta.image} />
+	{/if}
 	<meta property="article:published_time" content={new Date(meta.date).toISOString()} />
 	<meta property="article:tag" content={meta.tags.join(',')} />
 	<link rel="canonical" href={`https://farhana.li/projects/${meta.slug}`} />
@@ -65,26 +69,38 @@
 	<article
 		class="overflow-hidden rounded-xl border border-gray-800 bg-gray-900/20 backdrop-blur-sm"
 	>
-		<!-- Hero image with overlay -->
-		<div class="relative h-80 w-full overflow-hidden border-b border-gray-800">
-			<img
-				src={meta.image}
-				alt={meta.title}
-				class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-			/>
-			<!-- Overlay gradient for better text readability -->
-			<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
+		{#if meta.image}
+			<!-- Hero image with overlay -->
+			<div class="relative h-80 w-full overflow-hidden border-b border-gray-800">
+				<img
+					src={meta.image}
+					alt={meta.title}
+					class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+				/>
+				<!-- Overlay gradient for better text readability -->
+				<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
 
-			<!-- Project title overlay on image -->
-			<div class="absolute bottom-0 left-0 right-0 p-8">
+				<!-- Project title overlay on image -->
+				<div class="absolute bottom-0 left-0 right-0 p-8">
+					<h1
+						class="mb-4 bg-gradient-to-r from-[var(--color-brand)] to-[var(--color-text)] bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
+					>
+						{meta.title}
+					</h1>
+					<p class="mb-4 max-w-3xl text-lg text-white/90">{meta.description}</p>
+				</div>
+			</div>
+		{:else}
+			<!-- Header without image -->
+			<div class="border-b border-gray-800 p-8">
 				<h1
 					class="mb-4 bg-gradient-to-r from-[var(--color-brand)] to-[var(--color-text)] bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
 				>
 					{meta.title}
 				</h1>
-				<p class="mb-4 max-w-3xl text-lg text-white/90">{meta.description}</p>
+				<p class="max-w-3xl text-lg text-white/90">{meta.description}</p>
 			</div>
-		</div>
+		{/if}
 
 		<!-- Project details section -->
 		<div class="border-b border-gray-800 p-8">
