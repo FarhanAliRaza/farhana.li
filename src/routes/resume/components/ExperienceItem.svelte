@@ -1,0 +1,141 @@
+<script lang="ts">
+	let {
+		company,
+		tags,
+		dateRange,
+		jobTitle,
+		responsibilities
+	}: {
+		company: string;
+		tags: string[];
+		dateRange: string;
+		jobTitle: string;
+		responsibilities: string[];
+	} = $props();
+</script>
+
+<article class="experience">
+	<header class="header">
+		<div class="company-info">
+			<h3 class="company">{company}</h3>
+			<ul class="badges">
+				{#each tags as tag}
+					<li class="badge">{tag}</li>
+				{/each}
+			</ul>
+		</div>
+		<span class="period">{dateRange}</span>
+	</header>
+
+	<h4 class="role">{jobTitle}</h4>
+
+	<p class="description font-mono">
+		{responsibilities[0]}
+	</p>
+
+	{#if responsibilities.length > 1}
+		<ul class="highlights font-mono">
+			{#each responsibilities.slice(1) as responsibility}
+				<li>{@html responsibility}</li>
+			{/each}
+		</ul>
+	{/if}
+</article>
+
+<style>
+	.experience {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.company-info {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.company {
+		font-size: 1rem;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	.badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.badge {
+		padding: 3px 8px;
+		border-radius: 4px;
+		background-color: rgba(15, 23, 42, 0.08);
+		font-family: var(--resume-font-mono);
+		font-size: 0.75rem;
+		color: rgba(15, 23, 42, 0.75);
+		font-weight: 500;
+	}
+
+	.period {
+		font-size: 0.875rem;
+		color: rgba(15, 23, 42, 0.6);
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+
+	.role {
+		font-size: 0.9rem;
+		font-weight: 400;
+		margin: 0;
+		color: rgba(15, 23, 42, 0.85);
+	}
+
+	.description {
+		font-size: 0.875rem;
+		line-height: 1.6;
+		color: rgba(15, 23, 42, 0.75);
+		margin: 0.25rem 0 0 0;
+	}
+
+	.highlights {
+		font-size: 0.875rem;
+		line-height: 1.6;
+		color: rgba(15, 23, 42, 0.75);
+		margin: 0.5rem 0 0 0;
+		padding-left: 1.25rem;
+	}
+
+	.highlights li {
+		margin-bottom: 0.375rem;
+	}
+
+	.highlights li:last-child {
+		margin-bottom: 0;
+	}
+
+	@media (max-width: 640px) {
+		.header {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	@media print {
+		.experience {
+			break-inside: avoid;
+			page-break-inside: avoid;
+		}
+	}
+</style>
