@@ -2,17 +2,25 @@
 	let {
 		name,
 		description,
-		tags
+		tags,
+		url
 	}: {
 		name: string;
 		description: string;
 		tags: string[];
+		url?: string;
 	} = $props();
 </script>
 
 <article class="card">
 	<header class="card-header">
-		<h3 class="title">{name}</h3>
+		{#if url}
+			<h3 class="title">
+				<a href={url} target="_blank" rel="noopener noreferrer" class="title-link">{name}</a>
+			</h3>
+		{:else}
+			<h3 class="title">{name}</h3>
+		{/if}
 	</header>
 	<p class="description">{description}</p>
 	<footer class="card-footer">
@@ -47,6 +55,15 @@
 		font-weight: 600;
 		margin: 0;
 		line-height: 1.4;
+	}
+
+	.title-link {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.title-link:hover {
+		text-decoration: underline;
 	}
 
 	.description {

@@ -8,16 +8,14 @@
 	const resumeData = {
 		name: 'Farhan Ali',
 		initials: 'FA',
-		location: 'Gujrat, Pakistan',
-		locationLink: 'https://www.google.com/maps/place/Gujrat,+Pakistan',
-		tagline:
-			'Full Stack Engineer with 5+ years building production systems and contributing to Django core.',
+		location: 'Bahwalnagar, Pakistan | GMT+5',
+		tagline: 'Full Stack Engineer | Django Core Contributor',
 		about:
-			'Full-stack engineer with 5+ years building production systems at scale and contributing to Django core (GSoC 2025). Architected MedGebra (FHIR-compliant medical platform) and built infrastructure processing 100M+ emails with 90.9% uptime. Experienced in technical architecture design and remote team leadership.',
+			'Full-stack engineer with 5+ years building production systems at scale and contributing to Django core (GSoC 2025). Built django-bolt (64k+ RPS Rust/PyO3 framework) exploring Python/Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime and maintained open source projects with community engagement. Expert in Python/Django, Rust, async processing (Tokio, Actix), with a track record of shipping fast and solving complex technical challenges end-to-end.',
 		avatarUrl: null,
 		contact: {
-			personalWebsiteUrl: 'https://www.farhanali.tk',
-			email: 'farhanaliazeemi@gmail.com',
+			personalWebsiteUrl: 'https://farhana.li',
+			email: 'farhanalirazaazeemi@gmail.com',
 			tel: '+923038279454',
 			social: [
 				{
@@ -29,11 +27,6 @@
 					name: 'LinkedIn',
 					url: 'https://www.linkedin.com/in/farhanaliraza',
 					icon: 'linkedin'
-				},
-				{
-					name: 'X',
-					url: 'https://x.com/FarhanAliRaza4',
-					icon: 'x'
 				}
 			]
 		},
@@ -42,11 +35,11 @@
 				company: 'Django Software Foundation',
 				title: 'Google Summer of Code 2025 Contributor',
 				badges: ['Remote', 'Django', 'Python', 'Open Source'],
-				start: '2025',
-				end: 'Present',
+				start: '05/2025',
+				end: '08/2025',
 				highlights: [
-					'Selected for the highly competitive Google Summer of Code program to contribute to Django core.',
-					'Shipped template parallels to Django core (<a href="https://github.com/django/django/pull/19043" target="_blank" rel="noopener noreferrer">PR #19043</a>).',
+					'Selected for the highly competitive Google Summer of Code program to contribute to the Django web framework. <a href="https://summerofcode.withgoogle.com/programs/2025/projects/YqdTk30V" target="_blank" rel="noopener noreferrer">View Project</a>',
+					'Shipped template partials to Django core (<a href="https://github.com/django/django/pull/19643" target="_blank" rel="noopener noreferrer">PR #19643</a>).',
 					'Wrote comprehensive documentation and 50+ tests.',
 					'Collaborated openly with maintainers through 100+ public review comments.'
 				]
@@ -54,71 +47,77 @@
 			{
 				company: 'Medgebra',
 				title: 'Full Stack Engineer',
-				badges: ['Remote', 'Django', 'Next.js', 'RAG', 'PostgreSQL'],
-				start: '2023',
-				end: '2025',
+				badges: ['Remote', 'Django', 'Next.js', 'RAG', 'PostgreSQL', 'Redis'],
+				start: '06/2024',
+				end: '07/2025',
 				highlights: [
-					'Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3.5s to &lt;1s.',
-					'Designed production RAG system combining GPT-4 with 10+ clinical databases, achieving 2x response time improvement.',
-					'Built scalable pipeline processing 10,000+ medical PDFs with AI-powered page labeling.'
+					'<b>Semantic PDF Citation System:</b> Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3-5s to < 200ms while handling OCR errors and paraphrasing.',
+					'<b>Document Embedding Pipeline:</b> Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking, ensuring verifiable sources for clinical decision support.',
+					'<b>Tech Stack:</b> Django, Next.js, Pinecone, DSPY, RAG, PostgreSQL, Redis.'
 				]
 			},
 			{
 				company: 'Bulk Mail Verifier',
-				title: 'Full Stack Engineer — Lead Developer',
-				badges: ['Remote', 'Django', 'Celery', 'Redis', 'PostgreSQL'],
-				start: '2021',
-				end: '2023',
+				title: 'Full Stack Engineer',
+				badges: ['Remote', 'Django', 'Celery', 'Redis', 'PostgreSQL', 'AI'],
+				start: '03/2024',
+				end: 'Present',
 				highlights: [
-					'Architected infrastructure handling millions of daily verification requests, maintaining 90.9% uptime.',
-					'Built product from scratch, onboarded 3,000+ users with growing MRR.',
-					'Shipped autonomous email campaign agent with custom DNS and DKIM verification.',
-					'Owned end-to-end delivery, shipping features daily based on user feedback.'
+					'Started with email validation (100M+ processed), evolved to a smart cold email platform after discovering how users used the product.',
+					'3,000+ users, growing MRR, zero marketing - pure product-led growth.',
+					'Shipping AI agent that autonomously runs cold email campaigns, fine-tuned Qwen 2.5 0.5B for lead scoring.',
+					'Full product ownership: talked to users, made a pivot decision, built new features based on analytics.',
+					'Technical highlights: scalable architecture handling millions of emails, RESTful APIs, and real-time processing.'
 				]
 			}
 		],
 		education: [
 			{
-				school: 'University of Gujrat',
-				degree: "Bachelor's Degree in Computer Science",
-				start: '2019',
-				end: '2023'
+				school: 'Islamia University of Bahawalpur',
+				degree: 'BS CS - 3.61/4.0',
+				start: '08/2019',
+				end: '05/2023'
 			}
 		],
 		skills: [
 			'Python',
 			'Django',
-			'FastAPI',
+			'Rust',
+			'REST APIs',
+			'Javascript, TypeScript',
 			'React',
 			'Svelte',
-			'TypeScript',
-			'JavaScript',
-			'PostgreSQL',
-			'Redis',
 			'Docker',
-			'Celery',
 			'RAG',
+			'Prompt Engineering',
+			'Git',
+			'PostgreSQL',
 			'LLM Integration',
-			'REST APIs'
+			'PYO3',
+			'OSS',
+			'Performance Optimzation'
 		],
 		projects: [
 			{
-				title: 'Djangonaut Space',
+				title: 'django-bolt',
 				description:
-					'14 PRs merged into djangopackages.org, 1 PR merged into Django core, and ongoing contributions to OSS.',
-				techStack: ['Django', 'Python', 'Open Source']
+					'High-performance Django HTTP APIs powered by Rust (Actix+Tokio) with msgspec serialization, achieving 60k+ RPS for typed endpoints.',
+				techStack: ['Django', 'Rust', 'PyO3', 'Actix', 'Tokio'],
+				url: 'https://github.com/FarhanAliRaza/django-bolt'
 			},
 			{
-				title: 'Local AI Server',
+				title: 'claude-context-local',
 				description:
-					'High-performance FastAPI server for Claude Code running 100% locally with zero costs and complete privacy.',
-				techStack: ['FastAPI', 'AI', 'Python']
+					'Semantic code search MCP server for Claude Code that runs 100% locally using EmbeddingGemma, with zero API costs and complete privacy.',
+				techStack: ['Python', 'AI', 'MCP', 'Local ML'],
+				url: 'https://github.com/FarhanAliRaza/claude-context-local'
 			},
 			{
-				title: 'FastAPI Decorators for Django',
+				title: 'django-rapid',
 				description:
-					'3-10x faster JSON serialization for Django with simple request validation and response formatting.',
-				techStack: ['Django', 'FastAPI', 'Pydantic']
+					'FastAPI-like decorators for Django with 3-10x faster JSON serialization using msgspec, providing simple request validation and response serialization.',
+				techStack: ['Django', 'FastAPI', 'msgspec', 'Python'],
+				url: 'https://github.com/FarhanAliRaza/django-rapid'
 			}
 		]
 	} as const;
@@ -187,6 +186,7 @@
 						name={project.title}
 						description={project.description}
 						tags={project.techStack}
+						url={project.url}
 					/>
 				{/each}
 			</div>
