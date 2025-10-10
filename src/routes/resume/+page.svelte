@@ -51,9 +51,9 @@
 				start: '06/2024',
 				end: '07/2025',
 				highlights: [
-					'<b>Semantic PDF Citation System:</b> Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3-5s to < 200ms while handling OCR errors and paraphrasing.',
-					'<b>Document Embedding Pipeline:</b> Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking, ensuring verifiable sources for clinical decision support.',
-					'<b>Tech Stack:</b> Django, Next.js, Pinecone, DSPY, RAG, PostgreSQL, Redis.'
+					'Semantic PDF Citation System: Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3-5s to less than 200ms while handling OCR errors and paraphrasing.',
+					'Document Embedding Pipeline: Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking, ensuring verifiable sources for clinical decision support.',
+					'Tech Stack: Django, Next.js, Pinecone, DSPY, RAG, PostgreSQL, Redis.'
 				]
 			},
 			{
