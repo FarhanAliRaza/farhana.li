@@ -9,10 +9,12 @@
 		name: 'Farhan Ali',
 		initials: 'FA',
 		location: 'Bahwalnagar, Pakistan | GMT+5',
+		locationLink: 'https://maps.google.com/?q=Bahwalnagar,Pakistan',
 		tagline: 'Full Stack Engineer | Django Core Contributor',
 		about:
-			'Full-stack engineer with 5+ years building production systems at scale and contributing to Django core (GSoC 2025). Built django-bolt (64k+ RPS Rust/PyO3 framework) exploring Python/Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime and maintained open source projects with community engagement. Expert in Python/Django, Rust, async processing (Tokio, Actix), with a track record of shipping fast and solving complex technical challenges end-to-end.',
-		avatarUrl: null,
+			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor via Google Summer of Code 2025, shipped template partials feature to framework. Created django-bolt, a Rust/PyO3 framework achieving 64K+ RPS, exploring Python-Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime. Expert in Python, Django, Rust, and async processing with Tokio and Actix. Track record of delivering solutions rapidly while solving complex technical challenges end-to-end.',
+		avatarUrl:
+			'https://avatars.githubusercontent.com/u/62690310?s=400&u=cee700c06c6b86ca633e78e3d6f096b7a27b8437&v=4',
 		contact: {
 			personalWebsiteUrl: 'https://farhana.li',
 			email: 'farhanalirazaazeemi@gmail.com',
@@ -21,12 +23,12 @@
 				{
 					name: 'GitHub',
 					url: 'https://github.com/FarhanAliRaza',
-					icon: 'github'
+					icon: 'github' as 'github'
 				},
 				{
 					name: 'LinkedIn',
 					url: 'https://www.linkedin.com/in/farhanaliraza',
-					icon: 'linkedin'
+					icon: 'linkedin' as 'linkedin'
 				}
 			]
 		},
@@ -47,27 +49,27 @@
 			{
 				company: 'Medgebra',
 				title: 'Full Stack Engineer',
-				badges: ['Remote', 'Django', 'Next.js', 'RAG', 'PostgreSQL', 'Redis'],
+				badges: ['Remote', 'Django', 'Next.js', 'RAG', 'PostgreSQL', 'Redis', 'DSPY', 'Pinecone'],
 				start: '06/2024',
 				end: '07/2025',
 				highlights: [
-					'Semantic PDF Citation System: Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3-5s to less than 200ms while handling OCR errors and paraphrasing.',
-					'Document Embedding Pipeline: Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking, ensuring verifiable sources for clinical decision support.',
-					'Tech Stack: Django, Next.js, Pinecone, DSPY, RAG, PostgreSQL, Redis.'
+					'Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3-5s to less than 200ms while handling OCR errors and paraphrasing.',
+					'Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking, ensuring verifiable sources for clinical decision support.',
+					'Implemented real-time document search and retrieval system using vector embeddings and semantic similarity matching.'
 				]
 			},
 			{
 				company: 'Bulk Mail Verifier',
 				title: 'Full Stack Engineer',
-				badges: ['Remote', 'Django', 'Celery', 'Redis', 'PostgreSQL', 'AI'],
+				badges: ['Django', 'Svelte', 'Celery', 'Redis', 'PostgreSQL', 'Rabbitmq', 'SMTP'],
 				start: '03/2024',
 				end: 'Present',
 				highlights: [
-					'Started with email validation (100M+ processed), evolved to a smart cold email platform after discovering how users used the product.',
-					'3,000+ users, growing MRR, zero marketing - pure product-led growth.',
-					'Shipping AI agent that autonomously runs cold email campaigns, fine-tuned Qwen 2.5 0.5B for lead scoring.',
-					'Full product ownership: talked to users, made a pivot decision, built new features based on analytics.',
-					'Technical highlights: scalable architecture handling millions of emails, RESTful APIs, and real-time processing.'
+					'Evolved product from email validation service processing 100M+ emails to comprehensive cold email platform based on user behavior analysis.',
+					'Achieved 3,000+ active users and growing MRR through pure product-led growth strategy without marketing spend.',
+					'Developing AI agent for autonomous cold email campaign management with fine-tuned Qwen 2.5 0.5B model for lead scoring.',
+					'Led full product ownership cycle: user research, pivot decision, feature development based on analytics insights.',
+					'Built scalable architecture handling millions of emails with RESTful APIs and real-time processing capabilities.'
 				]
 			}
 		],
@@ -83,19 +85,29 @@
 			'Python',
 			'Django',
 			'Rust',
-			'REST APIs',
-			'Javascript, TypeScript',
+			'JavaScript',
+			'TypeScript',
 			'React',
 			'Svelte',
-			'Docker',
-			'RAG',
-			'Prompt Engineering',
-			'Git',
+			'Next.js',
+			'FastAPI',
+			'Celery',
+			'PyO3',
+			'msgspec',
+			'Tokio',
+			'Actix',
 			'PostgreSQL',
+			'Redis',
+			'Pinecone',
+			'Docker',
+			'Git',
+			'REST APIs',
+			'RAG',
 			'LLM Integration',
-			'PYO3',
-			'OSS',
-			'Performance Optimzation'
+			'Prompt Engineering',
+			'DSPY',
+			'Performance Optimization',
+			'Open Source'
 		],
 		projects: [
 			{
@@ -109,18 +121,18 @@
 				title: 'claude-context-local',
 				description:
 					'Semantic code search MCP server for Claude Code that runs 100% locally using EmbeddingGemma, with zero API costs and complete privacy.',
-				techStack: ['Python', 'AI', 'MCP', 'Local ML'],
+				techStack: ['Python', 'FASTMCP', 'MCP', 'FAISS', 'Local Model'],
 				url: 'https://github.com/FarhanAliRaza/claude-context-local'
 			},
 			{
 				title: 'django-rapid',
 				description:
 					'FastAPI-like decorators for Django with 3-10x faster JSON serialization using msgspec, providing simple request validation and response serialization.',
-				techStack: ['Django', 'FastAPI', 'msgspec', 'Python'],
+				techStack: ['Python', 'Django', 'msgspec'],
 				url: 'https://github.com/FarhanAliRaza/django-rapid'
 			}
 		]
-	} as const;
+	};
 </script>
 
 <svelte:head>
