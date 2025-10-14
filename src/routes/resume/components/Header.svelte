@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Globe, Mail, Phone, Github, Linkedin, Twitter as X } from 'lucide-svelte';
+	import { Globe, Mail, Phone, Github, Linkedin, Twitter as X, PinIcon } from 'lucide-svelte';
 	import Avatar from './ResumeAvatar.svelte';
 
 	let {
@@ -32,7 +32,7 @@
 		<p class="summary">{tagline}</p>
 
 		<a class="location" href={locationLink} target="_blank" rel="noopener noreferrer">
-			<Globe size={12} />
+			<PinIcon size={12} />
 			<span>{location}</span>
 		</a>
 
@@ -88,7 +88,16 @@
 			{/if}
 			{#if contact.tel}
 				<a href={`tel:${contact.tel}`}>{contact.tel}</a>
+				<span aria-hidden="true">/</span>
 			{/if}
+			{#each contact.social as social}
+				<a href={social.url} target="_blank" rel="noopener noreferrer">
+					{social.name}
+				</a>
+				{#if social !== contact.social[contact.social.length - 1]}
+					<span aria-hidden="true">/</span>
+				{/if}
+			{/each}
 		</div>
 	</div>
 
@@ -190,6 +199,26 @@
 
 		.contact-print {
 			display: inline-flex;
+		}
+
+		.name {
+			font-size: 18pt;
+		}
+
+		.summary {
+			font-size: 9pt;
+		}
+
+		.location {
+			font-size: 7.5pt;
+		}
+
+		.contact-print {
+			font-size: 7.5pt;
+		}
+
+		.header {
+			gap: 1rem;
 		}
 	}
 </style>

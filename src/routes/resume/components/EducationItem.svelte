@@ -55,5 +55,17 @@
 			break-inside: avoid;
 			page-break-inside: avoid;
 		}
+
+		.institution {
+			font-size: 10pt;
+		}
+
+		.period {
+			font-size: 8pt;
+		}
+
+		.degree {
+			font-size: 8.5pt;
+		}
 	}
 </style>

@@ -30,7 +30,7 @@
 	<h4 class="role">{jobTitle}</h4>
 
 	<p class="description font-mono">
-		{responsibilities[0]}
+		{@html responsibilities[0]}
 	</p>
 
 	{#if responsibilities.length > 1}
@@ -85,7 +85,7 @@
 		font-family: var(--resume-font-mono);
 		font-size: 0.75rem;
 		color: rgba(15, 23, 42, 0.75);
-		font-weight: 500;
+		font-weight: 900;
 	}
 
 	.period {
@@ -97,7 +97,8 @@
 
 	.role {
 		font-size: 0.9rem;
-		font-weight: 400;
+		font-weight: 900;
+		font-family: var(--resume-font-mono);
 		margin: 0;
 		color: rgba(15, 23, 42, 0.85);
 	}
@@ -136,6 +137,39 @@
 		.experience {
 			break-inside: avoid;
 			page-break-inside: avoid;
+			gap: 0.375rem;
+		}
+
+		.company {
+			font-size: 10pt;
+		}
+
+		.badge {
+			font-size: 7pt;
+			padding: 2px 6px;
+		}
+
+		.period {
+			font-size: 8pt;
+		}
+
+		.role {
+			font-size: 9pt;
+		}
+
+		.description,
+		.highlights {
+			font-size: 8.5pt;
+			line-height: 1.4;
+		}
+
+		.highlights {
+			margin: 0.25rem 0 0 0;
+			padding-left: 1rem;
+		}
+
+		.highlights li {
+			margin-bottom: 0.25rem;
 		}
 	}
 </style>

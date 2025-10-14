@@ -26,4 +26,16 @@
 		color: white;
 		font-weight: 500;
 	}
+
+	@media print {
+		.skills {
+			gap: 0.375rem;
+		}
+
+		.skill {
+			padding: 3px 8px;
+			font-size: 8pt;
+			background-color: rgba(15, 23, 42, 0.85);
+		}
+	}
 </style>
