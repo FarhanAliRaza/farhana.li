@@ -3,7 +3,7 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params }) => {
     try {
-        const project = await import(`../../../../content/projects/${params.slug}/${params.slug}.md`);
+        const project = await import(`/src/content/projects/${params.slug}/${params.slug}.md`);
         return {
             content: project.default,
             meta: project.metadata

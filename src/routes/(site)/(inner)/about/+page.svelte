@@ -51,39 +51,20 @@
 
 	<!-- Profile Section -->
 	<div class="mb-16">
-		<div class="max-w-4xl mx-auto">
+		<div class="mx-auto max-w-4xl">
 			<h2 class="mb-4 text-2xl font-semibold text-white">About Me</h2>
 
 			<p class="mb-4 text-white/70">
-				A results-oriented Full Stack Developer with over 5 years of experience architecting and building scalable web applications and complex AI systems. Proven expertise in solving real-world problems, demonstrated by single-handedly developing <b>MedGebra</b>, an AI-powered medical chatbot, and an email validation system that has processed over 100 million emails. Currently contributing to the core of a major open-source project as a Google Summer of Code 2025 participant with the Django Software Foundation.
+				A results-oriented Full Stack Developer with over 5 years of experience architecting and
+				building scalable web applications and complex AI systems. Proven expertise in solving
+				real-world problems, demonstrated by single-handedly developing <b>MedGebra</b>, an
+				AI-powered medical chatbot, and an email validation system that has processed over 100
+				million emails. Currently contributing to the core of a major open-source project as a
+				Google Summer of Code 2025 participant with the Django Software Foundation.
 			</p>
 
 			<!-- Contact Info -->
 			<div class="mb-6 flex flex-col gap-4 sm:flex-row">
-				<a
-					aria-label="Email"
-					onclick={() => {
-						window.open(`mailto:farhanalirazaazeemi@gmail.com`, '_blank');
-					}}
-					class="flex items-center gap-2 text-white/70 transition-colors hover:cursor-pointer hover:text-[var(--color-brand)]"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-						></path>
-						<polyline points="22,6 12,13 2,6"></polyline>
-					</svg>
-					<span>farhanalirazaazeemi@gmail.com</span>
-				</a>
 				<div class="flex items-center gap-2 text-white/70">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -128,264 +109,125 @@
 						></path>
 					</svg>
 				</a>
+				<a
+					href="https://www.linkedin.com/in/farhanaliraza/"
+					target="_blank"
+					aria-label="LinkedIn"
+					rel="noopener noreferrer"
+					class="rounded-full bg-gray-800 p-2 text-white/70 transition-colors hover:text-[var(--color-brand)]"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+						></path>
+						<rect x="2" y="9" width="4" height="12"></rect>
+						<circle cx="4" cy="4" r="2"></circle>
+					</svg>
+				</a>
 			</div>
 		</div>
 	</div>
 
-	<!-- Skills Section -->
-	<section class="mb-16">
-		<h2 class="mb-8 text-2xl font-semibold text-white">Skills & Expertise</h2>
+	<!-- Resume Banner -->
+	<div class="mb-16">
+		<div class="mx-auto max-w-4xl">
+			<a
+				href="resume"
+				target="_blank"
+				class="group relative block overflow-hidden rounded-2xl p-1 transition-all duration-300 hover:scale-[1.02]"
+			>
+				<!-- Animated gradient border -->
+				<div
+					class="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-75 blur-sm transition-opacity group-hover:opacity-100"
+				></div>
 
-		<div class="grid gap-8 md:grid-cols-2">
-			<!-- Technical Skills -->
-			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">Backend</h3>
-				<div class="flex flex-wrap gap-3">
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Python</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Django Rest Framework</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">FastAPI</span>
-<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Go Lang</span>
-<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Node JS</span>
-				</div>
-			</div>
-
-			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">Frontend</h3>
-				<div class="flex flex-wrap gap-3">
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">JavaScript</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">TypeScript</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">React</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Svelte</span>
-<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Flutter</span>
-				</div>
-			</div>
-
-			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">GenAI</h3>
-				<div class="flex flex-wrap gap-3">
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Natural Language Processing</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">RAG</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Vector Databases</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Prompt Engineering</span>
-				</div>
-			</div>
-
-			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">DevOps & Tools</h3>
-				<div class="flex flex-wrap gap-3">
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Docker</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">CI/CD</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Git</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">GitHub</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">API Design & Integration</span>
-					<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Unit Testing</span>
-					
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Experience Section -->
-	<section class="mb-16">
-		<h2 class="mb-8 text-2xl font-semibold text-white">Work Experience</h2>
-
-		<div class="space-y-8">
-			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
-				<h4 class="text-xl font-bold text-white mb-2">Google Summer of Code 2025 Contributor</h4>
-				<p class="text-[var(--color-brand)]/80 mb-4">Django Software Foundation</p>
-				<div class="space-y-3">
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Selected for the highly competitive Google Summer of Code program to contribute to the Django web framework. 
-							<a href="https://summerofcode.withgoogle.com/programs/2025/projects/YqdTk30V" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View Project</a>
-						</p>
-					</div>
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Actively working on integrating the django-template-partials library into the Django core, a project aimed at enhancing developer experience for thousands of users globally.
-						</p>
-					</div>
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Collaborating with experienced mentors and the open-source community, adhering to rigorous coding standards and contributing to a widely-used framework.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
-				<h4 class="text-xl font-bold text-white mb-2">Lead Developer</h4>
-				<p class="text-[var(--color-brand)]/80 mb-4">
-					<a href="https://medical-chatbot.medgebra.com" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">Medgebra</a>
-				</p>
-				<div class="space-y-3">
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Architected and solely developed <b>MedGebra</b>, an AI-powered medical assistant that provides doctors with resource-cited answers to complex queries.
-						</p>
-					</div>
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Engineered a secure integration with Hospital Information Systems (HIS) to access patient data, enabling personalized and context-aware clinical decision support.
-						</p>
-					</div>
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Built and maintain an extensive embedding database from over 100,000 chunked medical PDFs, creating a proprietary knowledge base for providing accurate, verifiable information with citations.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
-				<h4 class="text-xl font-bold text-white mb-2">Technical Cofounder</h4>
-				<p class="text-[var(--color-brand)]/80 mb-4">
-					<a href="https://bulkmailverifier.org" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">Bulk Mail Verifier</a>
-				</p>
-				<div class="space-y-3">
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Architected and developed a scalable web application for bulk email validation, successfully processing a volume of over 100 million emails to date.
-						</p>
-					</div>
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Designed and implemented robust RESTful APIs, enabling seamless integration for clients and enhancing the product's marketability.
-						</p>
-					</div>
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Established and maintained CI/CD pipelines, significantly reducing deployment time and ensuring high availability and consistent performance of the validation service.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
-				<h4 class="text-xl font-bold text-white mb-2">Full Stack Developer</h4>
-				<p class="text-[var(--color-brand)]/80 mb-4">
-					<a href="https://fiverr.com/users/backendev/" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">Fiverr (Freelance)</a>
-				</p>
-				<div class="space-y-3">
-					<div class="flex items-start gap-3">
-						<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-						<p class="text-white/70">
-							Successfully delivered over 50 projects for clients worldwide with a consistent 5-star rating, specializing in API integrations and custom web development using Django, React, and Svelte.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Personal Projects Section -->
-	<section class="mb-16">
-		<h2 class="mb-8 text-2xl font-semibold text-white">Personal Projects</h2>
-
-		<div class="space-y-6">
-			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
-				<h4 class="text-xl font-bold text-white mb-3">PAI - Terminal Coding Agent</h4>
-				<div class="flex items-start gap-3">
-					<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-					<p class="text-white/70">
-						Built a simple AI coding assistant that runs directly in the terminal, showcasing skills in creating practical AI-powered developer tools. 
-						<a href="https://github.com/FarhanAliRaza/pai" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View on GitHub</a>
-					</p>
-				</div>
-			</div>
-
-			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
-				<h4 class="text-xl font-bold text-white mb-3">Djinn - Django REST Framework Code Generator</h4>
-				<div class="flex items-start gap-3">
-					<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-					<p class="text-white/70">
-						Created a CLI tool to accelerate backend development by automatically generating starter templates and boilerplate code for Django REST Framework projects.
-						<a href="https://github.com/FarhanAliRaza/Djinn" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View on GitHub</a>
-					</p>
-				</div>
-			</div>
-
-			<div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
-				<h4 class="text-xl font-bold text-white mb-3">Toy Programming Language</h4>
-				<div class="flex items-start gap-3">
-					<div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></div>
-					<p class="text-white/70">
-						Designed and built an interpreter for a custom programming language with syntax in the Urdu language. This project involved creating a lexer, parser, and evaluator from scratch, demonstrating a deep understanding of language design and computer science fundamentals.
-						<a href="https://github.com/FarhanAliRaza/URDU-PROGRAMMING-LANGUAGE" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:text-[var(--color-brand)]/80 transition-colors">View on GitHub</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Education & Languages Section -->
-	<section class="mb-16">
-		<h2 class="mb-8 text-2xl font-semibold text-white">Education & Languages</h2>
-
-		<div class="grid gap-12 md:grid-cols-2">
-			<!-- Education -->
-			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">Education</h3>
-				<div class="space-y-8">
-					<div class="relative border-l border-gray-800 pl-6">
+				<!-- Inner content container -->
+				<div class="relative rounded-xl bg-gray-900/95 p-8 backdrop-blur-xl">
+					<!-- Animated background gradient -->
+					<div class="absolute inset-0 rounded-xl opacity-30">
 						<div
-							class="absolute -left-[5px] top-0 h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"
+							class="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-transparent to-blue-600/20"
 						></div>
-						<h4 class="text-lg font-medium text-white/90">BS in Computer Science</h4>
-						<p class="text-[var(--color-brand)]/80">2019 - 2023</p>
-						<p class="mt-2 text-white/70">
-							<b>Courses:</b> Data Structures & Algorithms, Machine Learning, Web Services & API Development, Artificial Intelligence.
-						</p>
+						<div
+							class="absolute inset-0 bg-gradient-to-tr from-pink-600/10 via-transparent to-purple-600/10"
+						></div>
+					</div>
+
+					<!-- Floating particles effect -->
+					<div class="absolute inset-0 overflow-hidden rounded-xl">
+						<div
+							class="absolute -left-4 -top-4 h-24 w-24 rounded-full bg-purple-500/20 blur-xl transition-colors group-hover:bg-purple-500/30"
+						></div>
+						<div
+							class="absolute -bottom-4 -right-4 h-32 w-32 rounded-full bg-blue-500/20 blur-xl transition-colors group-hover:bg-blue-500/30"
+						></div>
+						<div
+							class="absolute left-1/3 top-1/2 h-20 w-20 rounded-full bg-pink-500/10 blur-xl transition-colors group-hover:bg-pink-500/20"
+						></div>
+					</div>
+
+					<!-- Content -->
+					<div class="relative z-10 flex items-center justify-between">
+						<div>
+							<div class="mb-3 flex items-center gap-3">
+								<h2
+									class="bg-gradient-to-r from-white to-white/80 bg-clip-text text-2xl font-bold text-transparent"
+								>
+									Resume
+								</h2>
+							</div>
+							<p class="max-w-md text-white/60">Explore my journey through the universe.</p>
+						</div>
+						<div class="flex items-center gap-3">
+							<span class="hidden font-medium text-white/80 sm:block">View Resume</span>
+							<div
+								class="rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 p-3 backdrop-blur-sm transition-all group-hover:from-purple-500/30 group-hover:to-blue-500/30"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="text-white transition-transform group-hover:translate-x-1"
+								>
+									<line x1="5" y1="12" x2="19" y2="12"></line>
+									<polyline points="12 5 19 12 12 19"></polyline>
+								</svg>
+							</div>
+						</div>
+					</div>
+
+					<!-- Grid pattern overlay -->
+					<div class="absolute inset-0 opacity-[0.03]">
+						<svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+							<defs>
+								<pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+									<path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" stroke-width="1" />
+								</pattern>
+							</defs>
+							<rect width="100%" height="100%" fill="url(#grid)" />
+						</svg>
 					</div>
 				</div>
-			</div>
-
-			<!-- Languages -->
-			<div>
-				<h3 class="mb-4 text-xl font-medium text-white/90">Languages</h3>
-				<div class="space-y-4">
-					<div class="flex justify-between">
-						<span class="text-white/70">English</span>
-						<span class="text-[var(--color-brand)]">80%</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="text-white/70">Urdu</span>
-						<span class="text-[var(--color-brand)]">100%</span>
-					</div>
-				</div>
-			</div>
+			</a>
 		</div>
-	</section>
-
-	<!-- Interests Section -->
-	<section class="mb-16">
-		<h2 class="mb-8 text-2xl font-semibold text-white">Interests</h2>
-		<div class="flex flex-wrap gap-3">
-			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Cricket</span>
-			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Rockets & Space</span>
-			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Chess</span>
-			<span class="rounded-full bg-gray-800 px-3 py-1 text-white/70">Computer and Electronics</span>
-		</div>
-	</section>
+	</div>
 </main>
 
 <style>
 	/* Skills animation */
-	.skill-bar {
-		transition: width 1s ease-in-out;
-	}
-
-	.animate-skill {
-		width: attr(data-width);
-	}
 </style>

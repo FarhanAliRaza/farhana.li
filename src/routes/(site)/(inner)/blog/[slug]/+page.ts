@@ -46,7 +46,7 @@ function findRelatedPosts(currentSlug: string, currentTags: string[], allPosts: 
 export const load: PageLoad = async ({ params }) => {
     try {
         // Load the current post
-        const post = await import(`../../../../content/posts/${params.slug}/index.md`);
+        const post = await import(`/src/content/posts/${params.slug}/index.md`);
         
         // Get all posts to find related posts
         const allPosts = await getAllPosts();

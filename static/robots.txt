@@ -1,4 +1,22 @@
 User-agent: *
 Allow: /
+Disallow: /resume/view
+Disallow: /resume/view/
+
+# Block specific crawlers from resume pages
+User-agent: GPTBot
+Disallow: /resume/
+
+User-agent: ChatGPT-User
+Disallow: /resume/
+
+User-agent: CCBot
+Disallow: /resume/
+
+User-agent: antropic-ai
+Disallow: /resume/
+
+User-agent: Claude-Web
+Disallow: /resume/
 
 Sitemap: https://farhana.li/sitemap.xml 

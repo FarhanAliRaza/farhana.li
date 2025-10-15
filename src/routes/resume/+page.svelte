@@ -4,6 +4,7 @@
 	import EducationItem from './components/EducationItem.svelte';
 	import SkillsGrid from './components/SkillsGrid.svelte';
 	import ProjectCard from './components/ProjectCard.svelte';
+	import WordleOverlay from '$lib/wordle/WordleOverlay.svelte';
 
 	const resumeData = {
 		name: 'Farhan Ali',
@@ -140,71 +141,73 @@
 	<meta name="description" content={resumeData.about} />
 </svelte:head>
 
-<main class="page">
-	<section class="content">
-		<Header
-			name={resumeData.name}
-			tagline={resumeData.tagline}
-			location={resumeData.location}
-			locationLink={resumeData.locationLink}
-			initials={resumeData.initials}
-			avatarUrl={resumeData.avatarUrl}
-			contact={resumeData.contact}
-		/>
+<WordleOverlay>
+	<main class="page">
+		<section class="content">
+			<Header
+				name={resumeData.name}
+				tagline={resumeData.tagline}
+				location={resumeData.location}
+				locationLink={resumeData.locationLink}
+				initials={resumeData.initials}
+				avatarUrl={resumeData.avatarUrl}
+				contact={resumeData.contact}
+			/>
 
-		<section class="section">
-			<h2 class="section-title">About</h2>
-			<p class="section-text">{resumeData.about}</p>
-		</section>
+			<section class="section">
+				<h2 class="section-title">About</h2>
+				<p class="section-text">{resumeData.about}</p>
+			</section>
 
-		<section class="section">
-			<h2 class="section-title">Work Experience</h2>
-			<div class="stack">
-				{#each resumeData.work as experience}
-					<ExperienceItem
-						company={experience.company}
-						tags={experience.badges}
-						dateRange={`${experience.start} - ${experience.end}`}
-						jobTitle={experience.title}
-						responsibilities={experience.highlights}
-					/>
-				{/each}
-			</div>
-		</section>
+			<section class="section">
+				<h2 class="section-title">Work Experience</h2>
+				<div class="stack">
+					{#each resumeData.work as experience}
+						<ExperienceItem
+							company={experience.company}
+							tags={experience.badges}
+							dateRange={`${experience.start} - ${experience.end}`}
+							jobTitle={experience.title}
+							responsibilities={experience.highlights}
+						/>
+					{/each}
+				</div>
+			</section>
 
-		<section class="section">
-			<h2 class="section-title">Skills</h2>
-			<SkillsGrid skills={resumeData.skills} />
-		</section>
+			<section class="section">
+				<h2 class="section-title">Skills</h2>
+				<SkillsGrid skills={resumeData.skills} />
+			</section>
 
-		<section class="section">
-			<h2 class="section-title">Side Projects</h2>
-			<div class="grid">
-				{#each resumeData.projects as project}
-					<ProjectCard
-						name={project.title}
-						description={project.description}
-						tags={project.techStack}
-						url={project.url}
-					/>
-				{/each}
-			</div>
-		</section>
+			<section class="section">
+				<h2 class="section-title">Side Projects</h2>
+				<div class="grid">
+					{#each resumeData.projects as project}
+						<ProjectCard
+							name={project.title}
+							description={project.description}
+							tags={project.techStack}
+							url={project.url}
+						/>
+					{/each}
+				</div>
+			</section>
 
-		<section class="section education-section">
-			<h2 class="section-title">Education</h2>
-			<div class="stack">
-				{#each resumeData.education as education}
-					<EducationItem
-						institution={education.school}
-						degree={education.degree}
-						dateRange={`${education.start} - ${education.end}`}
-					/>
-				{/each}
-			</div>
+			<section class="section education-section">
+				<h2 class="section-title">Education</h2>
+				<div class="stack">
+					{#each resumeData.education as education}
+						<EducationItem
+							institution={education.school}
+							degree={education.degree}
+							dateRange={`${education.start} - ${education.end}`}
+						/>
+					{/each}
+				</div>
+			</section>
 		</section>
-	</section>
-</main>
+	</main>
+</WordleOverlay>
 
 <style>
 	.page {
@@ -300,11 +303,6 @@
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
 			gap: 0.5rem;
-		}
-
-		.grid > * {
-			page-break-inside: avoid;
-			break-inside: avoid;
 		}
 	}
 </style>
