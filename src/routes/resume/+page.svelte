@@ -13,7 +13,7 @@
 		locationLink: 'https://maps.google.com/?q=Bahwalnagar,Pakistan',
 		tagline: 'Full Stack Engineer | Django Core Contributor',
 		about:
-			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor via Google Summer of Code 2025, shipped template partials feature to framework. Created django-bolt, a Rust/PyO3 framework achieving 64K+ RPS, exploring Python-Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime. Expert in Python, Django, Rust, and async processing with Tokio and Actix. Track record of delivering solutions rapidly while solving complex technical challenges end-to-end.',
+			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor(DSF Member) via Google Summer of Code 2025, shipped template partials feature to framework. Created django-bolt, a Rust/PyO3 framework achieving 60K+ RPS, exploring Python-Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime. Expert in Python, Django, Svelte, and Rust. Track record of delivering solutions rapidly while solving complex technical challenges end-to-end.',
 		avatarUrl:
 			'https://avatars.githubusercontent.com/u/62690310?s=400&u=cee700c06c6b86ca633e78e3d6f096b7a27b8437&v=4',
 		contact: {
@@ -24,12 +24,12 @@
 				{
 					name: 'GitHub',
 					url: 'https://github.com/FarhanAliRaza',
-					icon: 'github' as 'github'
+					icon: 'github'
 				},
 				{
 					name: 'LinkedIn',
 					url: 'https://www.linkedin.com/in/farhanaliraza',
-					icon: 'linkedin' as 'linkedin'
+					icon: 'linkedin'
 				}
 			]
 		},
@@ -43,8 +43,9 @@
 				highlights: [
 					'Selected for the highly competitive Google Summer of Code program to contribute to the Django web framework. <a href="https://summerofcode.withgoogle.com/programs/2025/projects/YqdTk30V" target="_blank" rel="noopener noreferrer">View Project</a>',
 					'Shipped template partials to Django core (<a href="https://github.com/django/django/pull/19643" target="_blank" rel="noopener noreferrer">PR #19643</a>).',
-					'Wrote comprehensive documentation and 50+ tests.',
-					'Collaborated openly with maintainers through 100+ public review comments.'
+					'Wrote comprehensive documentation and 50+ tests for all the edge cases.',
+					'Collaborated openly with maintainers through 100+ public review comments.',
+					'Involved in the community through Djangonaut Space program, helping new contributors contribute to Django.'
 				]
 			},
 			{
@@ -54,9 +55,10 @@
 				start: '06/2024',
 				end: '07/2025',
 				highlights: [
-					'Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3-5s to less than 200ms while handling OCR errors and paraphrasing.',
+					'Engineered LLM-powered clinical decision support system, reducing citation lookup time from 3-5s to less than 200ms.',
 					'Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking, ensuring verifiable sources for clinical decision support.',
-					'Implemented real-time document search and retrieval system using vector embeddings and semantic similarity matching.'
+					'Implemented real-time document search and retrieval system using vector embeddings and semantic similarity matching.',
+					'Integerated with EMR system through FHIR api to fetch patient data for clinical decision support.'
 				]
 			},
 			{
@@ -66,10 +68,9 @@
 				start: '03/2024',
 				end: 'Present',
 				highlights: [
-					'Evolved product from email validation service processing 100M+ emails to comprehensive cold email platform based on user behavior analysis.',
-					'Achieved 3,000+ active users and growing MRR through pure product-led growth strategy without marketing spend.',
-					'Developing AI agent for autonomous cold email campaign management with fine-tuned Qwen 2.5 0.5B model for lead scoring.',
-					'Led full product ownership cycle: user research, pivot decision, feature development based on analytics insights.',
+					'Created a bulk email verification service that evolved to a comprehensive cold email platform from scratch.',
+					'Processed 100M+ emails with 99.9% uptime and growing.',
+					'Developing AI agent for autonomous cold email campaign management with fine-tuned Qwen 2.5 0.5B model for lead scoring and email classification.',
 					'Built scalable architecture handling millions of emails with RESTful APIs and real-time processing capabilities.'
 				]
 			}
