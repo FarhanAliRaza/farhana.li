@@ -65,7 +65,7 @@
 				company: 'Bulk Mail Verifier',
 				title: 'Full Stack Engineer',
 				badges: ['Django', 'Svelte', 'Celery', 'Redis', 'PostgreSQL', 'Rabbitmq', 'SMTP'],
-				start: '03/2024',
+				start: '03/2021',
 				end: 'Present',
 				highlights: [
 					'Created a bulk email verification service that evolved to a comprehensive cold email platform from scratch.',

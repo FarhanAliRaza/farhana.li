@@ -122,10 +122,10 @@ export const initWordBank = (): void => {
 
 	try {
 		const stored = localStorage.getItem(STORAGE_KEY);
-		if (!stored) {
-			const encoded = encodeWords(wordBank);
-			localStorage.setItem(STORAGE_KEY, encoded);
-		}
+		// if (!stored) {
+		const encoded = encodeWords(wordBank);
+		localStorage.setItem(STORAGE_KEY, encoded);
+		// }
 	} catch {
 		// Silent fail if localStorage is not available
 	}
