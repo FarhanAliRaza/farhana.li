@@ -7,11 +7,11 @@
 	import WordleOverlay from '$lib/wordle/WordleOverlay.svelte';
 
 	const resumeData = {
-		name: 'Farhan Ali',
+		name: 'Farhan Ali Raza',
 		initials: 'FA',
 		location: 'Bahwalnagar, Pakistan | GMT+5',
 		locationLink: 'https://maps.google.com/?q=Bahwalnagar,Pakistan',
-		tagline: 'Full Stack Engineer | Django Core Contributor',
+		tagline: 'Full Stack Engineer | DSF Member',
 		about:
 			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor(DSF Member) via Google Summer of Code 2025, shipped template partials feature to framework. Created django-bolt, a Rust/PyO3 framework achieving 60K+ RPS, exploring Python-Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime. Expert in Python, Django, Svelte, and Rust. Track record of delivering solutions rapidly while solving complex technical challenges end-to-end.',
 		avatarUrl:
@@ -142,7 +142,7 @@
 	<meta name="description" content={resumeData.about} />
 </svelte:head>
 
-<WordleOverlay>
+<WordleOverlay skip={false}>
 	<main class="page">
 		<section class="content">
 			<Header
@@ -150,8 +150,6 @@
 				tagline={resumeData.tagline}
 				location={resumeData.location}
 				locationLink={resumeData.locationLink}
-				initials={resumeData.initials}
-				avatarUrl={resumeData.avatarUrl}
 				contact={resumeData.contact}
 			/>
 

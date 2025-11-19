@@ -1,5 +1,5 @@
 ---
-title: 'My GSoC 2025 Journey: Bringing Template Partials to Django Core 🚀'
+title: 'My GSoC 2025 Journey: Bringing Template Partials to Django Core'
 slug: 'my-gsoc25-journey-django'
 description: 'How I spent my Google Summer of Code 2025 bringing django-template-partials into Django core, featuring architecture mysteries, regex nightmares, and the elegant solutiona that was hiding in plain sight all along.'
 date: '2025-09-11'

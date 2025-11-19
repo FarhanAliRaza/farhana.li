@@ -5,19 +5,28 @@
 
 	interface WordleOverlayProps {
 		children: Snippet;
+		skip?: boolean;
 	}
 
-	let { children }: WordleOverlayProps = $props();
+	let { children, skip = false }: WordleOverlayProps = $props();
 
 	let revealed = $state(false);
 	let currentAttempt = $state(0);
 	let key = $state(0); // Force remount of MiniWordle
 
 	const UNLOCK_KEY = '_resume_unlocked';
+	const SKIP_KEY = '_wordle_skip';
 	const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
 	onMount(() => {
 		initWordBank();
+
+		// Check if skip flag is set (either from prop or localStorage)
+		const skipFromStorage = localStorage.getItem(SKIP_KEY) === 'true';
+		if (skip || skipFromStorage) {
+			revealed = true;
+			return;
+		}
 
 		// Check if already unlocked in this session
 		const unlockData = sessionStorage.getItem(UNLOCK_KEY);

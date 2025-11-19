@@ -1,21 +1,16 @@
 <script lang="ts">
 	import { Globe, Mail, Phone, Github, Linkedin, Twitter as X, PinIcon } from 'lucide-svelte';
-	import Avatar from './ResumeAvatar.svelte';
 
 	let {
 		name,
 		tagline,
 		location,
-		initials,
-		avatarUrl,
 		locationLink,
 		contact
 	}: {
 		name: string;
 		tagline: string;
 		location: string;
-		initials: string;
-		avatarUrl: string;
 		locationLink: string;
 		contact: {
 			email?: string;
@@ -100,15 +95,13 @@
 			{/each}
 		</div>
 	</div>
-
-	<Avatar class="avatar" src={avatarUrl} alt={`${name}'s profile picture`} {initials} />
 </header>
 
 <style>
 	.header {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: center;
 		gap: 1.5rem;
 	}
 
@@ -116,20 +109,25 @@
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		align-items: center;
+		text-align: center;
+		gap: 0.75rem;
+		max-width: 100%;
 	}
 
 	.name {
-		font-size: 1.75rem;
+		font-size: 2.5rem;
 		font-weight: 700;
 		margin: 0;
+		letter-spacing: -0.02em;
 	}
 
 	.summary {
 		font-family: var(--resume-font-mono);
-		font-size: 0.9rem;
+		font-size: 1rem;
 		color: rgba(15, 23, 42, 0.75);
 		margin: 0;
+		max-width: 42rem;
 	}
 
 	.location {
@@ -137,7 +135,7 @@
 		align-items: center;
 		gap: 0.25rem;
 		font-family: var(--resume-font-mono);
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		color: rgba(15, 23, 42, 0.75);
 		text-decoration: none;
 	}
@@ -148,7 +146,9 @@
 
 	.contact-buttons {
 		display: flex;
-		gap: 0.5rem;
+		gap: 0.625rem;
+		justify-content: center;
+		margin-top: 0.25rem;
 	}
 
 	.icon-button {
@@ -181,10 +181,6 @@
 		text-decoration: underline;
 	}
 
-	.avatar {
-		flex-shrink: 0;
-	}
-
 	@media (max-width: 640px) {
 		.header {
 			flex-direction: column;
@@ -199,6 +195,7 @@
 
 		.contact-print {
 			display: inline-flex;
+			justify-content: center;
 		}
 
 		.name {
@@ -218,7 +215,11 @@
 		}
 
 		.header {
-			gap: 1rem;
+			gap: 0.5rem;
+		}
+
+		.header-text {
+			gap: 0.5rem;
 		}
 	}
 </style>
