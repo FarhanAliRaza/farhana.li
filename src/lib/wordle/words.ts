@@ -18,8 +18,6 @@ const wordBank: WordPair[] = [
 	{ word: 'CAT', hint: 'Keyboard walker at 3am' },
 	{ word: 'BUG', hint: 'Feature in disguise' },
 	{ word: 'CODE', hint: "Developer's poetry" },
-	{ word: 'WIFI', hint: 'Invisible lifeline' },
-	{ word: 'APP', hint: "Thumb's best friend" },
 	{ word: 'GIT', hint: 'Time machine for code' },
 	{ word: 'API', hint: 'services talk through?' },
 	{ word: 'LOG', hint: "Developer's diary" },

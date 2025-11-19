@@ -44,26 +44,30 @@ function findRelatedPosts(currentSlug: string, currentTags: string[], allPosts: 
 }
 
 export const load: PageLoad = async ({ params }) => {
-    try {
-        // Load the current post
-        const post = await import(`/src/content/posts/${params.slug}/index.md`);
-        
-        // Get all posts to find related posts
-        const allPosts = await getAllPosts();
-        
-        // Find related posts based on tags
-        const relatedPosts = findRelatedPosts(
-            params.slug, 
-            post.metadata.tags, 
-            allPosts
-        );
-        
-        return {
-            content: post.default,
-            meta: post.metadata,
-            relatedPosts
-        };
-    } catch (e) {
+    // Load all posts using glob pattern that Vite can analyze
+    const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
+
+    // Find the specific post by slug
+    const postPath = `/src/content/posts/${params.slug}/index.md`;
+    const post = paths[postPath];
+
+    if (!post || typeof post !== 'object' || !('metadata' in post) || !('default' in post)) {
         throw error(404, `Could not find ${params.slug}`);
     }
+
+    // Get all posts to find related posts
+    const allPosts = await getAllPosts();
+
+    // Find related posts based on tags
+    const relatedPosts = findRelatedPosts(
+        params.slug,
+        post.metadata.tags,
+        allPosts
+    );
+
+    return {
+        content: post.default,
+        meta: post.metadata,
+        relatedPosts
+    };
 }; 
