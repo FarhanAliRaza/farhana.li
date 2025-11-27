@@ -17,6 +17,12 @@
 	display: block;
 	overflow-x: auto;
 	width: 100%;
+	background: transparent !important;
+}
+
+/* Remove background from all elements inside code blocks */
+.prose pre code * {
+	background: transparent !important;
 }
 
 .prose img {

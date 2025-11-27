@@ -202,6 +202,11 @@
 		border: 1px solid rgba(33, 158, 255, 0.2);
 	}
 
+	:global(.prose pre code) {
+		background: transparent !important;
+		padding: 0 !important;
+	}
+
 	:global(.prose img) {
 		border-radius: 0.5rem;
 		border: 1px solid rgba(33, 158, 255, 0.2);
