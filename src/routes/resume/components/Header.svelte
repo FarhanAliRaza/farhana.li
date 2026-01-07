@@ -1,15 +1,17 @@
 <script lang="ts">
-	import { Globe, Mail, Phone, Github, Linkedin, Twitter as X, PinIcon } from 'lucide-svelte';
+	import { Globe, Mail, MapPin, Github, Linkedin } from 'lucide-svelte';
 
 	let {
 		name,
 		tagline,
+		about,
 		location,
 		locationLink,
 		contact
 	}: {
 		name: string;
 		tagline: string;
+		about: string;
 		location: string;
 		locationLink: string;
 		contact: {
@@ -22,77 +24,43 @@
 </script>
 
 <header class="header">
-	<div class="header-text">
-		<h1 class="name" id="resume-name">{name}</h1>
-		<p class="summary">{tagline}</p>
+	<div class="header-content">
+		<h1 class="name">{name}</h1>
+		<p class="tagline">{tagline}</p>
+		<p class="about">{about}</p>
 
-		<a class="location" href={locationLink} target="_blank" rel="noopener noreferrer">
-			<PinIcon size={12} />
-			<span>{location}</span>
-		</a>
-
-		<div class="contact-buttons">
-			{#if contact.personalWebsiteUrl}
-				<a
-					class="icon-button"
-					href={contact.personalWebsiteUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label="Personal website"
-				>
-					<Globe size={14} />
-				</a>
-			{/if}
+		<div class="contact-bar">
 			{#if contact.email}
-				<a class="icon-button" href={`mailto:${contact.email}`} aria-label="Email">
-					<Mail size={14} />
-				</a>
-			{/if}
-			{#if contact.tel}
-				<a class="icon-button" href={`tel:${contact.tel}`} aria-label="Phone">
-					<Phone size={14} />
+				<a class="contact-item" href={`mailto:${contact.email}`}>
+					<span class="icon"><Mail size={14} /></span>
+					<span>{contact.email}</span>
 				</a>
 			{/if}
 			{#each contact.social as social}
-				<a
-					class="icon-button"
-					href={social.url}
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label={social.name}
-				>
+				<span class="separator">•</span>
+				<a class="contact-item" href={social.url} target="_blank" rel="noopener noreferrer">
 					{#if social.icon === 'github'}
-						<Github size={14} />
+						<span class="icon"><Github size={14} /></span>
 					{:else if social.icon === 'linkedin'}
-						<Linkedin size={14} />
+						<span class="icon"><Linkedin size={14} /></span>
 					{:else}
-						<X size={14} />
+						<span class="icon"><Globe size={14} /></span>
 					{/if}
+					<span>{new URL(social.url).pathname.slice(1)}</span>
 				</a>
 			{/each}
-		</div>
-
-		<div class="contact-print">
 			{#if contact.personalWebsiteUrl}
-				<a href={contact.personalWebsiteUrl}>{new URL(contact.personalWebsiteUrl).hostname}</a>
-				<span aria-hidden="true">/</span>
-			{/if}
-			{#if contact.email}
-				<a href={`mailto:${contact.email}`}>{contact.email}</a>
-				<span aria-hidden="true">/</span>
-			{/if}
-			{#if contact.tel}
-				<a href={`tel:${contact.tel}`}>{contact.tel}</a>
-				<span aria-hidden="true">/</span>
-			{/if}
-			{#each contact.social as social}
-				<a href={social.url} target="_blank" rel="noopener noreferrer">
-					{social.name}
+				<span class="separator">•</span>
+				<a class="contact-item" href={contact.personalWebsiteUrl} target="_blank" rel="noopener noreferrer">
+					<span class="icon"><Globe size={14} /></span>
+					<span>{new URL(contact.personalWebsiteUrl).hostname}</span>
 				</a>
-				{#if social !== contact.social[contact.social.length - 1]}
-					<span aria-hidden="true">/</span>
-				{/if}
-			{/each}
+			{/if}
+			<span class="separator">•</span>
+			<a class="contact-item" href={locationLink} target="_blank" rel="noopener noreferrer">
+				<span class="icon"><MapPin size={14} /></span>
+				<span>{location.split('|')[0].trim()}</span>
+			</a>
 		</div>
 	</div>
 </header>
@@ -100,126 +68,144 @@
 <style>
 	.header {
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-	}
-
-	.header-text {
-		flex: 1;
-		display: flex;
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		gap: 0.75rem;
-		max-width: 100%;
+	}
+
+	.header-content {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
 	}
 
 	.name {
-		font-size: 2.5rem;
+		font-size: 2.25rem;
 		font-weight: 700;
 		margin: 0;
 		letter-spacing: -0.02em;
 	}
 
-	.summary {
+	.tagline {
 		font-family: var(--resume-font-mono);
 		font-size: 1rem;
-		color: rgba(15, 23, 42, 0.75);
+		color: rgba(15, 23, 42, 0.65);
 		margin: 0;
-		max-width: 42rem;
 	}
 
-	.location {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.25rem;
+	.about {
 		font-family: var(--resume-font-mono);
 		font-size: 0.875rem;
 		color: rgba(15, 23, 42, 0.75);
-		text-decoration: none;
+		margin: 0.5rem 0 0 0;
+		max-width: 100%;
+		line-height: 1.6;
+		text-align: left;
 	}
 
-	.location:hover {
-		text-decoration: underline;
-	}
-
-	.contact-buttons {
+	.contact-bar {
 		display: flex;
-		gap: 0.625rem;
+		flex-wrap: wrap;
 		justify-content: center;
-		margin-top: 0.25rem;
+		align-items: center;
+		gap: 0.75rem;
+		margin-top: 1rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(15, 23, 42, 0.04);
+		border-radius: 8px;
+		width: 100%;
 	}
 
-	.icon-button {
+	.contact-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-family: var(--resume-font-mono);
+		font-size: 0.8rem;
+		color: rgba(15, 23, 42, 0.75);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.contact-item:hover {
+		color: rgba(15, 23, 42, 1);
+	}
+
+	.icon {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.25rem;
-		height: 2.25rem;
-		border-radius: 9999px;
-		border: 1px solid rgba(15, 23, 42, 0.12);
-		color: rgba(15, 23, 42, 0.75);
-		transition: all 0.2s ease;
+		color: rgba(15, 23, 42, 0.6);
 	}
 
-	.icon-button:hover {
-		background-color: rgba(15, 23, 42, 0.06);
-		border-color: rgba(15, 23, 42, 0.2);
-		color: rgba(15, 23, 42, 0.95);
+	.contact-item:hover .icon {
+		color: rgba(15, 23, 42, 0.85);
 	}
 
-	.contact-print {
-		display: none;
-		font-family: var(--resume-font-mono);
-		font-size: 0.75rem;
-		gap: 0.5rem;
-	}
-
-	.contact-print a {
-		color: rgba(15, 23, 42, 0.75);
-		text-decoration: underline;
+	.separator {
+		color: rgba(15, 23, 42, 0.25);
+		font-size: 0.6rem;
 	}
 
 	@media (max-width: 640px) {
-		.header {
-			flex-direction: column;
-			align-items: flex-start;
+		.contact-bar {
+			gap: 0.5rem 0.75rem;
+		}
+
+		.separator {
+			display: none;
 		}
 	}
 
 	@media print {
-		.contact-buttons {
-			display: none;
-		}
-
-		.contact-print {
-			display: inline-flex;
-			justify-content: center;
+		.header-content {
+			gap: 0.2rem;
 		}
 
 		.name {
-			font-size: 18pt;
+			font-size: 16pt;
 		}
 
-		.summary {
+		.tagline {
 			font-size: 9pt;
 		}
 
-		.location {
-			font-size: 7.5pt;
+		.about {
+			font-size: 8pt;
+			line-height: 1.35;
+			margin-top: 0.2rem;
 		}
 
-		.contact-print {
-			font-size: 7.5pt;
+		.contact-bar {
+			margin-top: 0.25rem;
+			padding: 0.3rem 0.5rem;
+			gap: 0.4rem;
+			background: rgba(15, 23, 42, 0.04);
 		}
 
-		.header {
-			gap: 0.5rem;
+		.contact-item {
+			font-size: 7pt;
+			gap: 0.15rem;
 		}
 
-		.header-text {
-			gap: 0.5rem;
+		.contact-item .icon {
+			width: 10px;
+			height: 10px;
+		}
+
+		.contact-item .icon :global(svg) {
+			width: 10px;
+			height: 10px;
+		}
+
+		.separator {
+			font-size: 5pt;
+		}
+
+		.icon {
+			color: rgba(15, 23, 42, 0.5);
 		}
 	}
 </style>

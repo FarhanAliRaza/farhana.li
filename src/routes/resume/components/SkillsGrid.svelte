@@ -29,12 +29,12 @@
 
 	@media print {
 		.skills {
-			gap: 0.375rem;
+			gap: 0.25rem;
 		}
 
 		.skill {
-			padding: 3px 8px;
-			font-size: 8pt;
+			padding: 2px 6px;
+			font-size: 7pt;
 			background-color: rgba(15, 23, 42, 0.85);
 		}
 	}

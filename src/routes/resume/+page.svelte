@@ -13,7 +13,7 @@
 		locationLink: 'https://maps.google.com/?q=Bahwalnagar,Pakistan',
 		tagline: 'Full Stack Engineer | DSF Member',
 		about:
-			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor(DSF Member) via Google Summer of Code 2025, shipped template partials feature to framework. Created django-bolt, a Rust/PyO3 framework achieving 60K+ RPS, exploring Python-Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime. Expert in Python, Django, Svelte, and Rust. Track record of delivering solutions rapidly while solving complex technical challenges end-to-end.',
+			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor (DSF Member) who shipped template partials via GSoC 2025. Created django-bolt, achieving 100K+ RPS by bridging Python-Django with Rust—700+ stars, 23K+ downloads. Architected systems processing 100M+ emails at 99.9% uptime. Expert in Python, Django, Svelte, and Rust with a track record of solving complex performance challenges end-to-end.',
 		avatarUrl:
 			'https://avatars.githubusercontent.com/u/62690310?s=400&u=cee700c06c6b86ca633e78e3d6f096b7a27b8437&v=4',
 		contact: {
@@ -24,16 +24,29 @@
 				{
 					name: 'GitHub',
 					url: 'https://github.com/FarhanAliRaza',
-					icon: 'github'
+					icon: 'github' as const
 				},
 				{
 					name: 'LinkedIn',
 					url: 'https://www.linkedin.com/in/farhanaliraza',
-					icon: 'linkedin'
+					icon: 'linkedin' as const
 				}
 			]
 		},
 		work: [
+			{
+				company: 'django-bolt',
+				title: 'Creator & Open Source Maintainer',
+				badges: ['Rust', 'PyO3', 'Actix', 'Tokio', 'Django', 'Open Source'],
+				start: '09/2025',
+				end: 'Present',
+				highlights: [
+					'High-performance Django framework bridging Python with Rust, achieving 100K+ RPS—700+ GitHub stars and 23K+ downloads. <a href="https://github.com/FarhanAliRaza/django-bolt" target="_blank" rel="noopener noreferrer">View Project</a>',
+					'Achieved 100K+ RPS for JSON APIs by eliminating Python-Rust copy overhead through pointer-based data transfer, up from 40K RPS bottleneck.',
+					'Improved async streaming from 1,200 to 20,000+ RPS by batching chunk collection inside Python before crossing the Rust boundary.',
+					'Benchmarked 2.8x faster than FastAPI and 12x faster than Django Ninja on JSON endpoints. <a href="https://github.com/FarhanAliRaza/fastapi-vs-litestar-vs-django-bolt-vs-django-ninja-benchmarks" target="_blank" rel="noopener noreferrer">View Benchmarks</a>'
+				]
+			},
 			{
 				company: 'Django Software Foundation',
 				title: 'Google Summer of Code 2025 Contributor',
@@ -41,11 +54,10 @@
 				start: '05/2025',
 				end: '08/2025',
 				highlights: [
-					'Selected for the highly competitive Google Summer of Code program to contribute to the Django web framework. <a href="https://summerofcode.withgoogle.com/programs/2025/projects/YqdTk30V" target="_blank" rel="noopener noreferrer">View Project</a>',
-					'Shipped template partials to Django core (<a href="https://github.com/django/django/pull/19643" target="_blank" rel="noopener noreferrer">PR #19643</a>).',
-					'Wrote comprehensive documentation and 50+ tests for all the edge cases.',
-					'Collaborated openly with maintainers through 100+ public review comments.',
-					'Involved in the community through Djangonaut Space program, helping new contributors contribute to Django.'
+					'Shipped template partials to Django core (<a href="https://github.com/django/django/pull/19643" target="_blank" rel="noopener noreferrer">PR #19643</a>), enabling reusable template fragments for 4M+ Django developers. <a href="https://summerofcode.withgoogle.com/programs/2025/projects/YqdTk30V" target="_blank" rel="noopener noreferrer">GSoC Project</a>',
+					'Ensured feature stability with 50+ tests covering edge cases, plus comprehensive documentation for Django\'s official docs.',
+					'Achieved merge through 100+ public review iterations with Django maintainers, demonstrating code quality standards.',
+					'Mentored new contributors through Djangonaut Space program, growing the Django contributor community.'
 				]
 			},
 			{
@@ -55,10 +67,10 @@
 				start: '06/2024',
 				end: '07/2025',
 				highlights: [
-					'Engineered LLM-powered clinical decision support system, reducing citation lookup time from 3-5s to less than 200ms.',
-					'Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking, ensuring verifiable sources for clinical decision support.',
-					'Implemented real-time document search and retrieval system using vector embeddings and semantic similarity matching.',
-					'Integerated with EMR system through FHIR api to fetch patient data for clinical decision support.'
+					'Reduced clinical citation lookup from 3-5s to <200ms by building LLM-powered decision support with vector embeddings and semantic search. <a href="https://medgebra.com" target="_blank" rel="noopener noreferrer">medgebra.com</a>',
+					'Processed 100,000+ medical PDFs with verifiable citations by building AI-powered page filtering and tracking pipeline.',
+					'Enabled real-time document retrieval across 100K+ documents using Pinecone vector embeddings with semantic similarity matching.',
+					'Integrated FHIR-compliant EMR data fetching for 3,300+ users, enabling context-aware clinical decision support.'
 				]
 			},
 			{
@@ -68,10 +80,9 @@
 				start: '03/2021',
 				end: 'Present',
 				highlights: [
-					'Created a bulk email verification service that evolved to a comprehensive cold email platform from scratch.',
-					'Processed 100M+ emails with 99.9% uptime and growing.',
-					'Developing AI agent for autonomous cold email campaign management with fine-tuned Qwen 2.5 0.5B model for lead scoring and email classification.',
-					'Built scalable architecture handling millions of emails with RESTful APIs and real-time processing capabilities.'
+					'Scaled email verification service to comprehensive cold email platform, processing 100M+ emails at 99.9% uptime. <a href="https://bulkmailverifier.org" target="_blank" rel="noopener noreferrer">bulkmailverifier.org</a>',
+					'Automated campaign management with AI agent using fine-tuned Qwen 2.5 0.5B for lead scoring and email classification.',
+					'Built distributed architecture handling millions of emails daily using Celery, RabbitMQ, and Redis for real-time processing.'
 				]
 			}
 		],
@@ -87,37 +98,45 @@
 			'Python',
 			'Django',
 			'Rust',
-			'JavaScript',
+			'PyO3',
+			'Actix',
+			'Tokio',
+			'PostgreSQL',
+			'Redis',
+			'Celery',
 			'TypeScript',
 			'React',
 			'Svelte',
 			'Next.js',
-			'FastAPI',
-			'Celery',
-			'PyO3',
-			'msgspec',
-			'Tokio',
-			'Actix',
-			'PostgreSQL',
-			'Redis',
-			'Pinecone',
-			'Docker',
-			'Git',
-			'REST APIs',
+			'Kotlin',
 			'RAG',
 			'LLM Integration',
-			'Prompt Engineering',
-			'DSPY',
+			'Vector Embeddings',
+			'Docker',
 			'Performance Optimization',
 			'Open Source'
 		],
 		projects: [
 			{
-				title: 'django-bolt',
+				title: 'django-repl',
 				description:
-					'High-performance Django HTTP APIs powered by Rust (Actix+Tokio) with msgspec serialization, achieving 60k+ RPS for typed endpoints.',
-				techStack: ['Django', 'Rust', 'PyO3', 'Actix', 'Tokio'],
-				url: 'https://github.com/FarhanAliRaza/django-bolt'
+					'Browser-based Django IDE using WebAssembly—run Django entirely client-side with live preview, database support, and admin interface. 40+ stars.',
+				techStack: ['TypeScript', 'Svelte', 'Pyodide', 'WebAssembly'],
+				url: 'https://django.farhana.li'
+			},
+			{
+				title: 'django-hawkeye',
+				description:
+					'BM25 full-text search for Django using PostgreSQL 17+, eliminating Elasticsearch dependency with equivalent ranking quality. 28+ stars.',
+				techStack: ['Python', 'Django', 'PostgreSQL', 'BM25'],
+				url: 'https://github.com/FarhanAliRaza/django-hawkeye'
+			},
+			{
+				title: 'Wakt',
+				description:
+					'Privacy-first Android app for digital wellness with app/website blocking, focus timers, and scheduled locks. Fully offline, no login required.',
+				techStack: ['Kotlin', 'Jetpack Compose', 'Room', 'Material Design 3'],
+				url: 'https://github.com/FarhanAliRaza/Wakt'
 			},
 			{
 				title: 'claude-context-local',
@@ -148,67 +167,75 @@
 			<Header
 				name={resumeData.name}
 				tagline={resumeData.tagline}
+				about={resumeData.about}
 				location={resumeData.location}
 				locationLink={resumeData.locationLink}
 				contact={resumeData.contact}
 			/>
 
-			<section class="section">
-				<h2 class="section-title">About</h2>
-				<p class="section-text">{resumeData.about}</p>
-			</section>
-
-			<section class="section">
-				<h2 class="section-title">Work Experience</h2>
-				<div class="stack">
-					{#each resumeData.work as experience}
-						<ExperienceItem
-							company={experience.company}
-							tags={experience.badges}
-							dateRange={`${experience.start} - ${experience.end}`}
-							jobTitle={experience.title}
-							responsibilities={experience.highlights}
-						/>
-					{/each}
+			<div class="two-column">
+				<div class="main-column">
+					<section class="section">
+						<h2 class="section-title">Work Experience</h2>
+						<div class="stack">
+							{#each resumeData.work as experience}
+								<ExperienceItem
+									company={experience.company}
+									tags={experience.badges}
+									dateRange={`${experience.start} - ${experience.end}`}
+									jobTitle={experience.title}
+									responsibilities={experience.highlights}
+								/>
+							{/each}
+						</div>
+					</section>
 				</div>
-			</section>
 
-			<section class="section">
-				<h2 class="section-title">Skills</h2>
-				<SkillsGrid skills={resumeData.skills} />
-			</section>
+				<div class="sidebar">
+					<section class="section">
+						<h2 class="section-title">Skills</h2>
+						<SkillsGrid skills={resumeData.skills} />
+					</section>
 
-			<section class="section">
-				<h2 class="section-title">Side Projects</h2>
-				<div class="grid">
-					{#each resumeData.projects as project}
-						<ProjectCard
-							name={project.title}
-							description={project.description}
-							tags={project.techStack}
-							url={project.url}
-						/>
-					{/each}
+					<section class="section">
+						<h2 class="section-title">Side Projects</h2>
+						<div class="projects-stack">
+							{#each resumeData.projects as project}
+								<ProjectCard
+									name={project.title}
+									description={project.description}
+									tags={project.techStack}
+									url={project.url}
+								/>
+							{/each}
+						</div>
+					</section>
+
+					<section class="section">
+						<h2 class="section-title">Education</h2>
+						<div class="stack">
+							{#each resumeData.education as education}
+								<EducationItem
+									institution={education.school}
+									degree={education.degree}
+									dateRange={`${education.start} - ${education.end}`}
+								/>
+							{/each}
+						</div>
+					</section>
 				</div>
-			</section>
-
-			<section class="section education-section">
-				<h2 class="section-title">Education</h2>
-				<div class="stack">
-					{#each resumeData.education as education}
-						<EducationItem
-							institution={education.school}
-							degree={education.degree}
-							dateRange={`${education.start} - ${education.end}`}
-						/>
-					{/each}
-				</div>
-			</section>
+			</div>
 		</section>
 	</main>
 </WordleOverlay>
 
 <style>
+	/* Column width configuration - adjust these values to change layout */
+	.two-column {
+		--main-column-width: 65%;
+		--sidebar-width: 35%;
+	}
+
 	.page {
 		min-height: 100vh;
 		background: #ffffff;
@@ -216,11 +243,29 @@
 	}
 
 	.content {
-		max-width: 48rem;
+		max-width: 64rem;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: 2.5rem;
+		gap: 2rem;
+	}
+
+	.two-column {
+		display: grid;
+		grid-template-columns: var(--main-column-width) var(--sidebar-width);
+		gap: 2rem;
+	}
+
+	.main-column {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.sidebar {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 	}
 
 	.section {
@@ -229,22 +274,10 @@
 		gap: 1rem;
 	}
 
-	.education-section {
-		margin-top: 1.5rem;
-	}
-
 	.section-title {
 		font-size: 1.25rem;
 		font-weight: 700;
 		margin: 0;
-	}
-
-	.section-text {
-		font-family: var(--resume-font-mono);
-		font-size: 0.9rem;
-		color: rgba(15, 23, 42, 0.78);
-		margin: 0;
-		line-height: 1.7;
 	}
 
 	.stack {
@@ -253,55 +286,58 @@
 		gap: 1rem;
 	}
 
-	.grid {
-		display: grid;
+	.projects-stack {
+		display: flex;
+		flex-direction: column;
 		gap: 1rem;
 	}
 
-	@media (min-width: 768px) {
-		.grid {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+	@media (max-width: 768px) {
+		.two-column {
+			grid-template-columns: 1fr;
 		}
 	}
 
 	@media print {
 		.page {
-			padding: 0.5rem 0;
-			font-size: 10pt;
+			padding: 0;
+			font-size: 8pt;
 			min-height: 0;
 		}
 
 		.content {
-			gap: 1rem;
+			gap: 0.35rem;
 			max-width: 100%;
 		}
 
-		.section {
+		.two-column {
+			display: grid;
+			grid-template-columns: var(--main-column-width) var(--sidebar-width);
+			gap: 1rem;
+		}
+
+		.main-column,
+		.sidebar {
 			gap: 0.5rem;
-			page-break-inside: avoid;
-			break-inside: avoid;
+		}
+
+		.section {
+			gap: 0.25rem;
 		}
 
 		.section-title {
-			font-size: 13pt;
+			font-size: 10pt;
 			font-weight: 700;
 			margin: 0;
-			margin-bottom: 0.375rem;
-		}
-
-		.section-text {
-			font-size: 9pt;
-			line-height: 1.45;
+			margin-bottom: 0.15rem;
 		}
 
 		.stack {
-			gap: 0.625rem;
+			gap: 0.35rem;
 		}
 
-		.grid {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 0.5rem;
+		.projects-stack {
+			gap: 0.3rem;
 		}
 	}
 </style>

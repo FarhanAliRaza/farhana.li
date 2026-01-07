@@ -135,9 +135,15 @@
 
 	@media print {
 		.experience {
-			break-inside: avoid;
-			page-break-inside: avoid;
-			gap: 0.375rem;
+			gap: 0.2rem;
+		}
+
+		.header {
+			gap: 0.5rem;
+		}
+
+		.company-info {
+			gap: 0.5rem;
 		}
 
 		.company {
@@ -146,7 +152,11 @@
 
 		.badge {
 			font-size: 7pt;
-			padding: 2px 6px;
+			padding: 2px 5px;
+		}
+
+		.badges {
+			gap: 0.3rem;
 		}
 
 		.period {
@@ -159,17 +169,21 @@
 
 		.description,
 		.highlights {
-			font-size: 8.5pt;
-			line-height: 1.4;
+			font-size: 8pt;
+			line-height: 1.35;
+		}
+
+		.description {
+			margin: 0;
 		}
 
 		.highlights {
-			margin: 0.25rem 0 0 0;
+			margin: 0.15rem 0 0 0;
 			padding-left: 1rem;
 		}
 
 		.highlights li {
-			margin-bottom: 0.25rem;
+			margin-bottom: 0.15rem;
 		}
 	}
 </style>

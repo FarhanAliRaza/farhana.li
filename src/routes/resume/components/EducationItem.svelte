@@ -52,12 +52,11 @@
 
 	@media print {
 		.education {
-			break-inside: avoid;
-			page-break-inside: avoid;
+			gap: 0.15rem;
 		}
 
 		.institution {
-			font-size: 10pt;
+			font-size: 9pt;
 		}
 
 		.period {
@@ -65,7 +64,7 @@
 		}
 
 		.degree {
-			font-size: 8.5pt;
+			font-size: 8pt;
 		}
 	}
 </style>
