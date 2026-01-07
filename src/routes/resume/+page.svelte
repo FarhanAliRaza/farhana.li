@@ -13,7 +13,7 @@
 		locationLink: 'https://maps.google.com/?q=Bahwalnagar,Pakistan',
 		tagline: 'Full Stack Engineer | DSF Member',
 		about:
-			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor (DSF Member) who shipped template partials via GSoC 2025. Created django-bolt, achieving 100K+ RPS by bridging Python-Django with Rust—700+ stars, 23K+ downloads. Architected systems processing 100M+ emails at 99.9% uptime. Expert in Python, Django, Svelte, and Rust with a track record of solving complex performance challenges end-to-end.',
+			'Full-stack engineer with 5+ years building production systems at scale. Django core contributor (DSF Member) who shipped template partials via GSoC 2025. Created django-bolt, achieving 100K+ RPS by bridging Python-Django with Rust—700+ stars, 23K+ downloads. Architected systems processing 100M+ emails at 99.9% uptime. Delivered 50+ freelance projects on Fiverr with 5★ rating. Expert in Python, Django, Svelte, and Rust with a track record of solving complex performance challenges end-to-end.',
 		avatarUrl:
 			'https://avatars.githubusercontent.com/u/62690310?s=400&u=cee700c06c6b86ca633e78e3d6f096b7a27b8437&v=4',
 		contact: {
