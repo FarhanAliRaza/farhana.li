@@ -55,6 +55,12 @@
 			gap: 0.15rem;
 		}
 
+		.header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0;
+		}
+
 		.institution {
 			font-size: 9pt;
 		}

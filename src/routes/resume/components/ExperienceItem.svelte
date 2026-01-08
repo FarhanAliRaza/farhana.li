@@ -16,18 +16,17 @@
 
 <article class="experience">
 	<header class="header">
-		<div class="company-info">
-			<h3 class="company">{company}</h3>
-			<ul class="badges">
-				{#each tags as tag}
-					<li class="badge">{tag}</li>
-				{/each}
-			</ul>
-		</div>
+		<h3 class="role">{jobTitle}</h3>
 		<span class="period">{dateRange}</span>
 	</header>
 
-	<h4 class="role">{jobTitle}</h4>
+	<div class="company">{company}</div>
+
+	<ul class="badges">
+		{#each tags as tag}
+			<li class="badge">{tag}</li>
+		{/each}
+	</ul>
 
 	<p class="description font-mono">
 		{@html responsibilities[0]}
@@ -56,16 +55,10 @@
 		gap: 1rem;
 	}
 
-	.company-info {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-	}
-
 	.company {
-		font-size: 1rem;
-		font-weight: 600;
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: rgba(15, 23, 42, 0.7);
 		margin: 0;
 	}
 
@@ -96,11 +89,10 @@
 	}
 
 	.role {
-		font-size: 0.9rem;
-		font-weight: 900;
-		font-family: var(--resume-font-mono);
+		font-size: 1rem;
+		font-weight: 600;
 		margin: 0;
-		color: rgba(15, 23, 42, 0.85);
+		color: rgba(15, 23, 42, 1);
 	}
 
 	.description {
@@ -135,19 +127,19 @@
 
 	@media print {
 		.experience {
-			gap: 0.2rem;
+			gap: 0.15rem;
 		}
 
 		.header {
 			gap: 0.5rem;
 		}
 
-		.company-info {
-			gap: 0.5rem;
+		.role {
+			font-size: 10pt;
 		}
 
 		.company {
-			font-size: 10pt;
+			font-size: 9pt;
 		}
 
 		.badge {
@@ -161,10 +153,6 @@
 
 		.period {
 			font-size: 8pt;
-		}
-
-		.role {
-			font-size: 9pt;
 		}
 
 		.description,

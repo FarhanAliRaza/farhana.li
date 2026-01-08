@@ -46,7 +46,7 @@
 					{:else}
 						<span class="icon"><Globe size={14} /></span>
 					{/if}
-					<span>{new URL(social.url).pathname.slice(1)}</span>
+					<span>{social.name === 'LinkedIn' ? 'linkedin.com' + new URL(social.url).pathname : new URL(social.url).pathname.slice(1)}</span>
 				</a>
 			{/each}
 			{#if contact.personalWebsiteUrl}
