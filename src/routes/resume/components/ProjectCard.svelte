@@ -42,6 +42,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.35rem;
+		break-inside: avoid;
 	}
 
 	.project-header {
@@ -106,6 +107,8 @@
 	@media print {
 		.project {
 			gap: 0.15rem;
+			page-break-inside: avoid;
+			break-inside: avoid;
 		}
 
 		.title {
@@ -116,6 +119,8 @@
 		.description {
 			font-size: 7.5pt;
 			line-height: 1.3;
+			orphans: 2;
+			widows: 2;
 		}
 
 		.tag {

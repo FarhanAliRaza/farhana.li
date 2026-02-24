@@ -45,7 +45,7 @@
 	.experience {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.45rem;
 	}
 
 	.header {
@@ -89,7 +89,7 @@
 	}
 
 	.role {
-		font-size: 1rem;
+		font-size: 0.98rem;
 		font-weight: 600;
 		margin: 0;
 		color: rgba(15, 23, 42, 1);
@@ -112,6 +112,7 @@
 
 	.highlights li {
 		margin-bottom: 0.375rem;
+		break-inside: avoid;
 	}
 
 	.highlights li:last-child {
@@ -128,6 +129,8 @@
 	@media print {
 		.experience {
 			gap: 0.15rem;
+			page-break-inside: auto;
+			break-inside: auto;
 		}
 
 		.header {
@@ -159,6 +162,8 @@
 		.highlights {
 			font-size: 8pt;
 			line-height: 1.35;
+			orphans: 2;
+			widows: 2;
 		}
 
 		.description {
@@ -172,6 +177,7 @@
 
 		.highlights li {
 			margin-bottom: 0.15rem;
+			break-inside: avoid;
 		}
 	}
 </style>

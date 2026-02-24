@@ -71,6 +71,10 @@
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
+		padding: 0.25rem 0.35rem 0.35rem;
+		border-radius: 12px;
+		background: rgba(255, 255, 255, 0.82);
+		border: 1px solid rgba(15, 23, 42, 0.08);
 	}
 
 	.header-content {
@@ -160,6 +164,13 @@
 	}
 
 	@media print {
+		.header {
+			padding: 0;
+			background: transparent;
+			border: 0;
+			border-radius: 0;
+		}
+
 		.header-content {
 			gap: 0.2rem;
 		}
@@ -176,6 +187,8 @@
 			font-size: 8pt;
 			line-height: 1.35;
 			margin-top: 0.2rem;
+			orphans: 2;
+			widows: 2;
 		}
 
 		.contact-bar {

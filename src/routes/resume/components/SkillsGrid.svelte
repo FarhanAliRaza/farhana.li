@@ -12,29 +12,30 @@
 	.skills {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: 0.55rem;
 		padding: 0;
 		margin: 0;
 		list-style: none;
 	}
 
 	.skill {
-		padding: 6px 12px;
+		padding: 7px 13px;
 		border-radius: 6px;
 		background-color: rgba(15, 23, 42, 0.85);
-		font-size: 0.8125rem;
+		font-size: 0.875rem;
 		color: white;
-		font-weight: 500;
+		font-weight: 600;
 	}
 
 	@media print {
 		.skills {
-			gap: 0.25rem;
+			gap: 0.3rem;
 		}
 
 		.skill {
-			padding: 2px 6px;
-			font-size: 7pt;
+			padding: 2px 7px;
+			font-size: 7.8pt;
+			font-weight: 600;
 			background-color: rgba(15, 23, 42, 0.85);
 		}
 	}

@@ -15,6 +15,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
+		break-inside: avoid;
 	}
 
 	.header {
@@ -53,6 +54,8 @@
 	@media print {
 		.education {
 			gap: 0.15rem;
+			page-break-inside: avoid;
+			break-inside: avoid;
 		}
 
 		.header {
