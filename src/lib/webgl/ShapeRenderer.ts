@@ -34,7 +34,7 @@ export class ShapeRenderer {
 	private devicePixelRatio: number = 1;
 	private debugOptions: DebugOptions = { localData: false };
 	private readonly lightColors: string[] = ['#0083cf', '#3300eb', '#b900d1'];
-	private readonly darkColors: string[] = ['#ffd400', '#27b9dd', '#4c00bf', '#b900ce'];
+	private readonly darkColors: string[] = ['#eba8ff', '#00bfff', '#7300ff', '#2b00ff'];
 	private gradientColors: GradientColors = { top: '#ffffff', bottom: '#000000' };
 	private mouse: [number, number] = [-1000, -1000];
 	private scroll: number = 0;
@@ -517,7 +517,8 @@ export class ShapeRenderer {
 	private setupWebGLContext() {
 		if (!this.gl) return;
 		this.gl.enable(this.gl.BLEND);
-		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+		// The fragment shader already premultiplies RGB by alpha.
+		this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
 		this.gl.clearColor(0, 0, 0, 0);
 		this.gl.enable(this.gl.DEPTH_TEST);
 	}

@@ -1,8 +1,8 @@
 import type { ServerLoadEvent } from '@sveltejs/kit';
-import type { Post, Log, Project } from '$lib/types';
+import type { Post, Project } from '$lib/types';
 
 async function getProjects() {
-    const paths = import.meta.glob('/src/content/projects/*/index.md', { eager: true });
+    const paths = import.meta.glob('/src/content/projects/*/*.md', { eager: true });
     const projects: Project[] = [];
 
     for (const path in paths) {
@@ -18,7 +18,8 @@ async function getProjects() {
         }
     }
 
-    return projects.sort((first, second) => 
+    return projects.sort((first, second) =>
+        (first.order ?? Infinity) - (second.order ?? Infinity) ||
         new Date(second.date).getTime() - new Date(first.date).getTime()
     );
 }
@@ -45,36 +46,13 @@ async function getPosts() {
     ).slice(0, 3); // Only get the latest 3 posts
 }
 
-async function getLogs() {
-    const paths = import.meta.glob('/src/content/logs/*.md', { eager: true });
-    const logs: Log[] = [];
-
-    for (const path in paths) {
-        const file = paths[path];
-        const slug = path.split('/').at(-1)?.replace('.md', '');
-
-        if (file && typeof file === 'object' && 'metadata' in file && slug) {
-            const metadata = file.metadata as Omit<Log, 'slug'>;
-            const log = { ...metadata, slug } satisfies Log;
-            if (log.published) {
-                logs.push(log);
-            }
-        }
-    }
-
-    return logs.sort((first, second) => 
-        new Date(second.date).getTime() - new Date(first.date).getTime()
-    ).slice(0, 5); // Only get the latest 5 logs
-}
-
 export const load = async ({ fetch }: ServerLoadEvent) => {
     console.log('Loading projects...');
     
-    const [projects, posts, logs] = await Promise.all([
+    const [projects, posts] = await Promise.all([
         getProjects(),
-        getPosts(),
-        getLogs()
+        getPosts()
     ]);
 
-    return { projects, posts, logs };
+    return { projects, posts };
 }; 

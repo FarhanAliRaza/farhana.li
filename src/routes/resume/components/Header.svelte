@@ -17,7 +17,11 @@
 		contact: {
 			email?: string;
 			tel?: string;
-			social: { name: string; url: string; icon: 'github' | 'linkedin' | 'x' }[];
+			social?: {
+				name: string;
+				url: string;
+				icon: 'github' | 'linkedin' | 'x' | 'twitter' | 'email' | 'website';
+			}[];
 			personalWebsiteUrl?: string;
 		};
 	} = $props();
@@ -36,7 +40,7 @@
 					<span>{contact.email}</span>
 				</a>
 			{/if}
-			{#each contact.social as social}
+			{#each contact.social ?? [] as social}
 				<span class="separator">•</span>
 				<a class="contact-item" href={social.url} target="_blank" rel="noopener noreferrer">
 					{#if social.icon === 'github'}
@@ -46,12 +50,21 @@
 					{:else}
 						<span class="icon"><Globe size={14} /></span>
 					{/if}
-					<span>{social.name === 'LinkedIn' ? 'linkedin.com' + new URL(social.url).pathname : new URL(social.url).pathname.slice(1)}</span>
+					<span
+						>{social.name === 'LinkedIn'
+							? 'linkedin.com' + new URL(social.url).pathname
+							: new URL(social.url).pathname.slice(1)}</span
+					>
 				</a>
 			{/each}
 			{#if contact.personalWebsiteUrl}
 				<span class="separator">•</span>
-				<a class="contact-item" href={contact.personalWebsiteUrl} target="_blank" rel="noopener noreferrer">
+				<a
+					class="contact-item"
+					href={contact.personalWebsiteUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					<span class="icon"><Globe size={14} /></span>
 					<span>{new URL(contact.personalWebsiteUrl).hostname}</span>
 				</a>

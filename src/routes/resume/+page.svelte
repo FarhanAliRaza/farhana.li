@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from './components/Header.svelte';
+	import { profile, experience } from '$lib/profile';
 	import ExperienceItem from './components/ExperienceItem.svelte';
 	import EducationItem from './components/EducationItem.svelte';
 	import SkillsGrid from './components/SkillsGrid.svelte';
@@ -7,13 +8,12 @@
 	import WordleOverlay from '$lib/wordle/WordleOverlay.svelte';
 
 	const resumeData = {
-		name: 'Farhan Ali Raza',
+		name: profile.name,
 		initials: 'FA',
 		location: 'Bahawalnagar, Pakistan | GMT+5',
 		locationLink: 'https://maps.google.com/?q=Bahawalnagar,Pakistan',
-		tagline: 'Full Stack Engineer | DSF Member',
-		about:
-			'Full-stack engineer, 5+ years in. I contributed template partials to Django core via Google Summer of Code 2025 and built django-bolt—a Rust-powered Django server hitting 100K+ RPS with 1200+ stars and 30K+ downloads. My systems have processed 100M+ emails in production and I\'ve shipped 50+ freelance projects with a 5★ Fiverr rating. I mostly work in Python, Django, Svelte, and Rust, with a bias toward making things fast.',
+		tagline: profile.tagline,
+		about: profile.resumeSummary,
 		avatarUrl:
 			'https://avatars.githubusercontent.com/u/62690310?s=400&u=cee700c06c6b86ca633e78e3d6f096b7a27b8437&v=4',
 		contact: {
@@ -33,81 +33,16 @@
 				}
 			]
 		},
-		work: [
-			{
-				company: 'Qoves',
-				title: 'Senior Software Engineer',
-				badges: ['Remote', 'Django', 'Python', 'Kubernetes', 'Temporal', 'PostgreSQL', 'GDPR', 'msgspec'],
-				start: '01/2026',
-				end: 'Present',
-				highlights: [
-					'Took on a full Django codebase refactor—reworking models, views, serializers, and service layers to get things to a place where they\'re actually maintainable.',
-					'Dropped API latency noticeably by swapping DRF serializers for msgspec, which cuts out a lot of serialization overhead on busy endpoints.',
-					'Helping redesign the full data pipeline around Temporal on Kubernetes—moving away from fragile task chains toward proper workflow orchestration.',
-					'Architected the GDPR compliance layer: users get routed to the right regional servers, data stays where it legally has to, and deletion requests work end-to-end.'
-				]
-			},
-			{
-				company: 'django-bolt',
-				title: 'Creator & Open Source Maintainer',
-				badges: ['Rust', 'PyO3', 'Actix', 'Tokio', 'Django', 'Open Source'],
-				start: '09/2025',
-				end: 'Present',
-				highlights: [
-					'Built a Django server in Rust that hits 100K+ RPS—700+ GitHub stars, 25K+ downloads. <a href="https://github.com/FarhanAliRaza/django-bolt" target="_blank" rel="noopener noreferrer">View Project</a>',
-					'Got past the 40K RPS ceiling by solving the Python-Rust copy bottleneck—passing pointers instead of copying data across the boundary.',
-					'2.8x faster than FastAPI and 12x faster than Django Ninja on JSON endpoints in public benchmarks. <a href="https://github.com/FarhanAliRaza/fastapi-vs-litestar-vs-django-bolt-vs-django-ninja-benchmarks" target="_blank" rel="noopener noreferrer">View Benchmarks</a>'
-				]
-			},
-			{
-				company: 'Django Software Foundation',
-				title: 'Google Summer of Code 2025 Contributor',
-				badges: ['Remote', 'Django', 'Python', 'Open Source'],
-				start: '05/2025',
-				end: '08/2025',
-				highlights: [
-					'Shipped template partials to Django core (<a href="https://github.com/django/django/pull/19643" target="_blank" rel="noopener noreferrer">PR #19643</a>)—a long-requested feature now available to 4M+ Django developers. <a href="https://summerofcode.withgoogle.com/programs/2025/projects/YqdTk30V" target="_blank" rel="noopener noreferrer">GSoC Project</a>',
-					'Wrote 50+ tests covering edge cases and documented the feature in the official Django docs so people could actually use it.',
-					'Went through 100+ review rounds with Django maintainers before merge—a good lesson in what production-ready really means at that scale.'
-				]
-			},
-			{
-				company: 'Medgebra',
-				title: 'Full Stack AI Engineer',
-				badges: [
-					'Remote',
-					'Django',
-					'Next.js',
-					'RAG',
-					'PostgreSQL',
-					'Redis',
-					'DSPY',
-					'Pinecone',
-					'FHIR'
-				],
-				start: '06/2024',
-				end: '07/2025',
-				highlights: [
-					'Cut clinical citation lookup from 3-5s to under 200ms using vector embeddings and semantic search on top of an LLM decision-support layer. <a href="https://medgebra.com" target="_blank" rel="noopener noreferrer">medgebra.com</a>',
-					'Built a pipeline that processed 100K+ medical PDFs and tracked citations to specific pages—so doctors could actually verify what the AI was referencing.',
-					'Set up real-time retrieval across 100K+ documents with Pinecone, fast enough to feel instant during a clinical session.',
-					'Wired in FHIR-compliant EMR data so the AI had patient context, not just generic medical knowledge.'
-				]
-			},
-			{
-				company: 'Bulk Mail Verifier',
-				title: 'Full Stack Engineer',
-				badges: ['Django', 'Svelte', 'Celery', 'Redis', 'PostgreSQL', 'RabbitMQ', 'SMTP'],
-				start: '03/2021',
-				end: 'Present',
-				highlights: [
-					'Started this in my second semester as my first engineering role, building the entire email-validation platform from scratch—application logic, queueing, SMTP workflows, and operations. <a href="https://bulkmailverifier.org" target="_blank" rel="noopener noreferrer">bulkmailverifier.org</a>',
-					'Built and operated the infrastructure on bare-metal servers, learning deployment, reliability, and production debugging end-to-end.',
-					'Scaled throughput by splitting workloads across RabbitMQ Queues and workers, so verification jobs could run in parallel reliably.',
-					'The platform has validated 100M+ emails over its lifetime.'
-				]
-			}
-		],
+		work: experience.map((job) => ({
+			company: job.company,
+			title: job.role,
+			badges: [job.employmentType, ...job.skills],
+			start: job.start,
+			end: job.end,
+			location: job.location,
+			href: job.href,
+			highlights: [job.summary, ...job.highlights]
+		})),
 		education: [
 			{
 				school: 'Islamia University of Bahawalpur',
@@ -129,7 +64,6 @@
 			'PostgreSQL',
 			'Redis',
 			'Docker',
-			'Kubernetes',
 			'Temporal',
 			'PyO3',
 			'RAG',
@@ -137,6 +71,20 @@
 			'Vector Search'
 		],
 		projects: [
+			{
+				title: 'Lahza',
+				description:
+					'Native Linux screenshot and screen recording studio built with Rust and GPUI. Capture, annotate, edit on a multitrack timeline, and export up to 4K at 60 fps as MP4, WebM, or GIF.',
+				techStack: ['Rust', 'GPUI', 'Linux', 'Video'],
+				url: 'https://github.com/FarhanAliRaza/Lahza'
+			},
+			{
+				title: 'taipan',
+				description:
+					'Single self-contained binary with CPython 3.14 embedded, written in Zig. Runs Python and PEP 723 scripts on machines with no Python installed, with ~10ms warm starts, and compiles scripts into standalone executables.',
+				techStack: ['Zig', 'Python', 'CPython', 'CLI'],
+				url: 'https://github.com/FarhanAliRaza/taipan'
+			},
 			{
 				title: 'django-repl',
 				description:
@@ -185,20 +133,6 @@
 					'Fast JSON serialization and validation for Django using msgspec, with FastAPI-style decorators for request validation and response schemas.',
 				techStack: ['Python', 'Django', 'msgspec', 'JSON', 'Validation'],
 				url: 'https://github.com/FarhanAliRaza/django-rapid'
-			},
-			{
-				title: 'moonshine-mojo',
-				description:
-					'Moonshine speech recognition reimplemented in Mojo with GPU acceleration—5.3x faster than the Python baseline (135ms vs 715ms on RTX 3060). KV-cache cuts decoder time by 3.5x.',
-				techStack: ['Mojo', 'GPU', 'ASR', 'KV-Cache'],
-				url: 'https://github.com/FarhanAliRaza/moonshine-mojo'
-			},
-			{
-				title: 'turbo-orm',
-				description:
-					'Async ORM for Django using psycopg3 async cursors and real connection pooling—genuinely faster under concurrent load.',
-				techStack: ['Python', 'Django', 'PostgreSQL', 'psycopg3'],
-				url: 'https://github.com/FarhanAliRaza/turbo-orm'
 			}
 		]
 	};
@@ -229,6 +163,8 @@
 							{#each resumeData.work as experience}
 								<ExperienceItem
 									company={experience.company}
+									companyUrl={experience.href}
+									location={experience.location}
 									tags={experience.badges}
 									dateRange={`${experience.start} - ${experience.end}`}
 									jobTitle={experience.title}
@@ -288,8 +224,7 @@
 		min-height: 100vh;
 		background:
 			radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.06), transparent 40%),
-			radial-gradient(circle at 85% 5%, rgba(15, 23, 42, 0.07), transparent 45%),
-			#f8fafc;
+			radial-gradient(circle at 85% 5%, rgba(15, 23, 42, 0.07), transparent 45%), #f8fafc;
 		padding: 2.25rem 1.25rem 2.75rem;
 	}
 
@@ -363,9 +298,7 @@
 	}
 
 	.work-section {
-		background:
-			linear-gradient(180deg, rgba(15, 23, 42, 0.03), rgba(15, 23, 42, 0.01)),
-			#ffffff;
+		background: linear-gradient(180deg, rgba(15, 23, 42, 0.03), rgba(15, 23, 42, 0.01)), #ffffff;
 	}
 
 	.projects-section :global(.project),

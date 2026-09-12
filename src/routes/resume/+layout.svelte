@@ -1,52 +1,55 @@
-<svelte:head>
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-	<link
-		rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lato:wght@400;700&display=swap"
-	/>
-</svelte:head>
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+	import { ArrowLeft, Printer } from 'lucide-svelte';
+	import '../../app.css';
+	import '$lib/bento.css';
+	import './resume-screen.css';
+	let { children }: { children: Snippet } = $props();
+</script>
 
 <div class="resume-font">
-	<slot />
+	<nav class="resume-toolbar" aria-label="Resume navigation">
+		<a class="bento-button" href="/"><ArrowLeft size={16} /> Back to portfolio</a><button
+			class="bento-button"
+			onclick={() => window.print()}><Printer size={16} /> Print resume</button
+		>
+	</nav>
+	{@render children()}
 </div>
 
 <style>
 	.resume-font {
-		--resume-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-		--resume-font-mono:
-			ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-			monospace;
-		font-family: var(--resume-font-sans);
-		font-feature-settings:
-			'liga' 1,
-			'kern' 1;
-	}
-
-	:global(body) {
+		--resume-font-sans: var(--font-sans, sans-serif);
+		--resume-font-mono: var(--font-mono, monospace);
 		font-family: var(--resume-font-sans);
 	}
-
-	:global(.font-sans) {
-		font-family: var(--resume-font-sans);
+	.resume-toolbar {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 12px;
+		max-width: 1200px;
+		margin-inline: auto;
+		padding: 28px var(--bento-gutter) 0;
 	}
-
-	:global(.font-mono) {
-		font-family: var(--resume-font-mono);
+	@media screen {
+		.resume-font {
+			background: #08070c;
+			color: #f5f1fa;
+			min-height: 100vh;
+		}
 	}
-
-	:global(.font-display) {
-		font-family: var(--resume-font-sans);
-	}
-
-	/* Print-specific styles */
 	@media print {
+		.resume-toolbar {
+			display: none;
+		}
 		:global(body) {
+			background: white;
+			color: #111;
 			font-size: 11pt;
 			line-height: 1.4;
 		}
-
-		:global(*) {
+		.resume-font :global(*) {
 			-webkit-print-color-adjust: exact;
 			print-color-adjust: exact;
 		}

@@ -2,12 +2,12 @@
 
 /* Enhanced markdown content styling */
 .prose pre {
-	border-radius: 0.5rem;
+	border-radius: 1rem;
 	margin: 1.5rem 0;
 	padding: 1rem;
-	border: 1px solid rgba(33, 158, 255, 0.2);
+	border: 1px solid rgba(233, 194, 255, 0.2);
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-	background-color: #282c34 !important; /* Force consistent dark background */
+	background-color: #17131f !important; /* Force consistent dark background */
 	position: relative; /* For copy button positioning */
 	overflow: visible;
 }
@@ -26,14 +26,14 @@
 }
 
 .prose img {
-	border-radius: 0.5rem;
-	border: 1px solid rgba(33, 158, 255, 0.2);
+	border-radius: 1rem;
+	border: 1px solid rgba(233, 194, 255, 0.2);
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .prose blockquote {
 	border-left-color: var(--color-brand);
-	background-color: rgba(33, 158, 255, 0.05);
+	background-color: rgba(233, 194, 255, 0.05);
 	padding: 1rem;
 	border-radius: 0 0.5rem 0.5rem 0;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -45,10 +45,10 @@ button[data-code] {
 	top: 0.5rem;
 	right: 0.5rem;
 	padding: 0.5rem;
-	background-color: rgba(33, 158, 255, 0.1);
-	border: 1px solid rgba(33, 158, 255, 0.3);
+	background-color: rgba(233, 194, 255, 0.1);
+	border: 1px solid rgba(233, 194, 255, 0.3);
 	border-radius: 0.25rem;
-	color: #219eff !important;
+	color: #e9c2ff !important;
 	cursor: pointer;
 	opacity: 0.7;
 	transition: all 0.2s ease;
@@ -65,7 +65,7 @@ button[data-code] .ready {
 	display: block;
 	width: 16px;
 	height: 16px;
-	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23219eff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3e%3cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3e%3c/svg%3e");
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e9c2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3e%3cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3e%3c/svg%3e");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -92,8 +92,8 @@ button[data-code].copied .success {
 }
 
 button[data-code]:hover {
-	background-color: rgba(33, 158, 255, 0.2);
-	border-color: #219eff;
+	background-color: rgba(233, 194, 255, 0.2);
+	border-color: #e9c2ff;
 	opacity: 1;
 	transform: scale(1.05);
 }
@@ -108,12 +108,71 @@ button[data-code].copied {
 	color: #22c55e !important;
 }
 
-/* Radial gradient for background */
-.bg-gradient-radial {
-	background-image: radial-gradient(
-		circle at 50% 0%,
-		var(--from),
-		var(--via) 50%,
-		var(--to) 100%
-	);
+.bento-prose {
+	--tw-prose-body: #c8bfd1;
+	--tw-prose-headings: #f5f1fa;
+	--tw-prose-links: #e9c2ff;
+	--tw-prose-bold: #f5f1fa;
+	--tw-prose-counters: #cdb7df;
+	--tw-prose-bullets: #a68aba;
+	--tw-prose-hr: #382b44;
+	--tw-prose-quotes: #e8dcf2;
+	--tw-prose-quote-borders: #e9c2ff;
+	--tw-prose-code: #e9c2ff;
+	--tw-prose-th-borders: #493753;
+	--tw-prose-td-borders: #302536;
+	width: 100%;
+	max-width: 760px;
+	margin-inline: auto;
+	font-size: clamp(15px, 1.2vw, 17px);
+	line-height: 1.9;
+	overflow-wrap: anywhere;
+}
+.bento-prose h2,
+.bento-prose h3 {
+	letter-spacing: -0.025em;
+	scroll-margin-top: 100px;
+}
+.bento-prose a {
+	text-underline-offset: 4px;
+}
+.bento-prose pre {
+	max-width: 100%;
+	padding-top: 3rem;
+}
+.bento-prose pre code {
+	font-size: 13px;
+	overflow-wrap: normal;
+}
+.bento-prose table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+}
+.bento-prose :not(pre) > code {
+	background: #281d33;
+	padding: 3px 6px;
+	border-radius: 5px;
+}
+.bento-prose blockquote {
+	border-left-color: #e9c2ff;
+}
+.bento-prose img {
+	max-width: 100%;
+	height: auto;
+}
+.bento-prose iframe {
+	max-width: 100%;
+}
+.bento-prose :focus-visible {
+	outline: 2px solid #e9c2ff;
+	outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+	button[data-code] {
+		transition: none;
+	}
+	button[data-code]:hover {
+		transform: none;
+	}
 }

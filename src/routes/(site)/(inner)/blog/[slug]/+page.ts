@@ -1,73 +1,72 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import type { Component } from 'svelte';
 import type { Post } from '$lib/types';
 
 // Function to get all blog posts
 async function getAllPosts() {
-    const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
-    const posts: Post[] = [];
+	const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
+	const posts: Post[] = [];
 
-    for (const path in paths) {
-        const file = paths[path];
-        const slug = path.split('/').slice(-2)[0];
+	for (const path in paths) {
+		const file = paths[path];
+		const slug = path.split('/').slice(-2)[0];
 
-        if (file && typeof file === 'object' && 'metadata' in file && slug) {
-            const metadata = file.metadata as Omit<Post, 'slug'>;
-            const post = { ...metadata, slug } satisfies Post;
-            if (post.published) {
-                posts.push(post);
-            }
-        }
-    }
+		if (file && typeof file === 'object' && 'metadata' in file && slug) {
+			const metadata = file.metadata as Omit<Post, 'slug'>;
+			const post = { ...metadata, slug } satisfies Post;
+			if (post.published) {
+				posts.push(post);
+			}
+		}
+	}
 
-    return posts.sort((first, second) => 
-        new Date(second.date).getTime() - new Date(first.date).getTime()
-    );
+	return posts.sort(
+		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
+	);
 }
 
 // Function to find related posts based on tags
 function findRelatedPosts(currentSlug: string, currentTags: string[], allPosts: Post[]) {
-    // Filter out the current post and find posts with matching tags
-    return allPosts
-        .filter(post => post.slug !== currentSlug)
-        .map(post => {
-            // Count matching tags
-            const matchingTags = post.tags.filter(tag => currentTags.includes(tag));
-            return {
-                ...post,
-                relevance: matchingTags.length // Add relevance score based on matching tags
-            };
-        })
-        .filter(post => post.relevance > 0) // Only include posts with at least one matching tag
-        .sort((a, b) => b.relevance - a.relevance) // Sort by relevance
-        .slice(0, 3); // Get top 3 related posts
+	// Filter out the current post and find posts with matching tags
+	return allPosts
+		.filter((post) => post.slug !== currentSlug)
+		.map((post) => {
+			// Count matching tags
+			const matchingTags = post.tags.filter((tag) => currentTags.includes(tag));
+			return {
+				...post,
+				relevance: matchingTags.length // Add relevance score based on matching tags
+			};
+		})
+		.filter((post) => post.relevance > 0) // Only include posts with at least one matching tag
+		.sort((a, b) => b.relevance - a.relevance) // Sort by relevance
+		.slice(0, 3); // Get top 3 related posts
 }
 
 export const load: PageLoad = async ({ params }) => {
-    // Load all posts using glob pattern that Vite can analyze
-    const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
+	// Load all posts using glob pattern that Vite can analyze
+	const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
 
-    // Find the specific post by slug
-    const postPath = `/src/content/posts/${params.slug}/index.md`;
-    const post = paths[postPath];
+	// Find the specific post by slug
+	const postPath = `/src/content/posts/${params.slug}/index.md`;
+	const post = paths[postPath];
 
-    if (!post || typeof post !== 'object' || !('metadata' in post) || !('default' in post)) {
-        throw error(404, `Could not find ${params.slug}`);
-    }
+	if (!post || typeof post !== 'object' || !('metadata' in post) || !('default' in post)) {
+		throw error(404, `Could not find ${params.slug}`);
+	}
 
-    // Get all posts to find related posts
-    const allPosts = await getAllPosts();
+	// Get all posts to find related posts
+	const allPosts = await getAllPosts();
 
-    // Find related posts based on tags
-    const relatedPosts = findRelatedPosts(
-        params.slug,
-        post.metadata.tags,
-        allPosts
-    );
+	const metadata = post.metadata as Omit<Post, 'slug'>;
 
-    return {
-        content: post.default,
-        meta: post.metadata,
-        relatedPosts
-    };
-}; 
+	// Find related posts based on tags
+	const relatedPosts = findRelatedPosts(params.slug, metadata.tags, allPosts);
+
+	return {
+		content: post.default as Component,
+		meta: { ...metadata, slug: params.slug },
+		relatedPosts
+	};
+};

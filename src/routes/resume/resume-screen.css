@@ -1,0 +1,181 @@
+/* Screen-only portfolio styling; each component retains its paper/print rules. */
+@media screen {
+	.resume-font .page.page {
+		background: #08070c;
+		color: #f5f1fa;
+		padding: 32px var(--bento-gutter) 72px;
+	}
+	.resume-font .page .content {
+		max-width: 1140px;
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+		background: transparent;
+		box-shadow: none;
+		gap: var(--bento-gap);
+	}
+	.resume-font .page .two-column {
+		grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+		gap: var(--bento-gap);
+	}
+	.resume-font .page .sidebar {
+		gap: var(--bento-gap);
+	}
+	.resume-font .page .section,
+	.resume-font .page .content > .header {
+		border: 1px solid var(--bento-border);
+		border-radius: var(--bento-radius);
+		background: var(--bento-surface);
+		padding: var(--bento-padding);
+		gap: 24px;
+	}
+	.resume-font .page .content > .header {
+		text-align: left;
+		padding: clamp(24px, 4vw, 48px);
+	}
+	.resume-font .page .header-content {
+		align-items: flex-start;
+		gap: 16px;
+	}
+	.resume-font .page .name {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		letter-spacing: -0.05em;
+		line-height: 1.1;
+	}
+	.resume-font .page .section-title {
+		font-family: var(--font-display);
+		font-size: 1.5rem;
+		font-weight: 500;
+		text-transform: none;
+		letter-spacing: -0.035em;
+		color: #f5f1fa;
+		border-bottom: 1px solid var(--bento-border);
+		padding-bottom: 18px;
+	}
+	.resume-font .page :is(.description, .about, .highlights, .section-text, .degree) {
+		color: var(--bento-muted);
+		font-family: var(--resume-font-sans);
+		font-size: 14px;
+		line-height: 1.8;
+	}
+	.resume-font .page .tagline {
+		color: var(--bento-accent);
+		font-family: var(--resume-font-sans);
+		font-size: 16px;
+	}
+	.resume-font .page :is(.role, .institution, .title) {
+		color: #f5f1fa;
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		line-height: 1.35;
+	}
+	.resume-font .page :is(.company, .period, .icon, .contact-item) {
+		color: #cdb7df;
+	}
+	.resume-font .page .period {
+		font-size: 12px;
+		white-space: normal;
+	}
+	.resume-font .page .company {
+		font-size: 14px;
+	}
+	.resume-font .page :is(.badge, .tag, .skill) {
+		border-radius: 999px;
+		border: 1px solid #382c47;
+		background: #22192e;
+		color: #d9c5e9;
+		font-family: var(--resume-font-sans);
+		font-size: 11px;
+		font-weight: 400;
+		padding: 5px 10px;
+	}
+	.resume-font .page .contact-bar {
+		justify-content: flex-start;
+		background: #191320;
+		border-radius: 18px;
+		padding: 16px;
+		gap: 14px 20px;
+	}
+	.resume-font .page .contact-item {
+		overflow-wrap: anywhere;
+		min-width: 0;
+		min-height: 32px;
+	}
+	.resume-font .page .contact-item span {
+		min-width: 0;
+	}
+	.resume-font .page .separator {
+		display: none;
+	}
+	.resume-font .page :is(.stack, .projects-stack) {
+		gap: 24px;
+	}
+	.resume-font .page :is(.experience, .project, .education) {
+		padding: 0 0 24px;
+		border: 0;
+		border-bottom: 1px solid var(--bento-border);
+		border-radius: 0;
+		background: transparent;
+		gap: 12px;
+	}
+	.resume-font .page :is(.experience, .project, .education):last-child {
+		border-bottom: 0;
+		padding-bottom: 0;
+	}
+	.resume-font .page a:hover {
+		color: #e9c2ff;
+	}
+	.resume-font :is(a, button, summary):focus-visible {
+		outline: 2px solid #e9c2ff;
+		outline-offset: 4px;
+	}
+	/* Keep the existing resume puzzle and its semantic tile colors. */
+	.resume-font .overlay {
+		background: #08070cf2;
+	}
+	.resume-font .overlay .blur-bg {
+		background: transparent;
+	}
+	.resume-font .overlay .content {
+		background: #100d18;
+		border: 1px solid var(--bento-border);
+		border-radius: 28px;
+	}
+	.resume-font .overlay .title {
+		color: #f5f1fa;
+	}
+	.resume-font .overlay :is(.subtitle, .help-text, .attempts-text, .attempts, .hint-label) {
+		color: #b8afc4;
+	}
+	.resume-font .overlay .hint {
+		background: #22192e;
+		border-radius: 16px;
+	}
+	.resume-font .overlay .hint-text {
+		color: #e9c2ff;
+	}
+	.resume-font .overlay .tile-empty {
+		background: #191320;
+		border-color: #55425f;
+		color: #f5f1fa;
+	}
+	.resume-font .overlay .key-unused {
+		background: #30263c;
+		color: #f5f1fa;
+	}
+	.resume-font .overlay .key:hover {
+		filter: brightness(1.2);
+	}
+}
+@media screen and (max-width: 900px) {
+	.resume-font .page .two-column {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.resume-font .overlay,
+	.resume-font .overlay .content {
+		animation: none;
+	}
+}

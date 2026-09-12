@@ -26,6 +26,8 @@ export interface Project {
     published: boolean;
     github?: string;
     demo?: string;
+    /** Lower numbers sort first; projects without an order follow, newest first */
+    order?: number;
 }
 
 export interface Product {

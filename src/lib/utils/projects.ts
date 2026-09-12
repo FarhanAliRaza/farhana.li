@@ -17,7 +17,8 @@ export async function getAllProjects() {
         }
     }
 
-    return projects.sort((first, second) => 
+    return projects.sort((first, second) =>
+        (first.order ?? Infinity) - (second.order ?? Infinity) ||
         new Date(second.date).getTime() - new Date(first.date).getTime()
     );
 } 

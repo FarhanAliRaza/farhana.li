@@ -32,7 +32,7 @@ export const fragmentShader = `
             discard;
         }
         vec3 color = mix(u_color_bottom, u_color_top, v_gradient);
-        float alpha = max(0.3, v_z);
+        float alpha = max(0.55, v_z);
         gl_FragColor = vec4(color * alpha, alpha);
     }
 `;

@@ -27,7 +27,8 @@
 
 			<details class="schema-info">
 				<summary>View Required XML Schema</summary>
-				<pre><code>{`<resume>
+				<pre><code
+						>{`<resume>
   <name>Farhan Ali</name>
   <initials>FA</initials>
   <location>City, Country | GMT+X</location>
@@ -81,7 +82,8 @@
     <techStack>Django</techStack>
     <url>https://github.com/username/project</url>
   </projects>
-</resume>`}</code></pre>
+</resume>`}</code
+					></pre>
 			</details>
 		</div>
 
@@ -92,75 +94,52 @@
 <style>
 	.error-page {
 		min-height: 100vh;
-		background: #ffffff;
-		padding: 3rem 1.5rem;
+		background: #08070c;
+		padding: 40px var(--bento-gutter) 72px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 
 	.error-content {
-		max-width: 48rem;
+		max-width: 60rem;
 		width: 100%;
 	}
 
 	.error-title {
-		font-size: 4rem;
+		font-size: clamp(3rem, 7vw, 5rem);
 		font-weight: 800;
-		color: #dc2626;
+		color: #e9c2ff;
 		margin: 0 0 1rem 0;
 	}
 
 	.error-message {
-		font-size: 1.5rem;
+		font-size: clamp(1.25rem, 3vw, 1.75rem);
 		font-weight: 600;
-		color: #1f2937;
+		color: #e9e1f2;
 		margin: 0 0 1.5rem 0;
 	}
 
-	.error-details {
-		background: #fef2f2;
-		border-left: 4px solid #dc2626;
-		padding: 1rem 1.5rem;
-		margin-bottom: 2rem;
-		border-radius: 0.25rem;
-	}
-
-	.error-details h3 {
-		font-size: 1rem;
-		font-weight: 600;
-		color: #991b1b;
-		margin: 0 0 0.5rem 0;
-	}
-
-	.error-details p {
-		font-family: var(--resume-font-mono, monospace);
-		font-size: 0.875rem;
-		color: #7f1d1d;
-		margin: 0;
-		line-height: 1.6;
-		word-wrap: break-word;
-	}
-
 	.error-help {
-		background: #f9fafb;
-		border: 1px solid #e5e7eb;
+		background: #100d18;
+		border: 1px solid #352443;
 		padding: 1.5rem;
-		border-radius: 0.5rem;
+		border-radius: var(--bento-radius);
 		margin-bottom: 2rem;
 	}
 
 	.error-help h3 {
 		font-size: 1.125rem;
 		font-weight: 600;
-		color: #1f2937;
+		color: #e9e1f2;
 		margin: 0 0 1rem 0;
 	}
 
 	.error-help ol {
 		margin: 0 0 1rem 0;
 		padding-left: 1.5rem;
-		color: #4b5563;
+		list-style: decimal;
+		color: #b8afc4;
 	}
 
 	.error-help li {
@@ -169,8 +148,8 @@
 	}
 
 	.error-help code {
-		background: #1f2937;
-		color: #f9fafb;
+		background: #191320;
+		color: #e9e1f2;
 		padding: 0.125rem 0.375rem;
 		border-radius: 0.25rem;
 		font-family: var(--resume-font-mono, monospace);
@@ -185,20 +164,20 @@
 	.schema-info summary {
 		cursor: pointer;
 		font-weight: 600;
-		color: #374151;
+		color: #e9c2ff;
 		padding: 0.5rem;
-		background: #e5e7eb;
+		background: #352443;
 		border-radius: 0.25rem;
 		user-select: none;
 	}
 
 	.schema-info summary:hover {
-		background: #d1d5db;
+		background: #453054;
 	}
 
 	.schema-info pre {
-		background: #1f2937;
-		color: #f9fafb;
+		background: #191320;
+		color: #e9e1f2;
 		padding: 1rem;
 		border-radius: 0.25rem;
 		overflow-x: auto;
@@ -215,14 +194,14 @@
 
 	.back-link {
 		display: inline-block;
-		color: #2563eb;
+		color: #e9c2ff;
 		text-decoration: none;
 		font-weight: 500;
 		transition: color 0.2s;
 	}
 
 	.back-link:hover {
-		color: #1d4ed8;
+		color: #f2ddff;
 		text-decoration: underline;
 	}
 </style>

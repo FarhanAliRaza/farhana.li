@@ -7,32 +7,18 @@
 	import ExampleView from './ExampleView.svelte';
 	import WordleOverlay from '$lib/wordle/WordleOverlay.svelte';
 	import type { PageData } from './$types';
-	import { onMount } from 'svelte';
 
 	let { data }: { data: PageData } = $props();
-	const { showExample, resumeData } = data;
+	const showExample = $derived(data.showExample);
+	const resumeData = $derived(data.resumeData);
 
-	// Anti-scraping measures (only for actual resume, not example)
-	onMount(() => {
-		if (resumeData && !showExample) {
-			// Disable right-click context menu
-			document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-			// Disable text selection
-			document.addEventListener('selectstart', (e) => e.preventDefault());
-
-			// Disable copy
-			document.addEventListener('copy', (e) => e.preventDefault());
-
-			// Log warning for developers
-			console.warn('This resume is protected. For legitimate use, please contact the owner.');
-
-			return () => {
-				document.removeEventListener('contextmenu', (e) => e.preventDefault());
-				document.removeEventListener('selectstart', (e) => e.preventDefault());
-				document.removeEventListener('copy', (e) => e.preventDefault());
-			};
-		}
+	// Preserve the viewer's copy restrictions and release them when leaving the page.
+	$effect(() => {
+		if (!resumeData || showExample) return;
+		const prevent = (event: Event) => event.preventDefault();
+		const events = ['contextmenu', 'selectstart', 'copy'];
+		events.forEach((name) => document.addEventListener(name, prevent));
+		return () => events.forEach((name) => document.removeEventListener(name, prevent));
 	});
 </script>
 
@@ -63,15 +49,9 @@
 					tagline={resumeData.tagline}
 					location={resumeData.location}
 					locationLink={resumeData.locationLink}
-					initials={resumeData.initials}
-					avatarUrl={resumeData.avatarUrl}
-					contact={resumeData.contact as any}
+					about={resumeData.about}
+					contact={resumeData.contact}
 				/>
-
-				<section class="section">
-					<h2 class="section-title">About</h2>
-					<p class="section-text">{resumeData.about}</p>
-				</section>
 
 				<section class="section">
 					<h2 class="section-title">Work Experience</h2>
@@ -160,14 +140,6 @@
 		margin: 0;
 	}
 
-	.section-text {
-		font-family: var(--resume-font-mono);
-		font-size: 0.9rem;
-		color: rgba(15, 23, 42, 0.78);
-		margin: 0;
-		line-height: 1.7;
-	}
-
 	.stack {
 		display: flex;
 		flex-direction: column;
@@ -208,11 +180,6 @@
 			font-weight: 700;
 			margin: 0;
 			margin-bottom: 0.375rem;
-		}
-
-		.section-text {
-			font-size: 9pt;
-			line-height: 1.45;
 		}
 
 		.stack {

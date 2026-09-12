@@ -47,7 +47,7 @@
   --color-border: rgba(0, 0, 0, 0.867);
   --color-bg-code: rgba(0, 0, 0, 0.055);
   --color-bg-secondary: #eee;
-  --color-brand: #00a6f5;
+  --color-brand: #e9c2ff;
 
   --rem: 16;
   --viewport-padding: clamp(1rem, 0.4rem + 2vw, 2rem);
@@ -85,7 +85,7 @@
   --color-border: hsla(0, 0%, 100%, 0.8);
   --color-bg-code: hsla(0, 0%, 100%, 0.122);
   --color-bg-secondary: #1b1b1b;
-  --color-brand: #219eff;
+  --color-brand: #e9c2ff;
 }
 
 /* Base styles */

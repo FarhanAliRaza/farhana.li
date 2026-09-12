@@ -1,15 +1,18 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { profile, experience } from '$lib/profile';
+
+	const escapeXml = (value: string) =>
+		value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
 	// Full Example XML with your actual resume data
 	const exampleXML = `<?xml version="1.0" encoding="UTF-8"?>
 <resume>
-  <name>Farhan Ali</name>
+  <name>${escapeXml(profile.name)}</name>
   <initials>FA</initials>
   <location>Bahwalnagar, Pakistan | GMT+5</location>
   <locationLink>https://maps.google.com/?q=Bahwalnagar,Pakistan</locationLink>
-  <tagline>Full Stack Engineer | Django Core Contributor</tagline>
-  <about>Full-stack engineer with 5+ years building production systems at scale. Django core contributor via Google Summer of Code 2025, shipped template partials feature to framework. Created django-bolt, a Rust/PyO3 framework achieving 64K+ RPS, exploring Python-Rust performance boundaries. Architected systems processing 100M+ emails with 99.9% uptime. Expert in Python, Django, Rust, and async processing with Tokio and Actix. Track record of delivering solutions rapidly while solving complex technical challenges end-to-end.</about>
+  <tagline>${escapeXml(profile.tagline)}</tagline>
+  <about>${escapeXml(profile.resumeSummary)}</about>
   <avatarUrl>https://avatars.githubusercontent.com/u/62690310?s=400&amp;u=cee700c06c6b86ca633e78e3d6f096b7a27b8437&amp;v=4</avatarUrl>
 
   <contact>
@@ -28,57 +31,18 @@
     </social>
   </contact>
 
-  <work>
-    <company>Django Software Foundation</company>
-    <title>Google Summer of Code 2025 Contributor</title>
-    <badges>Remote</badges>
-    <badges>Django</badges>
-    <badges>Python</badges>
-    <badges>Open Source</badges>
-    <start>05/2025</start>
-    <end>08/2025</end>
-    <highlights>Selected for the highly competitive Google Summer of Code program to contribute to the Django web framework</highlights>
-    <highlights>Shipped template partials to Django core (PR #19643)</highlights>
-    <highlights>Wrote comprehensive documentation and 50+ tests</highlights>
-    <highlights>Collaborated openly with maintainers through 100+ public review comments</highlights>
-  </work>
-
-  <work>
-    <company>Medgebra</company>
-    <title>Full Stack Engineer</title>
-    <badges>Remote</badges>
-    <badges>Django</badges>
-    <badges>Next.js</badges>
-    <badges>RAG</badges>
-    <badges>PostgreSQL</badges>
-    <badges>Redis</badges>
-    <badges>DSPY</badges>
-    <badges>Pinecone</badges>
-    <start>06/2024</start>
-    <end>07/2025</end>
-    <highlights>Engineered LLM-powered semantic matching system with coordinate caching, reducing citation lookup time from 3-5s to less than 200ms</highlights>
-    <highlights>Built a scalable pipeline processing 100,000+ medical PDFs with AI-powered page filtering and citation tracking</highlights>
-    <highlights>Implemented real-time document search and retrieval system using vector embeddings and semantic similarity matching</highlights>
-  </work>
-
-  <work>
-    <company>Bulk Mail Verifier</company>
-    <title>Full Stack Engineer</title>
-    <badges>Django</badges>
-    <badges>Svelte</badges>
-    <badges>Celery</badges>
-    <badges>Redis</badges>
-    <badges>PostgreSQL</badges>
-    <badges>Rabbitmq</badges>
-    <badges>SMTP</badges>
-    <start>03/2024</start>
-    <end>Present</end>
-    <highlights>Evolved product from email validation service processing 100M+ emails to comprehensive cold email platform</highlights>
-    <highlights>Achieved 3,000+ active users and growing MRR through pure product-led growth strategy</highlights>
-    <highlights>Developing AI agent for autonomous cold email campaign management with fine-tuned Qwen 2.5 0.5B model</highlights>
-    <highlights>Led full product ownership cycle: user research, pivot decision, feature development</highlights>
-    <highlights>Built scalable architecture handling millions of emails with RESTful APIs</highlights>
-  </work>
+${experience
+	.map(
+		(job) => `  <work>
+    <company>${escapeXml(job.company)}</company>
+    <title>${escapeXml(job.role)}</title>
+    ${[job.employmentType, ...job.skills].map((badge) => `<badges>${escapeXml(badge)}</badges>`).join('\n    ')}
+    <start>${job.start}</start>
+    <end>${job.end}</end>
+    ${[job.summary, ...job.highlights].map((highlight) => `<highlights>${escapeXml(highlight)}</highlights>`).join('\n    ')}
+  </work>`
+	)
+	.join('\n\n')}
 
   <education>
     <school>Islamia University of Bahawalpur</school>
@@ -241,9 +205,9 @@ Return only the modified XML, no explanations.`;
 	}
 
 	async function generateTestUrl() {
-		const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-		const fullUrl = `${baseUrl}/resume/view?data=${exampleXML}`;
-		await copyToClipboard(fullUrl, 'url');
+		const url = new URL('/resume/view', window.location.origin);
+		url.searchParams.set('data', exampleXML);
+		await copyToClipboard(url.href, 'url');
 	}
 </script>
 
@@ -251,7 +215,8 @@ Return only the modified XML, no explanations.`;
 	<div class="example-content">
 		<h1>Resume XML Generator</h1>
 		<p class="subtitle">
-			Generate job-specific resumes using LLMs. The browser will automatically URL-encode your XML when you paste it in the address bar.
+			Generate job-specific resumes using XML. Copy the example below, customize it, and generate a
+			link to preview your resume.
 		</p>
 
 		<div class="card">
@@ -263,7 +228,8 @@ Return only the modified XML, no explanations.`;
 				<li>Press Ctrl+P (or Cmd+P on Mac) to save as PDF</li>
 			</ol>
 			<div class="tip">
-				<strong>💡 Pro Tip:</strong> You can paste raw XML directly in the URL bar - the browser handles encoding automatically!
+				<strong>💡 Pro Tip:</strong> You can paste raw XML directly in the URL bar - the browser handles
+				encoding automatically!
 			</div>
 		</div>
 
@@ -309,183 +275,145 @@ Return only the modified XML, no explanations.`;
 <style>
 	.example-page {
 		min-height: 100vh;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		padding: 2rem 1rem;
+		background: #08070c;
+		color: #f5f1fa;
+		padding: 40px var(--bento-gutter) 72px;
 	}
-
 	.example-content {
-		max-width: 1024px;
+		max-width: 1080px;
 		margin: 0 auto;
+		min-width: 0;
 	}
-
 	h1 {
-		color: white;
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0 0 0.5rem 0;
-		text-align: center;
+		font-family: var(--font-display);
+		font-size: clamp(2.4rem, 5vw, 4rem);
+		letter-spacing: -0.05em;
+		font-weight: 600;
+		line-height: 1.1;
+		margin-bottom: 20px;
 	}
-
 	.subtitle {
-		color: rgba(255, 255, 255, 0.9);
-		font-size: 1.25rem;
-		text-align: center;
-		margin-bottom: 2rem;
-		line-height: 1.6;
+		color: var(--bento-muted);
+		font-size: 16px;
+		line-height: 1.8;
+		max-width: 660px;
+		margin-bottom: 36px;
 	}
-
 	.card {
-		background: white;
-		border-radius: 1rem;
-		padding: 2rem;
-		margin-bottom: 1.5rem;
-		box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+		background: var(--bento-surface);
+		border: 1px solid var(--bento-border);
+		border-radius: var(--bento-radius);
+		padding: clamp(20px, 3vw, 36px);
+		margin-bottom: var(--bento-gap);
+		min-width: 0;
 	}
-
 	.card h2 {
-		color: #1a202c;
-		font-size: 1.5rem;
-		font-weight: 700;
-		margin: 0 0 1rem 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+		letter-spacing: -0.03em;
+		margin: 0 0 16px;
 	}
-
 	.card ol {
-		color: #4a5568;
+		color: var(--bento-muted);
 		line-height: 1.8;
 		margin: 0;
-		padding-left: 1.5rem;
+		padding-left: 24px;
+		list-style: decimal;
 	}
-
 	.card li {
-		margin-bottom: 0.5rem;
+		margin-bottom: 8px;
 	}
-
 	.card code {
-		background: #edf2f7;
-		color: #e53e3e;
-		padding: 0.125rem 0.375rem;
-		border-radius: 0.25rem;
-		font-family: 'Fira Code', monospace;
-		font-size: 0.9rem;
+		background: #22192e;
+		color: #e9c2ff;
+		padding: 2px 6px;
+		border-radius: 6px;
+		font-family: var(--font-mono);
+		font-size: 12px;
+		overflow-wrap: anywhere;
 	}
-
 	.tip {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		color: white;
-		padding: 1rem;
-		border-radius: 0.5rem;
-		margin-top: 1rem;
+		background: #22192e;
+		color: #d9c5e9;
+		padding: 20px;
+		border-radius: 16px;
+		margin-top: 20px;
+		line-height: 1.7;
 	}
-
 	.card-header {
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 1rem;
+		gap: 12px;
+		margin-bottom: 20px;
 	}
-
-	.copy-btn {
-		background: #48bb78;
-		color: white;
-		border: none;
-		padding: 0.5rem 1rem;
-		border-radius: 0.5rem;
-		font-size: 0.875rem;
-		font-weight: 600;
+	.card-header h2 {
+		margin-bottom: 0;
+	}
+	.copy-btn,
+	.test-btn,
+	.link-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		background: #22192e;
+		color: #e9c2ff;
+		border: 1px solid #382c47;
+		padding: 10px 18px;
+		border-radius: 999px;
+		font-size: 13px;
+		font-weight: 500;
 		cursor: pointer;
-		transition: all 0.2s;
+		transition: background 180ms;
+		text-decoration: none;
 	}
-
-	.copy-btn:hover {
-		background: #38a169;
-		transform: translateY(-1px);
+	.test-btn {
+		background: #e9c2ff;
+		color: #251431;
 	}
-
+	.copy-btn:hover,
+	.link-btn:hover {
+		background: #352443;
+	}
+	.test-btn:hover {
+		background: #f2ddff;
+	}
 	.code-block {
-		background: #1a202c;
-		color: #e2e8f0;
-		padding: 1.5rem;
-		border-radius: 0.5rem;
-		overflow-x: auto;
-		font-size: 0.875rem;
-		line-height: 1.5;
+		background: #0a0810;
+		color: #d7cee2;
+		padding: clamp(16px, 2vw, 28px);
+		border: 1px solid var(--bento-border);
+		border-radius: 18px;
+		overflow: auto;
+		font-size: 12px;
+		line-height: 1.8;
 		margin: 0;
 		max-height: 400px;
-		overflow-y: auto;
+		scrollbar-color: #544063 #0a0810;
+		scrollbar-width: thin;
 	}
-
 	.code-block.prompt {
-		background: #2d3748;
 		max-height: 300px;
 	}
-
 	.code-block code {
-		font-family: 'Fira Code', monospace;
 		background: transparent;
 		color: inherit;
 		padding: 0;
+		overflow-wrap: normal;
 	}
-
 	.actions {
 		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		margin-top: 2rem;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 32px;
 	}
-
-	.test-btn {
-		background: white;
-		color: #667eea;
-		border: 2px solid white;
-		padding: 1rem 2rem;
-		border-radius: 0.5rem;
-		font-size: 1.125rem;
-		font-weight: 700;
-		cursor: pointer;
-		transition: all 0.2s;
-	}
-
-	.test-btn:hover {
-		background: rgba(255, 255, 255, 0.1);
-		color: white;
-		transform: translateY(-2px);
-	}
-
-	.link-btn {
-		background: rgba(255, 255, 255, 0.2);
-		color: white;
-		border: 2px solid white;
-		padding: 1rem 2rem;
-		border-radius: 0.5rem;
-		font-size: 1.125rem;
-		font-weight: 700;
-		text-decoration: none;
-		display: inline-block;
-		transition: all 0.2s;
-	}
-
-	.link-btn:hover {
-		background: white;
-		color: #667eea;
-		transform: translateY(-2px);
-	}
-
-	/* Custom scrollbar for code blocks */
-	.code-block::-webkit-scrollbar {
-		width: 8px;
-		height: 8px;
-	}
-
-	.code-block::-webkit-scrollbar-track {
-		background: #2d3748;
-	}
-
-	.code-block::-webkit-scrollbar-thumb {
-		background: #4a5568;
-		border-radius: 4px;
-	}
-
-	.code-block::-webkit-scrollbar-thumb:hover {
-		background: #718096;
+	@media (prefers-reduced-motion: reduce) {
+		.copy-btn,
+		.test-btn,
+		.link-btn {
+			transition: none;
+		}
 	}
 </style>

@@ -14,13 +14,6 @@
 		"test": "vitest",
 		"test:ui": "vitest --ui"
 	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@sveltejs/kit",
-			"esbuild",
-			"sharp"
-		]
-	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.7",
 		"@eslint/js": "^9.22.0",
@@ -47,6 +40,7 @@
 		"vitest": "^3.2.4"
 	},
 	"dependencies": {
+		"@paper-design/shaders": "0.0.80",
 		"@sveltejs/adapter-vercel": "^5.6.3",
 		"@sveltejs/enhanced-img": "^0.4.4",
 		"@tailwindcss/container-queries": "^0.1.1",

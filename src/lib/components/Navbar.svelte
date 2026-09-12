@@ -5,26 +5,7 @@
 		{ label: 'Home', href: '/' },
 		{ label: 'Projects', href: '/projects' },
 		{ label: 'Blog', href: '/blog' },
-		{ label: 'Logs', href: '/logs' },
 		{ label: 'About', href: '/about' }
-	];
-
-	const socialLinks = [
-		{
-			icon: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>',
-			href: 'https://github.com/FarhanAliRaza',
-			label: 'GitHub'
-		},
-		{
-			icon: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>',
-			href: 'https://linkedin.com/in/farhanaliraza',
-			label: 'LinkedIn'
-		},
-		{
-			icon: '<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>',
-			href: 'https://twitter.com/FarhanAliRaza4',
-			label: 'Twitter'
-		}
 	];
 
 	// State for mobile menu
@@ -81,67 +62,12 @@
 			{/each}
 		</ul>
 
-		<!-- Social Icons (Desktop) -->
-		<div class="ml-8 hidden items-center gap-4 md:flex">
-			{#each socialLinks as link}
-				<a
-					href={link.href}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="text-white/70 transition-colors hover:text-[var(--color-brand)]"
-					aria-label={link.label}
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						{@html link.icon}
-					</svg>
-				</a>
-			{/each}
-		</div>
-
-		<!-- Mobile Icons & Menu -->
-		<div class="flex items-center gap-4 md:hidden">
-			{#each socialLinks as link, i}
-				{#if i < 2}
-					<!-- Only show first two icons on mobile navbar -->
-					<a
-						href={link.href}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-white/70 transition-colors hover:text-[var(--color-brand)]"
-						aria-label={link.label}
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							{@html link.icon}
-						</svg>
-					</a>
-				{/if}
-			{/each}
-
-			<!-- Mobile Menu Button -->
+		<!-- Mobile Menu Button -->
+		<div class="flex items-center md:hidden">
 			<button
 				class="block text-white focus:outline-none md:hidden"
 				aria-label="Menu"
-				on:click={toggleMobileMenu}
+				onclick={toggleMobileMenu}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +96,9 @@
 
 <!-- Mobile menu -->
 {#if mobileMenuOpen}
-	<div class="fixed inset-x-0 top-0 z-40 flex justify-center">
+	<div
+		class="fixed inset-x-0 top-0 z-40 flex justify-center"
+	>
 		<div
 			class="mt-16 w-[90%] max-w-sm rounded-xl border border-white/10 bg-[rgba(13,18,30,0.8)] px-6 py-6 backdrop-blur-md md:hidden"
 		>
@@ -180,7 +108,7 @@
 				<button
 					class="text-white/70 focus:outline-none"
 					aria-label="Close menu"
-					on:click={toggleMobileMenu}
+					onclick={toggleMobileMenu}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +133,7 @@
 					<li>
 						<a
 							href={item.href}
-							on:click={toggleMobileMenu}
+							onclick={toggleMobileMenu}
 							class="block py-2 text-lg font-medium text-white/90 transition-colors hover:text-[var(--color-brand)]"
 						>
 							{item.label}
@@ -214,34 +142,6 @@
 				{/each}
 			</ul>
 
-			<!-- Social icons - more visible -->
-			<div class="border-t border-white/10 pt-6">
-				<div class="flex justify-center gap-6">
-					{#each socialLinks as link}
-						<a
-							href={link.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover:bg-[var(--color-brand)]/20 rounded-full bg-white/10 p-3 text-white/80 transition-all hover:text-[var(--color-brand)]"
-							aria-label={link.label}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="20"
-								height="20"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								{@html link.icon}
-							</svg>
-						</a>
-					{/each}
-				</div>
-			</div>
 		</div>
 	</div>
 {/if}

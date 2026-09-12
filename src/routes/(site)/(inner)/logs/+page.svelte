@@ -1,16 +1,7 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils';
 	import type { Log } from '$lib/types';
-	import TimelineSection from '$lib/components/TimelineSection.svelte';
-	import { styling } from '$lib/config';
-
-	let { data } = $props<{
-		data: {
-			logs: Log[];
-		};
-	}>();
-
-	const { logs } = data;
+	import LogCard from '$lib/components/LogCard.svelte';
+	let { data }: { data: { logs: Log[] } } = $props();
 </script>
 
 <svelte:head>
@@ -33,9 +24,26 @@
 	<link rel="canonical" href="https://farhana.li/logs" />
 </svelte:head>
 
-<!-- Timeline section -->
-<section class="relative z-10 py-12 md:py-24">
-	<div class="container mx-auto px-4 md:px-6">
-		<TimelineSection {logs} title="All Logs" />
+<main class="bento-page">
+	<div class="bento-shell">
+		<header class="bento-page__header">
+			<div>
+				<p class="bento-eyebrow">Development logs</p>
+				<h1>The work in progress.</h1>
+				<p class="bento-page__intro">
+					Progress updates, experiments, and notes from building in the open.
+				</p>
+			</div>
+			<span class="bento-page__count"
+				>{data.logs.length} {data.logs.length === 1 ? 'entry' : 'entries'}</span
+			>
+		</header>
+		<div class="bento-list">
+			{#each data.logs as log (log.slug)}<LogCard {log} timeline={false} />{:else}<p
+					class="bento-empty"
+				>
+					No development logs here yet.
+				</p>{/each}
+		</div>
 	</div>
-</section>
+</main>

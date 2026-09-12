@@ -35,7 +35,7 @@ For the ORM to work, Django needs to be bootstrapped — its environment configu
 
 
 ## Sync vs Async
-{{Actually read code for this}}
+<!-- TODO: Actually read code for this -->
 
 First of all, I just wanted to prove that this thing could work. So I told Claude to build a kind of an proof-of-concept of the framework in which it used sync calls — it just called the Python function from the Actix layer in full sync mode.
 
@@ -81,7 +81,7 @@ From the start of this framework, my goal was to have a proper way to stream AI 
 Measure the correct thing. Python is not always the bottleneck.
 
 ### The Bridge
-So what was the problem? In a normal view, we have one full cycle: we call a Python function, we await it, and we get the response. But in streaming, the cycle breaks. What happens is when we call a view, it returns a generator. The generator sends a response back — for example, if we are returning from a while loop, it will return that response after one second or so. So it is not just awaiting a simple Python function. We have to send that response to the client, and then also await the next response. This actually amplifies the problem of the Python-Rust bridge handled by PyO3. Every time a new response comes, we have to cross that bridge every time. The other stupid thing I was doing was measuring requests per second for streaming responses. That was not the right thing to measure for streaming responses. {{Solution from code}}
+So what was the problem? In a normal view, we have one full cycle: we call a Python function, we await it, and we get the response. But in streaming, the cycle breaks. What happens is when we call a view, it returns a generator. The generator sends a response back — for example, if we are returning from a while loop, it will return that response after one second or so. So it is not just awaiting a simple Python function. We have to send that response to the client, and then also await the next response. This actually amplifies the problem of the Python-Rust bridge handled by PyO3. Every time a new response comes, we have to cross that bridge every time. The other stupid thing I was doing was measuring requests per second for streaming responses. That was not the right thing to measure for streaming responses. <!-- TODO: Solution from code -->
 
 
 ### Vibe Coder vs Software Engineer
@@ -157,7 +157,7 @@ I had to decide between type safety and development productivity. With a seriali
 
 Another feature I like very much that I built from this learning was having a subset of the parent serializer. In Django REST Framework, you have to define an admin serializer for all the fields and then a normal serializer that is a subset of those fields. What I decided instead was to have one class, and in the config we just define two levels of fields and use one class to have two serializers, instead of defining those two serializers separately. I had to fight a lot of msgspec's design to build this serialization layer, and it is still in development.
 
-{{Code example}}
+<!-- TODO: Code example -->
 
 ### Learning
 Choose libraries carefully.

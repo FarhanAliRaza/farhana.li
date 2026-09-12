@@ -1,12 +1,16 @@
 <script lang="ts">
 	let {
 		company,
+		companyUrl,
+		location,
 		tags,
 		dateRange,
 		jobTitle,
 		responsibilities
 	}: {
 		company: string;
+		companyUrl?: string;
+		location?: string;
 		tags: string[];
 		dateRange: string;
 		jobTitle: string;
@@ -20,7 +24,11 @@
 		<span class="period">{dateRange}</span>
 	</header>
 
-	<div class="company">{company}</div>
+	<div class="company">
+		{#if companyUrl}<a href={companyUrl} target="_blank" rel="noopener noreferrer">{company}</a
+			>{:else}{company}{/if}
+		{#if location}<span class="location"> · {location}</span>{/if}
+	</div>
 
 	<ul class="badges">
 		{#each tags as tag}
@@ -60,6 +68,15 @@
 		font-weight: 500;
 		color: rgba(15, 23, 42, 0.7);
 		margin: 0;
+	}
+
+	.company a {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.location {
+		font-weight: 400;
+		font-size: 0.8rem;
 	}
 
 	.badges {
