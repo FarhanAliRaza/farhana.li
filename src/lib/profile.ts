@@ -20,9 +20,9 @@ export const profile = {
 	heroBio:
 		"I'm an OSS engineer at Reflex, founder of Mailjinn, and creator of django-bolt. I build web applications and open-source tools with Python, Django, Rust, and Svelte.",
 	bio: [
-		"Based in Bahawalnagar, Pakistan, I work remotely as an OSS engineer at Reflex. I'm also the founder of Mailjinn, an email verification and cold email platform, and the creator and open-source maintainer of django-bolt.",
-		"I build with Python, Django, Rust, and Svelte. Through Google Summer of Code 2025, I shipped template partials to Django core. With django-bolt, I scaled throughput from 27K to 102K requests per second while keeping Django's ORM, authentication, and migrations.",
-		"As MedGebra's sole developer, I took the product from concept to 3,300+ users and 132 paying customers. I also delivered 54 freelance projects with a 5.0 rating across 30 reviews. I enjoy owning products end to end, solving performance problems, and sharing what I learn."
+		"Based in Bahawalnagar, Pakistan, I work remotely as an OSS engineer at Reflex, with 140+ merged pull requests across the framework, its enterprise auth plugin, and the xy charting library. I'm also the founder of Mailjinn, a cold email platform that has processed millions of emails.",
+		"I created django-bolt, a Rust-powered Django framework with 1,600+ GitHub stars and 100K+ downloads, scaling throughput from 27K to 102K requests per second while keeping Django's ORM, authentication, and migrations. Through Google Summer of Code 2025, I shipped template partials to Django core.",
+		"Mostly Python, Django, Rust, and Svelte, with a bias toward making things fast. I enjoy owning products end to end, solving performance problems, and sharing what I learn."
 	],
 	resumeSummary:
 		'OSS engineer at Reflex with 140+ merged pull requests across the framework, its enterprise auth plugin, and the xy charting library. Creator of django-bolt, a Rust-powered Django framework with 1,600+ GitHub stars and 100K+ downloads. Shipped template partials to Django core through Google Summer of Code 2025 and founded Mailjinn, a cold email platform that has processed millions of emails. Mostly Python, Django, Rust, and Svelte, with a bias toward making things fast.'
