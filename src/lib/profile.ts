@@ -21,7 +21,7 @@ export const profile = {
 		"I'm an OSS engineer at Reflex, founder of Mailjinn, and creator of django-bolt. I build web applications and open-source tools with Python, Django, Rust, and Svelte.",
 	bio: [
 		"Based in Bahawalnagar, Pakistan, I work remotely as an OSS engineer at Reflex, with 140+ merged pull requests across the framework, its enterprise auth plugin, and the xy charting library. I'm also the founder of Mailjinn, a cold email platform that has processed millions of emails.",
-		"I created django-bolt, a Rust-powered Django framework with 1,600+ GitHub stars and 100K+ downloads, scaling throughput from 27K to 102K requests per second while keeping Django's ORM, authentication, and migrations. Through Google Summer of Code 2025, I shipped template partials to Django core.",
+		"I created django-bolt, a Rust-powered Django framework with 1,600+ GitHub stars and 100K+ downloads, optimized to 300K+ requests per second while keeping Django's ORM, authentication, and migrations. Through Google Summer of Code 2025, I shipped template partials to Django core.",
 		"Mostly Python, Django, Rust, and Svelte, with a bias toward making things fast. I enjoy owning products end to end, solving performance problems, and sharing what I learn."
 	],
 	resumeSummary:
@@ -64,7 +64,7 @@ export const experience: Experience[] = [
 		skills: ['Python', 'Django', 'Rust', 'PyO3', 'Actix', 'Tokio'],
 		highlights: [
 			'Built a drop-in replacement for Django views that keeps the Django ORM and ecosystem.',
-			'Scaled throughput from 27K to 102K requests per second.',
+			'Optimized the framework to 300K+ requests per second on a single machine.',
 			'Preserved compatibility with existing Django models, authentication, and migrations.',
 			'Used Actix and Tokio for HTTP handling in Rust, with PyO3 bridging Rust and Python.'
 		]

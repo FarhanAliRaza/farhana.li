@@ -47,7 +47,6 @@ async function getPosts() {
 }
 
 export const load = async ({ fetch }: ServerLoadEvent) => {
-    console.log('Loading projects...');
     
     const [projects, posts] = await Promise.all([
         getProjects(),
