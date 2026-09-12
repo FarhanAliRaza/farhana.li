@@ -8,6 +8,30 @@
 	--bento-border: rgba(235, 168, 255, 0.14);
 	--bento-muted: #b8afc4;
 	--bento-accent: #e9c2ff;
+	/* spring(stiffness 300, damping 25): quick with a small overshoot */
+	--bento-spring: linear(
+		0 0%,
+		0.071 4.2%,
+		0.231 8.3%,
+		0.417 12.5%,
+		0.595 16.7%,
+		0.745 20.8%,
+		0.859 25%,
+		0.94 29.2%,
+		0.992 33.3%,
+		1.022 37.5%,
+		1.035 41.7%,
+		1.038 45.8%,
+		1.034 50%,
+		1.028 54.2%,
+		1.021 58.3%,
+		1.014 62.5%,
+		1.009 66.7%,
+		1.005 70.8%,
+		1.002 75%,
+		1 79.2%,
+		1 100%
+	);
 }
 .bento-shell {
 	width: 100%;
@@ -30,10 +54,20 @@
 	background: var(--bento-surface);
 	border: 1px solid var(--bento-border);
 	border-radius: var(--bento-radius);
+	/* --tx/--ty are set by bento-motion.ts to nudge neighbours of the hovered card */
+	translate: var(--tx, 0) var(--ty, 0);
 	transition:
-		transform 250ms ease,
+		translate 580ms var(--bento-spring),
+		scale 580ms var(--bento-spring),
 		border-color 250ms ease,
 		box-shadow 250ms ease;
+}
+.bento-card[data-href] {
+	cursor: pointer;
+}
+.bento-card[data-href]:active {
+	scale: 0.98;
+	transition-duration: 120ms;
 }
 .bento-card--project {
 	background: #0e1520;
@@ -218,9 +252,9 @@
 }
 @media (hover: hover) and (pointer: fine) {
 	.bento-card:hover {
-		transform: translateY(-3px);
+		scale: 1.02;
 		border-color: rgba(235, 168, 255, 0.35);
-		box-shadow: 0 16px 36px #0004;
+		box-shadow: 0 24px 48px -12px #0008;
 	}
 	.bento-card:hover .bento-card__image img {
 		transform: scale(1.035);
@@ -255,6 +289,10 @@
 		transition: none;
 	}
 	.bento-card:hover,
+	.bento-card[data-href]:active {
+		scale: none;
+		translate: none;
+	}
 	.bento-card:hover .bento-card__image img {
 		transform: none;
 	}

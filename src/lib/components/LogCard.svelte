@@ -12,6 +12,8 @@
 
 <article
 	class="bento-card"
+	data-href="/logs/{log.slug}"
+	data-cursor-text="Read entry"
 	class:timeline-entry={timeline}
 	data-animated={animation || undefined}
 	style:--entry-index={index}

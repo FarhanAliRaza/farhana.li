@@ -5,7 +5,11 @@
 	let { project }: { project: Project } = $props();
 </script>
 
-<article class="bento-card bento-card--project">
+<article
+	class="bento-card bento-card--project"
+	data-href="/projects/{project.slug}"
+	data-cursor-text="View project"
+>
 	{#if project.image}
 		<a class="bento-card__image" href="/projects/{project.slug}" tabindex="-1" aria-hidden="true"
 			><img src={project.image} alt="" loading="lazy" /></a

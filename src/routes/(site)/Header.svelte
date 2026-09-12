@@ -42,10 +42,21 @@
 				<h1 id="hero-heading">Farhan Ali Raza<span aria-hidden="true">.</span></h1>
 				<p class="headline">I build things for the web.<br /><span>And make them fast.</span></p>
 				<p class="bio">
-					I'm an OSS engineer at <a class="scribble" href="https://reflex.dev" target="_blank" rel="noopener noreferrer">Reflex</a>,
-					founder of <a class="scribble" href="https://mailjinn.com/" target="_blank" rel="noopener noreferrer">Mailjinn</a>,
-					and creator of <a class="scribble" href="https://github.com/FarhanAliRaza/django-bolt" target="_blank" rel="noopener noreferrer">django-bolt</a>.
-					I build web applications and open-source tools with Python, Django, Rust, and Svelte.
+					I'm an OSS engineer at <a
+						class="scribble"
+						href="https://reflex.dev"
+						target="_blank"
+						rel="noopener noreferrer">Reflex</a
+					>, founder of
+					<a class="scribble" href="https://mailjinn.com/" target="_blank" rel="noopener noreferrer"
+						>Mailjinn</a
+					>, and creator of
+					<a
+						class="scribble"
+						href="https://github.com/FarhanAliRaza/django-bolt"
+						target="_blank"
+						rel="noopener noreferrer">django-bolt</a
+					>. I build web applications and open-source tools with Python, Django, Rust, and Svelte.
 				</p>
 			</div>
 
@@ -95,6 +106,7 @@
 
 		<a
 			class="tile link-tile work-tile"
+			data-cursor-text="View project"
 			href="https://github.com/FarhanAliRaza/django-bolt"
 			target="_blank"
 			rel="noopener noreferrer"
@@ -112,7 +124,7 @@
 			<span class="tile-link">Explore django-bolt <ArrowRight size={15} aria-hidden="true" /></span>
 		</a>
 
-		<a class="tile link-tile writing-tile" href="/blog">
+		<a class="tile link-tile writing-tile" data-cursor-text="Read blog" href="/blog">
 			<div class="tile-top">
 				<span class="eyebrow"
 					><BookOpen size={15} aria-hidden="true" /> Notes from the workbench</span
@@ -152,23 +164,23 @@
 		background: rgba(15, 12, 22, 0.94);
 		padding: 28px;
 		overflow: hidden;
-	}
-	.link-tile {
-		transform: translateZ(0);
+		/* --tx/--ty are set by bento-motion.ts to nudge neighbours of the hovered tile */
+		translate: var(--tx, 0) var(--ty, 0);
 		transition:
-			transform 400ms var(--ease-out-soft),
+			translate 580ms var(--bento-spring),
+			scale 580ms var(--bento-spring),
 			box-shadow 400ms var(--ease-out-soft),
 			background 150ms,
 			border-color 150ms;
 	}
 	@media (pointer: fine) {
 		.link-tile:hover {
-			transform: translateY(-3px) scale(1.01);
-			box-shadow: 0 18px 40px -18px rgba(235, 168, 255, 0.35);
+			scale: 1.02;
+			box-shadow: 0 24px 48px -12px #0008;
 		}
 	}
 	.link-tile:active {
-		transform: scale(0.99);
+		scale: 0.98;
 		transition-duration: 120ms;
 	}
 	.intro-tile {
@@ -490,11 +502,16 @@
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.button,
-		.link-tile {
+		.tile {
 			transition: none;
 		}
+		.tile {
+			translate: none;
+		}
 		.link-tile:hover,
-		.link-tile:active,
+		.link-tile:active {
+			scale: none;
+		}
 		.button:hover,
 		.button:active {
 			transform: none;

@@ -6,7 +6,7 @@
 	let { post, compact = false }: { post: Post; compact?: boolean } = $props();
 </script>
 
-<article class="bento-card">
+<article class="bento-card" data-href="/blog/{post.slug}" data-cursor-text="Read article">
 	{#if post.image}
 		<a class="bento-card__image" href="/blog/{post.slug}" tabindex="-1" aria-hidden="true">
 			<enhanced:img
