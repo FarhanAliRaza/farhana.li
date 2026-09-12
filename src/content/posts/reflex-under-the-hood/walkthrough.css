@@ -1,0 +1,1696 @@
+.reflex-walkthrough {
+	color-scheme: dark;
+	--bg: #0b1020;
+	--panel: #141d32;
+	--ink: #e8efff;
+	--muted: #afbed9;
+	--line: #31415e;
+	--blue: #86baff;
+	--green: #80e4c0;
+	--orange: #ffca8b;
+}
+.reflex-walkthrough * {
+	box-sizing: border-box;
+}
+.reflex-walkthrough {
+	scroll-behavior: smooth;
+	scroll-padding-top: 24px;
+}
+.reflex-walkthrough {
+	margin: 0;
+	background: var(--bg);
+	color: var(--ink);
+	font:
+		16px/1.7 system-ui,
+		sans-serif;
+}
+.reflex-walkthrough a {
+	color: var(--blue);
+	text-underline-offset: 4px;
+}
+.reflex-walkthrough a:hover {
+	color: var(--green);
+}
+.reflex-walkthrough header,
+.reflex-walkthrough main,
+.reflex-walkthrough footer {
+	max-width: 1180px;
+	margin: auto;
+	padding: 32px;
+}
+.reflex-walkthrough header {
+	padding-top: 70px;
+}
+.reflex-walkthrough h1 {
+	font-size: clamp(36px, 6vw, 72px);
+	line-height: 1.08;
+	letter-spacing: -0.04em;
+	max-width: 900px;
+	margin: 20px 0;
+}
+.reflex-walkthrough h2 {
+	font-size: 30px;
+	line-height: 1.25;
+	margin: 0 0 20px;
+}
+.reflex-walkthrough h3 {
+	font-size: 20px;
+	line-height: 1.4;
+}
+.reflex-walkthrough p {
+	max-width: 88ch;
+}
+.reflex-walkthrough strong {
+	color: #fff;
+}
+.reflex-walkthrough .eyebrow {
+	color: var(--green);
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	font-size: 12px;
+	font-weight: 700;
+}
+.reflex-walkthrough .lead {
+	font-size: 22px;
+	color: var(--muted);
+	max-width: 780px;
+}
+.reflex-walkthrough .meta {
+	font-size: 13px;
+	color: var(--muted);
+}
+.reflex-walkthrough nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 20px;
+	border-block: 1px solid var(--line);
+	padding: 22px 0;
+	margin-top: 30px;
+}
+.reflex-walkthrough nav a {
+	font-size: 14px;
+}
+.reflex-walkthrough section {
+	padding: 40px 0;
+	border-bottom: 1px solid var(--line);
+}
+.reflex-walkthrough .grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 20px;
+}
+.reflex-walkthrough .card,
+.reflex-walkthrough .callout {
+	background: var(--panel);
+	padding: 24px;
+	border-radius: 14px;
+	min-width: 0;
+}
+.reflex-walkthrough .callout {
+	border-left: 3px solid var(--green);
+	margin: 20px 0;
+}
+.reflex-walkthrough .callout p:last-child {
+	margin-bottom: 0;
+}
+.reflex-walkthrough .small {
+	font-size: 14px;
+	color: var(--muted);
+}
+.reflex-walkthrough .flow {
+	display: flex;
+	align-items: stretch;
+	gap: 12px;
+	margin: 24px 0;
+}
+.reflex-walkthrough .node {
+	flex: 1;
+	min-width: 0;
+	padding: 20px;
+	background: var(--panel);
+	border: 1px solid var(--line);
+	border-radius: 12px;
+}
+.reflex-walkthrough .node b,
+.reflex-walkthrough .node span {
+	display: block;
+}
+.reflex-walkthrough .node span {
+	font-size: 14px;
+	color: var(--muted);
+	margin-top: 8px;
+}
+.reflex-walkthrough .arrow {
+	align-self: center;
+	color: var(--green);
+	font-size: 24px;
+}
+.reflex-walkthrough .browser {
+	border-top: 3px solid var(--blue);
+}
+.reflex-walkthrough .server {
+	border-top: 3px solid var(--green);
+}
+.reflex-walkthrough .wire {
+	border-top: 3px solid var(--orange);
+}
+.reflex-walkthrough code {
+	font:
+		0.88em/1.6 ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+	overflow-wrap: anywhere;
+	color: #b7dcff;
+}
+.reflex-walkthrough pre {
+	background: #070c17;
+	padding: 20px;
+	overflow: auto;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	font-size: 14px;
+	line-height: 1.65;
+}
+.reflex-walkthrough pre code {
+	font-size: inherit;
+}
+.reflex-walkthrough .table-wrap {
+	overflow: auto;
+}
+.reflex-walkthrough table {
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 15px;
+}
+.reflex-walkthrough th,
+.reflex-walkthrough td {
+	padding: 14px 12px;
+	text-align: left;
+	border-bottom: 1px solid var(--line);
+	vertical-align: top;
+}
+.reflex-walkthrough th {
+	color: var(--green);
+}
+.reflex-walkthrough ol,
+.reflex-walkthrough ul {
+	padding-left: 24px;
+}
+.reflex-walkthrough li {
+	padding: 5px 0;
+}
+.reflex-walkthrough details {
+	margin: 14px 0;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	padding: 16px;
+}
+.reflex-walkthrough summary {
+	cursor: pointer;
+	color: var(--blue);
+	font-weight: 600;
+}
+.reflex-walkthrough button,
+.reflex-walkthrough select {
+	font: inherit;
+	color: var(--ink);
+	background: var(--panel);
+	border: 1px solid var(--line);
+	padding: 10px 15px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.reflex-walkthrough button:hover {
+	border-color: var(--green);
+}
+.reflex-walkthrough button:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+.reflex-walkthrough button:focus-visible,
+.reflex-walkthrough select:focus-visible,
+.reflex-walkthrough a:focus-visible,
+.reflex-walkthrough summary:focus-visible {
+	outline: 3px solid var(--orange);
+	outline-offset: 4px;
+}
+.reflex-walkthrough .controls {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 18px 0;
+}
+.reflex-walkthrough .stage {
+	font-size: 24px;
+	margin: 16px 0;
+}
+.reflex-walkthrough .active {
+	outline: 2px solid var(--orange);
+	background: #213149;
+}
+.reflex-walkthrough .sequence {
+	display: grid;
+	grid-template-columns: 80px 1fr 1fr;
+	gap: 0;
+	margin-top: 24px;
+}
+.reflex-walkthrough .sequence > div {
+	padding: 16px;
+	border-bottom: 1px solid var(--line);
+}
+.reflex-walkthrough .sequence .label {
+	color: var(--green);
+	background: var(--panel);
+	font-weight: 600;
+}
+.reflex-walkthrough .sequence .cross {
+	grid-column: 2 / 4;
+	background: var(--panel);
+}
+.reflex-walkthrough .pill {
+	font-size: 12px;
+	padding: 4px 9px;
+	border: 1px solid var(--line);
+	border-radius: 20px;
+	color: var(--orange);
+}
+.reflex-walkthrough .packet {
+	max-height: 650px;
+	overflow: auto;
+}
+.reflex-walkthrough footer {
+	color: var(--muted);
+}
+.reflex-walkthrough .source-list li {
+	overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+	.reflex-walkthrough header,
+	.reflex-walkthrough main,
+	.reflex-walkthrough footer {
+		padding: 24px 18px;
+	}
+	.reflex-walkthrough header {
+		padding-top: 40px;
+	}
+	.reflex-walkthrough .grid {
+		grid-template-columns: 1fr;
+	}
+	.reflex-walkthrough .flow {
+		flex-direction: column;
+	}
+	.reflex-walkthrough .arrow {
+		transform: rotate(90deg);
+	}
+	.reflex-walkthrough .sequence {
+		grid-template-columns: 42px 1fr 1fr;
+		font-size: 13px;
+	}
+	.reflex-walkthrough .sequence > div {
+		padding: 10px 6px;
+	}
+	.reflex-walkthrough h2 {
+		font-size: 26px;
+	}
+	.reflex-walkthrough pre {
+		padding: 14px;
+	}
+	.reflex-walkthrough th,
+	.reflex-walkthrough td {
+		min-width: 120px;
+	}
+}
+@media print {
+	.reflex-walkthrough {
+		background: white;
+		color: black;
+	}
+	.reflex-walkthrough header,
+	.reflex-walkthrough main,
+	.reflex-walkthrough footer {
+		max-width: none;
+	}
+	.reflex-walkthrough .card,
+	.reflex-walkthrough .callout,
+	.reflex-walkthrough .node,
+	.reflex-walkthrough pre {
+		background: #f2f4f7;
+		color: black;
+	}
+	.reflex-walkthrough strong,
+	.reflex-walkthrough code,
+	.reflex-walkthrough a {
+		color: black;
+	}
+	.reflex-walkthrough details {
+		break-inside: avoid;
+	}
+	.reflex-walkthrough .controls {
+		display: none;
+	}
+	.reflex-walkthrough section {
+		break-inside: auto;
+	}
+}
+.reflex-walkthrough select {
+	max-width: 100%;
+	min-width: 0;
+}
+.reflex-walkthrough .grid > div {
+	min-width: 0;
+}
+.reflex-walkthrough .motion-figure {
+	--paper: #f7f8fa;
+	--paper-ink: #17212f;
+	--paper-muted: #536171;
+	--request: #215fc2;
+	--response: #087d64;
+	--local: #8656b3;
+	margin: 28px 0 36px;
+	padding: 24px;
+	background: var(--paper);
+	color: var(--paper-ink);
+	border-radius: 12px;
+	border: 1px solid #d6dde6;
+	color-scheme: light;
+}
+.reflex-walkthrough .motion-figure figcaption h3 {
+	font-size: clamp(22px, 3vw, 30px);
+	line-height: 1.2;
+	margin: 12px 0;
+}
+.reflex-walkthrough .motion-figure figcaption p {
+	color: var(--paper-muted);
+	margin: 0 0 20px;
+	max-width: 78ch;
+	font-size: 15px;
+}
+.reflex-walkthrough .motion-kicker {
+	color: var(--paper-muted);
+	font-size: 12px;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+.reflex-walkthrough .motion-toolbar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	padding-bottom: 14px;
+	border-bottom: 1px solid #d6dde6;
+}
+.reflex-walkthrough .motion-figure button,
+.reflex-walkthrough .motion-figure select {
+	background: #fff;
+	color: var(--paper-ink);
+	border: 1px solid #cad2df;
+	border-radius: 6px;
+	padding: 8px 12px;
+	font-size: 13px;
+	min-height: 38px;
+}
+.reflex-walkthrough .motion-figure button[data-control='play'] {
+	background: #17212f;
+	color: #fff;
+	min-width: 88px;
+}
+.reflex-walkthrough .motion-figure button:disabled {
+	opacity: 0.45;
+}
+.reflex-walkthrough .motion-figure label {
+	font-size: 12px;
+	color: var(--paper-muted);
+}
+.reflex-walkthrough .motion-legend {
+	display: flex;
+	gap: 14px;
+	flex-wrap: wrap;
+	margin-left: auto;
+	font-size: 12px;
+}
+.reflex-walkthrough .request-dot {
+	color: var(--request);
+}
+.reflex-walkthrough .response-dot {
+	color: var(--response);
+}
+.reflex-walkthrough .local-dot {
+	color: var(--local);
+}
+.reflex-walkthrough .motion-diagram {
+	display: block;
+	width: 100%;
+	overflow: visible;
+}
+.reflex-walkthrough .motion-track {
+	fill: none;
+	stroke: #d7dfe8;
+	stroke-width: 1.5;
+}
+.reflex-walkthrough .motion-active-path {
+	fill: none;
+	stroke-width: 2.5;
+}
+.reflex-walkthrough .motion-active-path.request {
+	stroke: var(--request);
+}
+.reflex-walkthrough .motion-active-path.response {
+	stroke: var(--response);
+}
+.reflex-walkthrough .motion-active-path.local {
+	stroke: var(--local);
+	stroke-dasharray: 4 4;
+}
+.reflex-walkthrough .motion-marker {
+	stroke: var(--paper);
+	stroke-width: 2;
+}
+.reflex-walkthrough .motion-marker.request {
+	fill: var(--request);
+}
+.reflex-walkthrough .motion-marker.response {
+	fill: var(--response);
+}
+.reflex-walkthrough .motion-marker.local {
+	fill: var(--local);
+}
+.reflex-walkthrough .motion-node rect {
+	fill: white;
+	stroke: #cbd4df;
+	stroke-width: 1.2;
+}
+.reflex-walkthrough .motion-node.is-working rect {
+	stroke: #5c769d;
+	stroke-width: 2;
+}
+.reflex-walkthrough .motion-node text {
+	text-anchor: middle;
+	font-family: system-ui, sans-serif;
+	fill: var(--paper-ink);
+}
+.reflex-walkthrough .motion-node-name {
+	font-size: 15px;
+	font-weight: 650;
+}
+.reflex-walkthrough .motion-node-sub {
+	font-size: 11px;
+	fill: var(--paper-muted) !important;
+}
+.reflex-walkthrough .motion-node-value {
+	font-size: 11px;
+	font-weight: 550;
+}
+.reflex-walkthrough .motion-progress {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin: 4px 0 24px;
+}
+.reflex-walkthrough .motion-progress input {
+	flex: 1;
+	min-width: 40px;
+	accent-color: var(--request);
+	cursor: pointer;
+}
+.reflex-walkthrough .motion-progress output {
+	font-size: 12px;
+	color: var(--paper-muted);
+	white-space: nowrap;
+}
+.reflex-walkthrough .motion-explanation {
+	border-top: 1px solid #d6dde6;
+	padding-top: 20px;
+	min-height: 162px;
+}
+.reflex-walkthrough .motion-phase {
+	font-size: 12px;
+	color: var(--paper-muted);
+}
+.reflex-walkthrough .motion-explanation h4 {
+	font-size: 20px;
+	margin: 6px 0;
+}
+.reflex-walkthrough .motion-explanation p {
+	font-size: 15px;
+	color: #3e4d60;
+	line-height: 1.6;
+	margin: 8px 0;
+}
+.reflex-walkthrough .motion-payload {
+	border: 1px solid #d6dde6;
+	padding: 12px;
+	background: #fff;
+}
+.reflex-walkthrough .motion-payload summary {
+	color: var(--request);
+	font-size: 14px;
+}
+.reflex-walkthrough .motion-payload pre {
+	color: #17212f;
+	background: #eef2f7;
+	border-color: #d6dde6;
+	font-size: 12px;
+	max-height: 360px;
+	overflow: auto;
+}
+.reflex-walkthrough .motion-footnote {
+	color: var(--paper-muted);
+	font-size: 12px;
+	margin: 16px 0 0;
+	line-height: 1.5;
+}
+.reflex-walkthrough .motion-figure button:focus-visible,
+.reflex-walkthrough .motion-figure input:focus-visible,
+.reflex-walkthrough .motion-figure select:focus-visible {
+	outline: 3px solid #215fc2;
+	outline-offset: 3px;
+}
+@media (max-width: 700px) {
+	.reflex-walkthrough .motion-figure {
+		padding: 16px;
+		margin-inline: 0;
+	}
+	.reflex-walkthrough .motion-legend {
+		margin-left: 0;
+		width: 100%;
+		padding-top: 8px;
+	}
+	.reflex-walkthrough .motion-progress {
+		flex-wrap: wrap;
+	}
+	.reflex-walkthrough .motion-progress label {
+		width: 100%;
+	}
+	.reflex-walkthrough .motion-figure button {
+		min-height: 44px;
+	}
+	.reflex-walkthrough .motion-explanation {
+		min-height: 210px;
+	}
+	.reflex-walkthrough .motion-node-name {
+		font-size: 16px;
+	}
+	.reflex-walkthrough .motion-node-sub,
+	.reflex-walkthrough .motion-node-value {
+		font-size: 12px;
+	}
+}
+@media print {
+	.reflex-walkthrough .motion-toolbar,
+	.reflex-walkthrough .motion-progress {
+		display: none;
+	}
+	.reflex-walkthrough .motion-figure {
+		break-inside: avoid;
+	}
+}
+
+.reflex-walkthrough .motion-diamond {
+	display: none;
+}
+.reflex-walkthrough .motion-marker.response circle {
+	display: none;
+}
+.reflex-walkthrough .motion-marker.response .motion-diamond {
+	display: block;
+}
+@media (max-width: 700px) {
+	.reflex-walkthrough .sequence {
+		grid-template-columns: 42px minmax(0, 1fr) minmax(0, 1fr);
+	}
+	.reflex-walkthrough .sequence > div {
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+}
+/* Article presentation, with the diagrams kept inside the reading flow. */
+.reflex-walkthrough {
+	color-scheme: light;
+	--bg: #fff;
+	--panel: #f7f7f7;
+	--ink: #111;
+	--muted: #666;
+	--line: #e5e5e5;
+	--blue: #222;
+	--green: #222;
+	--orange: #666;
+}
+.reflex-walkthrough {
+	scroll-padding-top: 36px;
+}
+.reflex-walkthrough {
+	background: #fff;
+	color: #111;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+}
+.reflex-walkthrough strong {
+	color: inherit;
+	font-weight: 600;
+}
+.reflex-walkthrough a {
+	color: inherit;
+	text-decoration-color: #aaa;
+	text-underline-offset: 4px;
+}
+.reflex-walkthrough a:hover {
+	color: #666;
+}
+.reflex-walkthrough a:focus-visible,
+.reflex-walkthrough button:focus-visible,
+.reflex-walkthrough summary:focus-visible,
+.reflex-walkthrough select:focus-visible {
+	outline: 2px solid #555;
+	outline-offset: 5px;
+}
+.reflex-walkthrough .publication-shell {
+	margin-left: 244px;
+}
+.reflex-walkthrough .publication-shell > header,
+.reflex-walkthrough .publication-shell > main,
+.reflex-walkthrough .publication-shell > footer {
+	max-width: 1120px;
+	margin-inline: auto;
+	padding-inline: 52px;
+}
+.reflex-walkthrough .publication-shell > header {
+	text-align: center;
+	padding-top: 104px;
+	padding-bottom: 76px;
+}
+.reflex-walkthrough .publication-shell > header .eyebrow {
+	font-size: 14px;
+	color: #111;
+	text-transform: none;
+	letter-spacing: 0;
+	font-weight: 400;
+}
+.reflex-walkthrough .publication-shell > header h1 {
+	font-size: clamp(42px, 4.8vw, 68px);
+	font-weight: 400;
+	line-height: 1.05;
+	letter-spacing: -2.7px;
+	max-width: 840px;
+	margin: 28px auto;
+}
+.reflex-walkthrough .publication-shell > header .lead {
+	font-size: 22px;
+	color: #222;
+	line-height: 1.45;
+	max-width: 730px;
+	margin: 0 auto 26px;
+}
+.reflex-walkthrough .article-byline {
+	font-size: 14px;
+	margin: 0 auto 25px;
+	color: #555;
+}
+.reflex-walkthrough .article-meta {
+	max-width: 730px;
+	margin: 24px auto 0;
+	text-align: left;
+	border: 0;
+	font-size: 13px;
+	color: #777;
+	padding: 0;
+}
+.reflex-walkthrough .article-meta summary {
+	text-align: center;
+	font-size: 13px;
+	font-weight: 400;
+	color: #777;
+}
+.reflex-walkthrough .article-meta .meta {
+	font-size: 13px;
+}
+.reflex-walkthrough .publication-shell > main {
+	padding-top: 0;
+}
+.reflex-walkthrough .publication-shell section {
+	padding: 34px 0 48px;
+	border: 0;
+}
+.reflex-walkthrough .publication-shell section > p,
+.reflex-walkthrough .publication-shell section > h2,
+.reflex-walkthrough .publication-shell section > h3,
+.reflex-walkthrough .publication-shell section > .eyebrow,
+.reflex-walkthrough .publication-shell section > ol,
+.reflex-walkthrough .publication-shell section > ul {
+	max-width: 720px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.reflex-walkthrough .publication-shell section > h2 {
+	font-size: 32px;
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: -0.8px;
+	margin-top: 0;
+	margin-bottom: 25px;
+}
+.reflex-walkthrough .publication-shell section > h3 {
+	font-size: 23px;
+	font-weight: 500;
+	letter-spacing: -0.4px;
+	margin-top: 36px;
+}
+.reflex-walkthrough .publication-shell section > .eyebrow {
+	font-size: 12px;
+	text-transform: none;
+	letter-spacing: 0;
+	font-weight: 400;
+	color: #777;
+	margin-bottom: 12px;
+}
+.reflex-walkthrough .publication-shell section > p {
+	margin-top: 22px;
+	margin-bottom: 22px;
+}
+.reflex-walkthrough .publication-shell section > pre,
+.reflex-walkthrough .publication-shell section > details,
+.reflex-walkthrough .publication-shell section > .callout {
+	max-width: 800px;
+	margin-inline: auto;
+}
+.reflex-walkthrough .publication-shell section > .grid,
+.reflex-walkthrough .publication-shell section > .flow,
+.reflex-walkthrough .publication-shell section > .table-wrap,
+.reflex-walkthrough .publication-shell section > .sequence {
+	margin-top: 28px;
+	margin-bottom: 28px;
+}
+.reflex-walkthrough .publication-shell footer {
+	font-size: 13px;
+	text-align: center;
+	color: #777;
+	padding-top: 50px;
+	padding-bottom: 55px;
+	border-top: 1px solid #eee;
+	margin-top: 50px;
+}
+.reflex-walkthrough .card {
+	background: #f7f7f7;
+	border-radius: 4px;
+	padding: 28px;
+}
+.reflex-walkthrough .card h3 {
+	font-weight: 500;
+	letter-spacing: -0.3px;
+	margin-top: 0;
+}
+.reflex-walkthrough .callout {
+	background: #f7f7f7;
+	border: 0;
+	border-radius: 3px;
+	padding: 24px 28px;
+}
+.reflex-walkthrough .small,
+.reflex-walkthrough .meta {
+	color: #666;
+}
+.reflex-walkthrough code {
+	color: #333;
+	font-size: 0.84em;
+}
+.reflex-walkthrough pre {
+	color: #222;
+	background: #f7f7f7;
+	border: 0;
+	border-radius: 4px;
+	padding: 24px;
+	font-size: 13px;
+	line-height: 1.75;
+}
+.reflex-walkthrough .grid pre {
+	height: auto;
+}
+.reflex-walkthrough .node {
+	background: #fafafa;
+	border-color: #ddd;
+	border-radius: 4px;
+}
+.reflex-walkthrough .node span {
+	color: #666;
+}
+.reflex-walkthrough .browser,
+.reflex-walkthrough .server,
+.reflex-walkthrough .wire {
+	border-top: 1px solid #ddd;
+}
+.reflex-walkthrough .arrow {
+	color: #888;
+}
+.reflex-walkthrough .node b {
+	font-weight: 500;
+}
+.reflex-walkthrough .flow {
+	gap: 16px;
+}
+.reflex-walkthrough .sequence .label,
+.reflex-walkthrough .sequence .cross {
+	background: #f7f7f7;
+	color: #222;
+}
+.reflex-walkthrough .sequence > div {
+	border-color: #e5e5e5;
+}
+.reflex-walkthrough .sequence .label {
+	font-weight: 500;
+}
+.reflex-walkthrough th {
+	color: #222;
+	font-weight: 500;
+}
+.reflex-walkthrough td,
+.reflex-walkthrough th {
+	border-color: #e5e5e5;
+	padding: 18px 14px;
+}
+.reflex-walkthrough table {
+	font-size: 14px;
+}
+.reflex-walkthrough .table-wrap {
+	border-block: 1px solid #e5e5e5;
+}
+.reflex-walkthrough details {
+	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+	padding: 16px 20px;
+}
+.reflex-walkthrough summary {
+	color: #222;
+	font-weight: 400;
+	font-size: 15px;
+}
+.reflex-walkthrough button,
+.reflex-walkthrough select {
+	color: #111;
+	background: #f5f5f5;
+	border: 1px solid #dedede;
+	border-radius: 6px;
+	font-size: 14px;
+}
+.reflex-walkthrough button:hover {
+	border-color: #aaa;
+}
+.reflex-walkthrough .active {
+	outline: 1px solid #555;
+	background: #f2f2f2;
+}
+.reflex-walkthrough .pill {
+	color: #555;
+	border-color: #ddd;
+}
+.reflex-walkthrough .stage {
+	font-weight: 500;
+}
+.reflex-walkthrough .controls {
+	justify-content: flex-start;
+	max-width: 800px;
+	margin-inline: auto;
+}
+.reflex-walkthrough #step-status {
+	max-width: 720px;
+	margin-inline: auto;
+}
+.reflex-walkthrough #step-payload {
+	max-width: 800px;
+}
+.reflex-walkthrough .publication-shell .motion-figure {
+	--paper: #f7f7f7;
+	--paper-ink: #171717;
+	--paper-muted: #666;
+	--request: #376caf;
+	--response: #16806b;
+	--local: #8463a9;
+	border: 0;
+	border-radius: 4px;
+	padding: 32px;
+	margin: 38px 0 46px;
+	box-shadow: none;
+}
+.reflex-walkthrough .motion-figure figcaption h3 {
+	font-size: 28px;
+	line-height: 1.2;
+	font-weight: 500;
+	letter-spacing: -0.7px;
+	margin: 12px 0;
+}
+.reflex-walkthrough .motion-kicker {
+	text-transform: none;
+	letter-spacing: 0;
+	font-size: 12px;
+}
+.reflex-walkthrough .motion-figure figcaption p {
+	font-size: 15px;
+	max-width: 740px;
+}
+.reflex-walkthrough .motion-toolbar {
+	border-color: #e1e1e1;
+	gap: 8px;
+}
+.reflex-walkthrough .motion-figure button,
+.reflex-walkthrough .motion-figure select {
+	border-color: #ddd;
+	border-radius: 20px;
+	background: transparent;
+	color: #222;
+	padding: 7px 13px;
+}
+.reflex-walkthrough .motion-figure button[data-control='play'] {
+	background: white;
+	color: #111;
+	border-color: #ddd;
+}
+.reflex-walkthrough .motion-node rect {
+	fill: #fff;
+	stroke: #d8d8d8;
+	rx: 4;
+}
+.reflex-walkthrough .motion-node.is-working rect {
+	stroke: #7e8fa6;
+	stroke-width: 1.5;
+}
+.reflex-walkthrough .motion-node-name {
+	font-weight: 500;
+}
+.reflex-walkthrough .motion-track {
+	stroke: #ddd;
+}
+.reflex-walkthrough .motion-explanation {
+	border-color: #ddd;
+	min-height: 154px;
+}
+.reflex-walkthrough .motion-explanation h4 {
+	font-weight: 500;
+	font-size: 20px;
+	letter-spacing: -0.3px;
+}
+.reflex-walkthrough .motion-explanation p {
+	color: #555;
+	font-size: 15px;
+}
+.reflex-walkthrough .motion-payload {
+	background: transparent;
+	border: 0;
+	border-top: 1px solid #ddd;
+	border-radius: 0;
+	padding: 14px 0 0;
+}
+.reflex-walkthrough .motion-payload summary {
+	color: #444;
+	font-size: 13px;
+}
+.reflex-walkthrough .motion-payload pre {
+	background: #eee;
+	color: #222;
+	border: 0;
+	border-radius: 3px;
+}
+.reflex-walkthrough .motion-progress input {
+	accent-color: #333;
+}
+.reflex-walkthrough .motion-footnote {
+	font-size: 12px;
+	color: #777;
+}
+.reflex-walkthrough .motion-figure button:focus-visible,
+.reflex-walkthrough .motion-figure input:focus-visible,
+.reflex-walkthrough .motion-figure select:focus-visible {
+	outline-color: #555;
+}
+.reflex-walkthrough .motion-figure .motion-progress label {
+	color: #666;
+}
+.reflex-walkthrough .motion-figure .motion-node text {
+	font-family: Arial, Helvetica, sans-serif;
+}
+@media (min-width: 1500px) {
+	.reflex-walkthrough .publication-shell > header,
+	.reflex-walkthrough .publication-shell > main,
+	.reflex-walkthrough .publication-shell > footer {
+		max-width: 1200px;
+		padding-inline: 68px;
+	}
+	.reflex-walkthrough .publication-shell > header {
+		padding-top: 130px;
+	}
+}
+@media (max-width: 1100px) {
+	.reflex-walkthrough .publication-shell {
+		margin-left: 220px;
+	}
+	.reflex-walkthrough .publication-shell > header,
+	.reflex-walkthrough .publication-shell > main,
+	.reflex-walkthrough .publication-shell > footer {
+		padding-inline: 30px;
+	}
+	.reflex-walkthrough .publication-shell > header h1 {
+		font-size: 52px;
+	}
+	.reflex-walkthrough .publication-shell .motion-figure {
+		padding: 24px;
+	}
+	.reflex-walkthrough .motion-legend {
+		margin-left: 0;
+	}
+}
+@media (max-width: 850px) {
+	.reflex-walkthrough .publication-shell {
+		margin-left: 0;
+	}
+	.reflex-walkthrough .publication-shell > header {
+		padding-top: 58px;
+		padding-bottom: 48px;
+	}
+	.reflex-walkthrough .publication-shell > header h1 {
+		font-size: 48px;
+		letter-spacing: -1.8px;
+	}
+	.reflex-walkthrough .publication-shell > header .lead {
+		font-size: 20px;
+	}
+	.reflex-walkthrough .publication-shell > header,
+	.reflex-walkthrough .publication-shell > main,
+	.reflex-walkthrough .publication-shell > footer {
+		padding-inline: 24px;
+	}
+	.reflex-walkthrough .publication-shell section {
+		padding-top: 28px;
+		padding-bottom: 30px;
+	}
+}
+@media (max-width: 520px) {
+	.reflex-walkthrough {
+		font-size: 16px;
+	}
+	.reflex-walkthrough .publication-shell > header,
+	.reflex-walkthrough .publication-shell > main,
+	.reflex-walkthrough .publication-shell > footer {
+		padding-inline: 20px;
+	}
+	.reflex-walkthrough .publication-shell > header {
+		padding-top: 42px;
+		padding-bottom: 34px;
+	}
+	.reflex-walkthrough .publication-shell > header h1 {
+		font-size: 40px;
+		letter-spacing: -1.5px;
+		margin: 22px auto;
+		line-height: 1.08;
+	}
+	.reflex-walkthrough .publication-shell > header .lead {
+		font-size: 19px;
+		line-height: 1.5;
+	}
+	.reflex-walkthrough .publication-shell section > h2 {
+		font-size: 28px;
+	}
+	.reflex-walkthrough .publication-shell .motion-figure {
+		padding: 16px;
+		margin-block: 28px;
+	}
+	.reflex-walkthrough .motion-figure figcaption h3 {
+		font-size: 24px;
+	}
+	.reflex-walkthrough .motion-explanation {
+		min-height: 190px;
+	}
+	.reflex-walkthrough .publication-shell section > h3 {
+		font-size: 22px;
+	}
+	.reflex-walkthrough .card,
+	.reflex-walkthrough .callout {
+		padding: 20px;
+	}
+	.reflex-walkthrough .motion-toolbar button {
+		min-height: 42px;
+	}
+}
+@media print {
+	.reflex-walkthrough .publication-shell {
+		margin: 0;
+	}
+	.reflex-walkthrough .publication-shell > header {
+		padding-top: 0;
+	}
+}
+
+.reflex-walkthrough {
+	color-scheme: dark;
+	--bg: #000;
+	--panel: #080808;
+	--ink: #f5f5f5;
+	--muted: #aaa;
+	--line: #333;
+	--blue: #eee;
+	--green: #eee;
+	--orange: #aaa;
+}
+.reflex-walkthrough {
+	background: #000;
+	color: #f5f5f5;
+}
+.reflex-walkthrough .article-byline,
+.reflex-walkthrough .article-meta,
+.reflex-walkthrough .article-meta summary,
+.reflex-walkthrough .small,
+.reflex-walkthrough .meta {
+	color: #aaa;
+}
+.reflex-walkthrough .publication-shell > header .eyebrow,
+.reflex-walkthrough .publication-shell > header .lead {
+	color: #f5f5f5;
+}
+.reflex-walkthrough .publication-shell section > .eyebrow {
+	color: #aaa;
+}
+.reflex-walkthrough .publication-shell footer {
+	border-color: #333;
+	color: #aaa;
+}
+.reflex-walkthrough .card,
+.reflex-walkthrough .callout,
+.reflex-walkthrough pre,
+.reflex-walkthrough .node,
+.reflex-walkthrough .sequence .label,
+.reflex-walkthrough .sequence .cross {
+	background: #080808;
+	color: #f5f5f5;
+}
+.reflex-walkthrough code {
+	color: #ddd;
+}
+.reflex-walkthrough .node,
+.reflex-walkthrough .table-wrap,
+.reflex-walkthrough details,
+.reflex-walkthrough .sequence > div,
+.reflex-walkthrough th,
+.reflex-walkthrough td {
+	border-color: #333;
+}
+.reflex-walkthrough .node span,
+.reflex-walkthrough .arrow {
+	color: #aaa;
+}
+.reflex-walkthrough th,
+.reflex-walkthrough summary {
+	color: #eee;
+}
+.reflex-walkthrough .active {
+	background: #151515;
+	outline-color: #aaa;
+}
+.reflex-walkthrough button,
+.reflex-walkthrough select {
+	background: #080808;
+	color: #eee;
+	border-color: #555;
+}
+.reflex-walkthrough a:hover {
+	color: #aaa;
+}
+.reflex-walkthrough .publication-shell .motion-figure {
+	--paper: #000;
+	--paper-ink: #fff;
+	--paper-muted: #ccc;
+	--request: #6695ff;
+	--response: #9fe5ca;
+	--local: #d0d0d0;
+	position: relative;
+	background: #000;
+	border: 1px solid #383838;
+	border-radius: 4px;
+	padding: 0;
+	margin: 40px 0 56px;
+	overflow: hidden;
+	color-scheme: dark;
+	color: #fff;
+}
+.reflex-walkthrough .motion-figure figcaption {
+	position: relative;
+	padding: 38px 40px 26px;
+}
+.reflex-walkthrough .motion-kicker {
+	display: block;
+	text-transform: uppercase;
+	font:
+		600 12px/1.5 ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+	letter-spacing: 0;
+	color: #fff;
+	margin-bottom: 32px;
+}
+.reflex-walkthrough .motion-figure figcaption h3 {
+	font:
+		600 27px/1.25 Arial,
+		Helvetica,
+		sans-serif;
+	letter-spacing: -0.6px;
+	margin: 0 120px 12px 0;
+}
+.reflex-walkthrough .motion-figure figcaption p {
+	font-size: 16px;
+	line-height: 1.6;
+	color: #f2f2f2;
+	max-width: 760px;
+	margin: 0 0 36px;
+}
+.reflex-walkthrough .motion-figure figcaption > [data-control='play'] {
+	position: absolute;
+	right: 40px;
+	top: 88px;
+	min-height: 42px;
+	border: 1px solid #eee;
+	border-radius: 11px;
+	background: #000;
+	color: #fff;
+	padding: 9px 16px;
+	font-weight: 600;
+	font-size: 14px;
+}
+.reflex-walkthrough .motion-figure figcaption > [data-control='play']:hover {
+	background: #181818;
+}
+.reflex-walkthrough .motion-legend {
+	margin: 0;
+	gap: 30px;
+	font-size: 15px;
+	line-height: 20px;
+	color: white;
+}
+.reflex-walkthrough .motion-legend > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: white;
+}
+.reflex-walkthrough .motion-legend > span:before {
+	content: '';
+	display: block;
+	width: 15px;
+	height: 15px;
+	border: 0.75px solid #fff;
+	background: var(--request);
+	border-radius: 2px;
+}
+.reflex-walkthrough .motion-legend > .response-dot:before {
+	border-radius: 50%;
+	background: var(--response);
+}
+.reflex-walkthrough .motion-legend > .local-dot:before {
+	border-radius: 50%;
+	width: 12px;
+	height: 12px;
+	background: transparent;
+	border-color: #aaa;
+}
+.reflex-walkthrough .motion-diagram {
+	background-color: #000;
+	background-image: radial-gradient(circle, #272727 0.8px, transparent 1px);
+	background-size: 6px 6px;
+	border-top: 1px solid #242424;
+	width: 100%;
+	overflow: hidden;
+}
+.reflex-walkthrough .motion-node rect {
+	fill: #000;
+	stroke: #eee;
+	stroke-width: 1;
+	rx: 5;
+}
+.reflex-walkthrough .motion-node.is-working rect {
+	stroke: #fff;
+	stroke-width: 1.2;
+}
+.reflex-walkthrough .motion-node text {
+	fill: #fff;
+	text-anchor: start;
+}
+.reflex-walkthrough .motion-node-name {
+	font-weight: 500;
+	font-size: 17px;
+}
+.reflex-walkthrough .motion-node-sub {
+	font-size: 12px;
+	fill: #ccc !important;
+}
+.reflex-walkthrough .motion-node-value {
+	font:
+		600 12px ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+}
+.reflex-walkthrough .motion-region {
+	fill: none;
+	stroke: #aaa;
+	stroke-width: 1;
+	rx: 4;
+}
+.reflex-walkthrough .motion-region-label {
+	fill: #fff;
+	text-anchor: middle;
+	font:
+		600 12px ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+}
+.reflex-walkthrough .motion-track {
+	stroke: #797979;
+	stroke-width: 1;
+	fill: none;
+}
+.reflex-walkthrough .motion-active-path.request,
+.reflex-walkthrough .motion-active-path.response,
+.reflex-walkthrough .motion-active-path.local {
+	stroke: #eee;
+	stroke-width: 1.2;
+}
+.reflex-walkthrough .motion-active-path.local {
+	stroke-dasharray: 3 4;
+}
+.reflex-walkthrough .motion-marker {
+	stroke: #fff;
+	stroke-width: 0.75;
+}
+.reflex-walkthrough .motion-marker.request {
+	fill: var(--request);
+}
+.reflex-walkthrough .motion-marker.response {
+	fill: var(--response);
+}
+.reflex-walkthrough .motion-marker.local {
+	fill: #000;
+}
+.reflex-walkthrough .motion-marker circle,
+.reflex-walkthrough .motion-marker .motion-square {
+	display: none;
+}
+.reflex-walkthrough .motion-marker.request .motion-square {
+	display: block;
+}
+.reflex-walkthrough .motion-marker.response circle,
+.reflex-walkthrough .motion-marker.local circle {
+	display: block;
+}
+.reflex-walkthrough .motion-figure .motion-explanation {
+	margin: 0;
+	padding: 24px 40px 16px;
+	border-color: #282828;
+	min-height: 142px;
+}
+.reflex-walkthrough .motion-explanation h4 {
+	font-size: 19px;
+	color: #fff;
+	font-weight: 500;
+}
+.reflex-walkthrough .motion-explanation p {
+	font-size: 14px;
+	line-height: 1.6;
+	color: #ccc;
+}
+.reflex-walkthrough .motion-phase {
+	color: #aaa;
+	font:
+		11px ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+.reflex-walkthrough .motion-controls {
+	border: 0;
+	border-top: 1px solid #282828;
+	border-radius: 0;
+	margin: 0;
+	padding: 18px 40px;
+}
+.reflex-walkthrough .motion-controls > summary,
+.reflex-walkthrough .motion-payload > summary {
+	font-size: 13px;
+	color: #ccc;
+}
+.reflex-walkthrough .motion-toolbar {
+	border: 0;
+	margin-top: 18px;
+	padding: 0;
+	gap: 10px;
+}
+.reflex-walkthrough .motion-figure button,
+.reflex-walkthrough .motion-figure select {
+	color: #fff;
+	border-color: #666;
+	background: #000;
+}
+.reflex-walkthrough .motion-figure label {
+	color: #ccc;
+}
+.reflex-walkthrough .motion-progress {
+	margin: 24px 0 6px;
+}
+.reflex-walkthrough .motion-figure .motion-progress label,
+.reflex-walkthrough .motion-progress output {
+	color: #aaa;
+}
+.reflex-walkthrough .motion-progress input {
+	accent-color: #ddd;
+}
+.reflex-walkthrough .motion-payload {
+	margin: 0 40px 0;
+	padding: 18px 0;
+	border-top: 1px solid #282828;
+}
+.reflex-walkthrough .motion-payload pre {
+	background: #090909;
+	color: #eee;
+	border: 1px solid #222;
+}
+.reflex-walkthrough .motion-footnote {
+	margin: 0;
+	padding: 16px 40px 26px;
+	font-size: 11px;
+	color: #999;
+}
+.reflex-walkthrough .motion-figure button:focus-visible,
+.reflex-walkthrough .motion-figure input:focus-visible,
+.reflex-walkthrough .motion-figure select:focus-visible {
+	outline-color: #ddd;
+}
+@media (max-width: 700px) {
+	.reflex-walkthrough .publication-shell .motion-figure {
+		padding: 0;
+	}
+	.reflex-walkthrough .motion-figure figcaption {
+		padding: 26px 22px 22px;
+	}
+	.reflex-walkthrough .motion-kicker {
+		margin-bottom: 22px;
+		font-size: 10px;
+	}
+	.reflex-walkthrough .motion-figure figcaption h3 {
+		font-size: 24px;
+		margin-right: 0;
+	}
+	.reflex-walkthrough .motion-figure figcaption p {
+		font-size: 15px;
+		margin-bottom: 22px;
+	}
+	.reflex-walkthrough .motion-figure figcaption > [data-control='play'] {
+		position: static;
+		margin: 0 0 24px;
+	}
+	.reflex-walkthrough .motion-legend {
+		gap: 16px;
+		font-size: 12px;
+	}
+	.reflex-walkthrough .motion-legend > span {
+		gap: 7px;
+	}
+	.reflex-walkthrough .motion-legend > span:before {
+		width: 12px;
+		height: 12px;
+	}
+	.reflex-walkthrough .motion-figure .motion-explanation {
+		padding: 22px;
+		min-height: 190px;
+	}
+	.reflex-walkthrough .motion-controls {
+		padding: 18px 22px;
+	}
+	.reflex-walkthrough .motion-payload {
+		margin-inline: 22px;
+	}
+	.reflex-walkthrough .motion-footnote {
+		padding: 16px 22px 24px;
+	}
+	.reflex-walkthrough .motion-node-name {
+		font-size: 16px;
+	}
+	.reflex-walkthrough .motion-node-sub,
+	.reflex-walkthrough .motion-node-value {
+		font-size: 11px;
+	}
+}
+
+.reflex-walkthrough .motion-figure .wire-panel {
+	margin: 0;
+	padding: 24px 40px;
+	border-top: 1px solid #333;
+	background: #050505;
+}
+.reflex-walkthrough .wire-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+}
+.reflex-walkthrough .wire-heading > span {
+	font:
+		600 11px ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: #aaa;
+}
+.reflex-walkthrough .motion-figure .wire-heading button {
+	font-size: 12px;
+	padding: 6px 12px;
+	border-radius: 7px;
+}
+.reflex-walkthrough .wire-panel .wire-direction {
+	font-size: 16px;
+	margin: 18px 0 6px;
+	color: #eee;
+}
+.reflex-walkthrough .wire-panel[data-kind='request'] .wire-direction {
+	color: #83aaff;
+}
+.reflex-walkthrough .wire-panel[data-kind='response'] .wire-direction {
+	color: #9fe5ca;
+}
+.reflex-walkthrough .wire-panel .wire-name {
+	font:
+		12px/1.65 ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+	color: #ccc;
+	overflow-wrap: anywhere;
+	margin: 0 0 18px;
+}
+.reflex-walkthrough .wire-tools {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.reflex-walkthrough .motion-figure .wire-tools button {
+	font-size: 12px;
+	padding: 7px 11px;
+	border-radius: 5px;
+}
+.reflex-walkthrough .motion-figure .wire-tools button[aria-pressed='true'] {
+	background: #202020;
+	border-color: #aaa;
+}
+.reflex-walkthrough .wire-frame-label {
+	margin-left: auto;
+	max-width: 100%;
+}
+.reflex-walkthrough .wire-frame {
+	max-width: 100%;
+	font-size: 11px !important;
+}
+.reflex-walkthrough .wire-panel .wire-body {
+	height: 245px;
+	max-height: none;
+	overflow: auto;
+	margin: 16px 0;
+	border: 1px solid #292929;
+	border-radius: 4px;
+	padding: 20px;
+	background: #000;
+	font-size: 12px;
+	line-height: 1.7;
+	color: #eee;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+.reflex-walkthrough .wire-body:focus-visible {
+	outline: 2px solid #aaa;
+	outline-offset: 3px;
+}
+.reflex-walkthrough .wire-panel .wire-context {
+	font-size: 11px;
+	line-height: 1.7;
+	color: #999;
+	margin: 10px 0 0;
+}
+.reflex-walkthrough .wire-frame-label[hidden] {
+	display: none;
+}
+.reflex-walkthrough .wire-tools button:disabled {
+	opacity: 0.35;
+}
+@media (max-width: 700px) {
+	.reflex-walkthrough .motion-figure .wire-panel {
+		padding: 22px;
+	}
+	.reflex-walkthrough .wire-heading {
+		flex-wrap: wrap;
+	}
+	.reflex-walkthrough .wire-frame-label {
+		margin: 8px 0 0;
+		width: 100%;
+	}
+	.reflex-walkthrough .wire-panel .wire-body {
+		padding: 12px;
+		height: 280px;
+	}
+	.reflex-walkthrough .wire-tools {
+		gap: 6px;
+	}
+}
+
+/* Fit the complete walkthrough beneath the site's existing navigation. */
+.reflex-walkthrough {
+	padding-top: 88px;
+	min-height: 100vh;
+}
+.reflex-walkthrough section[id],
+.reflex-walkthrough figure[id] {
+	scroll-margin-top: 100px;
+}
+.reflex-walkthrough ol {
+	list-style: decimal;
+}
+.reflex-walkthrough ul {
+	list-style: disc;
+}
+.reflex-walkthrough a {
+	text-decoration: underline;
+}
+.reflex-walkthrough nav a {
+	text-decoration: none;
+}
+.reflex-walkthrough .motion-diagram {
+	height: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+	.reflex-walkthrough {
+		scroll-behavior: auto;
+	}
+}

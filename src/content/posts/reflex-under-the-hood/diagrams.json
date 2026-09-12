@@ -1,0 +1,486 @@
+[
+	{
+		"id": "motion-browser",
+		"anchor": "browser-events",
+		"number": "06",
+		"title": "Inside the browser: from DOM click to socket",
+		"intro": "The browser scheduler runs JavaScript. Reflex’s event queue is an array inside that JavaScript, not another thread.",
+		"nodes": [
+			["DOM + React", "Browser event handling", "Count 0 · idle"],
+			["Reflex frontend", "addEvents · event_queue", "Queue empty"],
+			["Python backend", "Socket + event processor", "Awaiting a request"]
+		],
+		"phases": [
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "React invokes the generated callback",
+				"note": "The browser delivers the interaction and React invokes the button callback. The next local phases describe a call chain, not separate browser tasks.",
+				"payload": "DOM click → React callback(_e)\nCall stack: generated onClick",
+				"values": ["Click callback running", "Queue empty", "No request yet"]
+			},
+			{
+				"from": 0,
+				"to": 1,
+				"kind": "local",
+				"title": "Build an application event",
+				"note": "The callback constructs a ReflexEvent. The native/React interaction object stays in the browser; only the required application arguments are selected.",
+				"payload": "{\n  \"name\": \"reflex___state____state.flow_lab___flow_lab____lab_state.increment\"\n}",
+				"values": ["Count 0 · callback", "ReflexEvent constructed", "No request yet"]
+			},
+			{
+				"from": 1,
+				"to": 1,
+				"kind": "local",
+				"title": "addEvents applies event actions",
+				"note": "Connection setup is requested when appropriate. applyEventActions handles configured preventDefault, stopPropagation, temporal, throttle, or debounce behavior. This button has none.",
+				"payload": "addEvents(events, [_e], {})\n→ applyEventActions(queueTarget, ...)",
+				"values": ["Count 0", "Event actions applied", "No request yet"]
+			},
+			{
+				"from": 1,
+				"to": 1,
+				"kind": "local",
+				"title": "Enqueue a Reflex event",
+				"note": "queueEvents appends to a module-level array and calls processEvent. This snapshot is transient; dispatch can begin immediately.",
+				"payload": "{\n  \"event_queue\": [\n    {\n      \"name\": \"reflex___state____state.flow_lab___flow_lab____lab_state.increment\"\n    }\n  ]\n}",
+				"values": ["Count 0", "Queue: [increment]", "No request yet"]
+			},
+			{
+				"from": 1,
+				"to": 1,
+				"kind": "local",
+				"title": "Take the next event and attach routing",
+				"note": "With the socket connected, processEvent shifts the event. applyEvent chooses the socket path and fills router_data. The array is not a server-completion tracker.",
+				"payload": "event = event_queue.shift()\napplyEvent(event, socket, navigate, params)\nevent.router_data = {pathname: \"/\", asPath: \"/\"}",
+				"values": ["Count 0", "Queue: [] · dispatching", "No request yet"]
+			},
+			{
+				"from": 1,
+				"to": 2,
+				"kind": "request",
+				"title": "Emit the event",
+				"note": "socket.emit sends the event object. Awaiting local applyEvent does not await the Python handler or a final=true response.",
+				"payload": "{\n  \"name\": \"reflex___state____state.flow_lab___flow_lab____lab_state.increment\",\n  \"router_data\": {\n    \"pathname\": \"/\",\n    \"asPath\": \"/\"\n  }\n}",
+				"values": ["Count 0", "Local dispatch completes", "Request received"]
+			},
+			{
+				"from": 2,
+				"to": 2,
+				"kind": "local",
+				"title": "Python works; the click callback can finish",
+				"note": "Python processes the session event. The browser does not synchronously execute it. Other browser work can run after the JavaScript callback yields or returns.",
+				"payload": "Python: increment() → count=1, doubled=2\nBrowser: original click callback no longer waiting",
+				"values": ["Count 0 · can handle input", "Waiting for socket data", "Handler → state delta"]
+			},
+			{
+				"from": 2,
+				"to": 1,
+				"kind": "response",
+				"title": "Socket.IO invokes the incoming listener",
+				"note": "The receive callback is a new entry into frontend JavaScript. It receives a StateUpdate rather than resuming a blocked Python call.",
+				"payload": "{\n  \"delta\": {\n    \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\n      \"count_rx_state_\": 1,\n      \"doubled_rx_state_\": 2\n    }\n  }\n}",
+				"values": ["Count 0", "Incoming event callback", "count=1 · doubled=2"]
+			},
+			{
+				"from": 1,
+				"to": 0,
+				"kind": "local",
+				"title": "Dispatch into the substate reducer",
+				"note": "The listener validates substate names, dispatches deltas, updates configured storage, and handles returned frontend events. React receives the merged context values.",
+				"payload": "dispatch[LAB]({count_rx_state_: 1, doubled_rx_state_: 2})\napplyDelta = (state, delta) => ({...state, ...delta})",
+				"values": ["React update scheduled", "Reducer dispatch", "count=1 · doubled=2"]
+			},
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "React commits the updated UI",
+				"note": "React renders and commits the affected DOM; the browser paints when appropriate. No page recompilation happened.",
+				"payload": "Visible: Count: 1 · Doubled: 2\nFrontend event_queue: []",
+				"values": ["Count 1 · doubled 2", "Ready for next event", "State retained"]
+			}
+		]
+	},
+	{
+		"id": "motion-compile",
+		"anchor": "compile",
+		"number": "05",
+		"title": "From Python objects to a runnable browser app",
+		"intro": "Follow the artifacts. UI declarations produce React modules; Python event handlers stay on the backend.",
+		"nodes": [
+			["Python process", "Source + compiler", "Page function ready"],
+			["Frontend toolchain", "React Router + Vite", "Generated project"],
+			["Browser", "JavaScript engine + React", "Waiting for assets"]
+		],
+		"phases": [
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "Execute the page-building code",
+				"note": "Python calls component constructors. This creates objects describing the interface, not HTML in a browser.",
+				"payload": "rx.button(\"Add one\", on_click=LabState.increment, id=\"increment\")",
+				"values": ["Component constructors", "No browser bundle yet", "Nothing downloaded"]
+			},
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "Build the component tree",
+				"note": "The actual button render dictionary contains a component name, properties, event expression, and child text.",
+				"payload": "{\n  \"name\": \"RadixThemesButton\",\n  \"props\": [\n    \"id:\\\"increment\\\"\",\n    \"onClick:((_e) => (addEvents([(ReflexEvent(\\\"reflex___state____state.flow_lab___flow_lab____lab_state.increment\\\", ({  }), ({  })))], [_e], ({  }))))\",\n    \"ref:ref_increment\"\n  ],\n  \"children\": [\n    {\n      \"contents\": \"\\\"Add one\\\"\"\n    }\n  ]\n}",
+				"values": ["Component tree + metadata", "No browser bundle yet", "Nothing downloaded"]
+			},
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "Resolve symbolic state references",
+				"note": "LabState.count in a page is an expression linked to a React state context. self.count in a backend handler is a Python value.",
+				"payload": "reflex___state____state__flow_lab___flow_lab____lab_state.count_rx_state_",
+				"values": ["Var expression + dependency", "Context needed", "Nothing downloaded"]
+			},
+			{
+				"from": 0,
+				"to": 1,
+				"kind": "local",
+				"title": "Generate the React module",
+				"note": "The compiler emits imports, hooks, event callbacks, and component rendering code. This is an actual generated button excerpt.",
+				"payload": "export const Button_button_5b96ea87d6d46c65a36c4e74327104a9_4c100443 = memo(({children}) => {\n    const ref_increment = useRef(null); refs[\"ref_increment\"] = ref_increment;\nconst on_click_f878fea372bb8c958470a4b8a1cc88df = useCallback(((_e) => (addEvents([(ReflexEvent(\"reflex___state____state.flow_lab___flow_lab____lab_state.increment\", ({  }), ({  })))], [_e], ({  })))), [addEvents, ReflexEvent])\n\n\n\n    return(\n        jsx(RadixThemesButton,{id:\"increment\",onClick:on_click_f878fea372bb8c958470a4b8a1cc88df,ref:ref_increment},children)\n    )\n});\nButton_button_5b96ea87d6d46c65a36c4e74327104a9_4c100443.displayName = \"Button\";",
+				"values": ["Python handler stays here", "React source on disk", "Nothing downloaded"]
+			},
+			{
+				"from": 0,
+				"to": 1,
+				"kind": "local",
+				"title": "Generate contexts and initial data",
+				"note": "Initial public defaults and reducers become JavaScript. Compilation does not retrieve a future visitor’s saved session.",
+				"payload": "export const initialState = {\"reflex___state____state\": {\"is_hydrated_rx_state_\": false, \"router_headers_rx_state_\": {\"host\": \"\", \"origin\": \"\", \"upgrade\": \"\", \"connection\": \"\", \"cookie\": \"\", \"pragma\": \"\", \"cache_control\": \"\", \"user_agent\": \"\", \"sec_websocket_version\": \"\", \"sec_websocket_key\": \"\", \"sec_websocket_extensions\": \"\", \"accept_encoding\": \"\", \"accept_language\": \"\", \"raw_headers\": {}}, \"router_page_rx_state_\": {\"host\": \"\", \"path\": \"\", \"raw_path\": \"\", \"full_path\": \"\", \"full_raw_path\": \"\", \"params\": {}}, \"router_route_id_rx_state_\": \"\", \"router_session_rx_state_\": {\"client_token\": \"\", \"client_ip\": \"\", \"session_id\": \"\"}, \"router_url_rx_state_\": {\"scheme\": \"\", \"netloc\": \"\", \"origin\": \"\", \"path\": \"\", \"query\": \"\", \"query_parameters\": {}, \"fragment\": \"\", \"href\": \"\"}}, \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\"count_rx_state_\": 0, \"doubled_rx_state_\": 0, \"greeting_rx_state_\": \"Hello, Ada!\", \"name_rx_state_\": \"Ada\", \"page_rx_state_\": \"Not loaded\", \"visits_rx_state_\": 0}, \"reflex___state____state.reflex___istate___shared____shared_state_base_internal\": {}, \"reflex___state____state.reflex___state____frontend_event_exception_state\": {}, \"reflex___state____state.reflex___state____on_load_internal_state\": {}, \"reflex___state____state.reflex___state____update_vars_internal_state\": {}}\nexport const UploadFilesContext = createContext(null);\nexport const DispatchContext = createContext(null);\nexport const StateContexts = {reflex___state____state: createContext(null),reflex___state____state__flow_lab___flow_lab____lab_state: createContext(null),reflex___state____state__reflex___istate___shared____shared_state_base_internal: createContext(null),reflex___state____state__reflex___state____frontend_event_exception_state: createContext(null),reflex___state____state__reflex___state____on_load_internal_state: createContext(null),reflex___state____state__reflex___state____update_vars_internal_state: createContext(null),};\nexport const EventLoopContext = createContext(null);\n  const [reflex___state____state, dispatch_reflex___state____state] = useReducer(applyDelta, initialState[\"reflex___state____state\"])\nconst [reflex___state____state__flow_lab___flow_lab____lab_state, dispatch_reflex___state____state__flow_lab___flow_lab____lab_state] = useReducer(applyDelta, initialState[\"reflex___state____state.flow_lab___flow_lab____lab_state\"])\nconst [reflex___state____state__reflex___istate___shared____shared_state_base_internal, dispatch_reflex___state____state__reflex___istate___shared____shared_state_base_internal] = useReducer(applyDelta, initialState[\"reflex___state____state.reflex___istate___shared____shared_state_base_internal\"])\nconst [reflex___state____state__reflex___state____frontend_event_exception_state, dispatch_reflex___state____state__reflex___state____frontend_event_exception_state] = useReducer(applyDelta, initialState[\"reflex___state____state.reflex___state____frontend_event_exception_state\"])\nconst [reflex___state____state__reflex___state____on_load_internal_state, dispatch_reflex___state____state__reflex___state____on_load_internal_state] = useReducer(applyDelta, initialState[\"reflex___state____state.reflex___state____on_load_internal_state\"])\nconst [reflex___state____state__reflex___state____update_vars_internal_state, dispatch_reflex___state____state__reflex___state____update_vars_internal_state] = useReducer(applyDelta, initialState[\"reflex___state____state.reflex___state____update_vars_internal_state\"])",
+				"values": ["Initial defaults serialized", "Contexts + dispatch map", "Nothing downloaded"]
+			},
+			{
+				"from": 1,
+				"to": 1,
+				"kind": "local",
+				"title": "Bundle the frontend for production",
+				"note": "The real production build resolves and chunks the module graph. This is a contiguous excerpt around the event callback in .web/build/client/assets/flow_lab-lNesF4hv.js.",
+				"payload": ">(0,m.useContext)(r.reflex___state____state__flow_lab___flow_lab____lab_state).doubled_rx_state_);S.displayName=`Bare`;var C=(0,m.memo)(({children:e})=>{let t=(0,m.useRef)(null);c.ref_increment=t;let n=(0,m.useCallback)((e=>l([a(`reflex___state____state.flow_lab___flow_lab____lab_state.increment`,{},{})],[e],{})),[l,a]);return u(i,{id:`increment`,onClick:n,ref:t},e)});C.displayName=`Button`;var w=(0,m.memo)(({children:e})=>{let t=(0,m.useCallback)((e=>l([a(`reflex___state____state.flow_lab___flow_lab____lab_state.increment`,{},{})],[e],{})),[l,a]);return u(i,{onClick:t},e)});w.displayName=`Button`;export{y as a,w as c,v as i,b as l,S as n,x as o,_ as r,C as s,g as t};",
+				"values": ["Backend remains Python", "Hashed JS + CSS + HTML", "Nothing downloaded"]
+			},
+			{
+				"from": 1,
+				"to": 2,
+				"kind": "response",
+				"title": "Serve the SPA document and assets",
+				"note": "The browser receives HTML referencing runnable JavaScript modules. The inspector shows the actual generated production HTML, not a Socket.IO message.",
+				"payload": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/><link rel=\"modulepreload\" href=\"/assets/manifest-95bcf033.js\"/><link rel=\"modulepreload\" href=\"/assets/entry.client-5UErbQKK.js\"/><link rel=\"modulepreload\" href=\"/assets/components-Blt2PyNA.js\"/><link rel=\"modulepreload\" href=\"/assets/errorBoundaries-DIYo_grw.js\"/><link rel=\"modulepreload\" href=\"/assets/root-gPZAYZ4h.js\"/><link rel=\"modulepreload\" href=\"/assets/text-field-BkrB7aRw.js\"/><link rel=\"modulepreload\" href=\"/assets/reflex-env-Bgj8Vl-s.js\"/><link rel=\"modulepreload\" href=\"/assets/emotion-react.browser.esm-Do-RBW0K.js\"/><script>\n// Only run in browser environment, not during SSR\nif (typeof document !== 'undefined') {\n    try {\n        const theme = localStorage.getItem(\"theme\") || 'system';\n        const systemPreference = window.matchMedia(\"(prefers-color-scheme: dark)\").matches ? \"dark\" : \"light\";\n        const resolvedTheme = theme === \"system\" ? systemPreference : theme;\n\n        // Apply theme immediately - blocks until complete\n        // Use classList to avoid overwriting other classes\n        document.documentElement.classList.remove(\"light\", \"dark\");\n        document.documentElement.classList.add(resolvedTheme);\n        document.documentElement.style.colorScheme = resolvedTheme;\n\n    } catch (e) {\n        // Fallback to system preference on any error (resolve \"system\" to actual theme)\n        const fallbackTheme = window.matchMedia(\"(prefers-color-scheme: dark)\").matches ? \"dark\" : \"light\";\n        document.documentElement.classList.remove(\"light\", \"dark\");\n        document.documentElement.classList.add(fallbackTheme);\n        document.documentElement.style.colorScheme = fallbackTheme;\n    }\n}\n</script><link href=\"/assets/__reflex_global_styles-NccINl-w.css\" rel=\"stylesheet\" type=\"text/css\"/></head><body><section aria-label=\"Notifications alt+T\" tabindex=\"-1\" aria-live=\"polite\" aria-relevant=\"additions text\" aria-atomic=\"false\" data-react-aria-top-layer=\"true\"></section><div data-is-root-theme=\"true\" data-accent-color=\"blue\" data-gray-color=\"slate\" data-has-background=\"true\" data-panel-background=\"translucent\" data-radius=\"medium\" data-scaling=\"100%\" class=\"radix-themes css-0\"><style data-emotion=\"css 17rg0dp\">.css-17rg0dp{position:fixed;width:100vw;height:0;}</style><div title=\"Connection Error: \" class=\"css-17rg0dp\"></div></div><script>window.__reactRouterContext = {\"basename\":\"/\",\"future\":{\"unstable_enableNodeReadableStream\":false,\"unstable_optimizeDeps\":true},\"routeDiscovery\":{\"mode\":\"initial\"},\"ssr\":false,\"isSpaMode\":true};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type=\"module\" async=\"\">import \"/assets/manifest-95bcf033.js\";\nimport * as route0 from \"/assets/root-gPZAYZ4h.js\";\n  \n  window.__reactRouterRouteModules = {\"root\":route0};\n\nimport(\"/assets/entry.client-5UErbQKK.js\");</script><!--$--><script>window.__reactRouterContext.streamController.enqueue(\"[{\\\"_1\\\":2,\\\"_3\\\":-5,\\\"_4\\\":-5},\\\"loaderData\\\",{},\\\"actionData\\\",\\\"errors\\\"]\\n\");</script><!--$--><script>window.__reactRouterContext.streamController.close();</script><!--/$--><!--/$--></body></html>",
+				"values": ["Python service ready", "Static files served", "HTML → JS imports"]
+			},
+			{
+				"from": 2,
+				"to": 2,
+				"kind": "local",
+				"title": "React renders; Python handles later events",
+				"note": "JavaScript executes React components and creates the DOM. A later click sends an event to Python; it does not recompile the app.",
+				"payload": "HTML → JavaScript entry → React providers → route → DOM\n\nLater: click → Socket.IO → Python increment() → delta → React",
+				"values": ["Python methods + sessions", "Build complete", "DOM + public state"]
+			}
+		]
+	},
+	{
+		"id": "motion-load",
+		"anchor": "load",
+		"number": "01",
+		"title": "From an empty tab to live state",
+		"intro": "HTTP brings the interface. The socket brings this session’s data. Follow both trips.",
+		"nodes": [
+			["Browser", "DOM + React contexts", "No document yet"],
+			["Frontend server", "HTML · JavaScript · CSS", "Compiled app assets"],
+			["Python backend", "State manager + events", "Waiting for a client"]
+		],
+		"phases": [
+			{
+				"from": 0,
+				"to": 1,
+				"kind": "request",
+				"title": "Request the document",
+				"note": "The browser requests / from the frontend. This is HTTP, before the Reflex state socket exists.",
+				"payload": "GET / HTTP/1.1\nHost: localhost:3037",
+				"values": ["Loading /", "Serving the document", "No app event yet"]
+			},
+			{
+				"from": 1,
+				"to": 0,
+				"kind": "response",
+				"title": "Load the interface",
+				"note": "The document references scripts and styles. The browser loads them and React initializes from compiled defaults. This diagram groups the separate asset requests.",
+				"payload": "HTML document → script and CSS requests\nReact hydrateRoot(document, HydratedRouter)",
+				"values": ["HTML + JS received", "Assets delivered", "No app event yet"]
+			},
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "Initialize public defaults",
+				"note": "These values were compiled before this visitor connected. Empty router fields are placeholders, not missing runtime data.",
+				"payload": "{\n  \"reflex___state____state\": {\n    \"is_hydrated_rx_state_\": false\n  },\n  \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\n    \"count_rx_state_\": 0,\n    \"name_rx_state_\": \"Ada\",\n    \"page_rx_state_\": \"Not loaded\"\n  }\n}",
+				"values": ["count 0 · not hydrated", "Assets delivered", "Session not synchronized"]
+			},
+			{
+				"from": 0,
+				"to": 2,
+				"kind": "request",
+				"title": "Establish the socket",
+				"note": "Socket.IO connects with a browser token. The backend associates its connection SID with that token. No user login is implied.",
+				"payload": "Socket.IO /_event\nconnection query: token=<CLIENT_TOKEN>",
+				"values": ["Socket connected", "No state lookup here", "Token ↔ socket SID"]
+			},
+			{
+				"from": 0,
+				"to": 2,
+				"kind": "request",
+				"title": "Queue hydrate and page-load work",
+				"note": "initialEvents queues hydrate followed by on_load_internal. This app has no browser-storage values to insert between them.",
+				"payload": "{\n  \"name\": \"reflex___state____state.hydrate\",\n  \"router_data\": {\n    \"pathname\": \"/\",\n    \"asPath\": \"/\"\n  }\n}\n\n{\n  \"name\": \"reflex___state____state.reflex___state____on_load_internal_state.on_load_internal\",\n  \"router_data\": {\n    \"pathname\": \"/\",\n    \"asPath\": \"/\"\n  }\n}",
+				"values": ["Waiting for state", "Compiled defaults only", "Resolve token → state"]
+			},
+			{
+				"from": 2,
+				"to": 0,
+				"kind": "response",
+				"title": "Receive the public snapshot",
+				"note": "Python sends current public state. This is a full synchronization; the payload below is an excerpt of the app substate.",
+				"payload": "{\n  \"delta\": {\n    \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\n      \"count_rx_state_\": 0,\n      \"name_rx_state_\": \"Ada\",\n      \"page_rx_state_\": \"Not loaded\",\n      \"visits_rx_state_\": 0\n    }\n  }\n}",
+				"values": ["count 0 · not hydrated", "Compiled defaults only", "Public snapshot sent"]
+			},
+			{
+				"from": 2,
+				"to": 2,
+				"kind": "local",
+				"title": "Run enter_home",
+				"note": "The on-load chain selects the Home handler, updates page and visits, then sets the root hydration flag.",
+				"payload": "self.page = \"Home\"\nself.visits += 1\n# Then State.set_is_hydrated(True)",
+				"values": ["count 0 · not hydrated", "Compiled defaults only", "Home · visits 1"]
+			},
+			{
+				"from": 2,
+				"to": 0,
+				"kind": "response",
+				"title": "Render the synchronized page",
+				"note": "Page and hydration deltas reach React. Multiple actual frames are grouped here; no personalized HTML is sent by this event.",
+				"payload": "{\n  \"delta\": {\n    \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\n      \"page_rx_state_\": \"Home\",\n      \"visits_rx_state_\": 1\n    }\n  }\n}\n\n{\n  \"delta\": {\n    \"reflex___state____state\": {\n      \"is_hydrated_rx_state_\": true\n    }\n  }\n}",
+				"values": ["Home · visits 1 · ready", "Assets stay loaded", "Home · visits 1"]
+			}
+		]
+	},
+	{
+		"id": "motion-event",
+		"anchor": "explorer",
+		"number": "02",
+		"title": "A click is a round trip, not new HTML",
+		"intro": "Watch count stay at 0 in the browser until the server’s delta arrives.",
+		"nodes": [
+			["Browser", "React event + context", "Count 0 · doubled 0"],
+			["Event processor", "Queue · token · handler", "Ready for an event"],
+			["LabState in Python", "Authoritative session state", "count=0 · _handled=0"]
+		],
+		"phases": [
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "Click Add one",
+				"note": "The generated React callback builds a named event. It does not send count=1 or the complete DOM click object.",
+				"payload": "on_click=LabState.increment\n→ ReflexEvent(LAB + \".increment\")",
+				"values": ["Count 0 · doubled 0", "Ready for an event", "count=0 · _handled=0"]
+			},
+			{
+				"from": 0,
+				"to": 1,
+				"kind": "request",
+				"title": "Send the handler name",
+				"note": "Socket.IO sends this object. The established connection supplies the client token to the backend.",
+				"payload": "{\n  \"name\": \"reflex___state____state.flow_lab___flow_lab____lab_state.increment\",\n  \"router_data\": {\n    \"pathname\": \"/\",\n    \"asPath\": \"/\"\n  }\n}",
+				"values": ["Count 0 · waiting", "Incoming event", "count=0 · _handled=0"]
+			},
+			{
+				"from": 1,
+				"to": 2,
+				"kind": "local",
+				"title": "Resolve the session and handler",
+				"note": "The processor selects this token’s LabState and enters its state modification context. This edge is an internal Python call, not a second network request.",
+				"payload": "token → state manager → LabState\nregistered handler → increment()",
+				"values": ["Count 0 · waiting", "Handler resolved", "State locked for mutation"]
+			},
+			{
+				"from": 2,
+				"to": 2,
+				"kind": "local",
+				"title": "Mutate Python state",
+				"note": "count changes first. Its computed dependency doubled becomes 2. The private bookkeeping field changes too.",
+				"payload": "self.count += 1\nself._handled += 1\n# doubled = self.count * 2",
+				"values": ["Count 0 · waiting", "Handler running", "count=1 · _handled=1"]
+			},
+			{
+				"from": 2,
+				"to": 1,
+				"kind": "local",
+				"title": "Collect changed public fields",
+				"note": "Dirty tracking includes count and doubled. _handled stays backend-only. Unchanged name and page are omitted.",
+				"payload": "{\n  \"delta\": {\n    \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\n      \"count_rx_state_\": 1,\n      \"doubled_rx_state_\": 2\n    }\n  }\n}",
+				"values": ["Count 0 · waiting", "Delta prepared", "count=1 · doubled=2"]
+			},
+			{
+				"from": 1,
+				"to": 0,
+				"kind": "response",
+				"title": "Send the delta back",
+				"note": "The backend targets this client’s socket. The message contains values, not HTML or DOM instructions.",
+				"payload": "{\n  \"delta\": {\n    \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\n      \"count_rx_state_\": 1,\n      \"doubled_rx_state_\": 2\n    }\n  }\n}",
+				"values": ["Count 0 · awaiting merge", "Delta in flight", "count=1 · doubled=2"]
+			},
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "Merge state and commit the DOM",
+				"note": "React receives the field updates. The reducer preserves omitted fields; React renders the new count and doubled values.",
+				"payload": "applyDelta = (state, delta) => ({...state, ...delta});\n\nVisible: Count: 1 · Doubled: 2",
+				"values": ["Count 1 · doubled 2", "Ready for next event", "count=1 · doubled=2"]
+			}
+		]
+	},
+	{
+		"id": "motion-route",
+		"anchor": "routing",
+		"number": "03",
+		"title": "New page. Same counter. Same connection.",
+		"intro": "This sequence begins after one click: count is 1 and the Home page has one visit.",
+		"nodes": [
+			["Browser", "Document + public state", "Home · count 1"],
+			["React Router", "Location + route component", "/"],
+			["Python backend", "Route + on-load chain", "Home · visits 1"]
+		],
+		"phases": [
+			{
+				"from": 0,
+				"to": 1,
+				"kind": "local",
+				"title": "Follow the internal link",
+				"note": "The app link requests client-side navigation to /details. This is a local browser action.",
+				"payload": "rx.link(\"Details\", href=\"/details\")",
+				"values": ["Home · count 1", "Navigate /details", "Home · visits 1"]
+			},
+			{
+				"from": 1,
+				"to": 1,
+				"kind": "local",
+				"title": "Select the Details component",
+				"note": "The location changes. Contexts preserve the current count; the navigation effect marks hydration false. Route code may load if it is not already available.",
+				"payload": "location.pathname = \"/details\"\nlocal is_hydrated = false\ncount remains 1",
+				"values": ["Details · count 1", "/details · on-load pending", "Home · visits 1"]
+			},
+			{
+				"from": 1,
+				"to": 2,
+				"kind": "request",
+				"title": "Send on_load_internal",
+				"note": "The existing socket carries the new pathname and asPath. Normal internal navigation does not send a full hydrate event.",
+				"payload": "{\n  \"name\": \"reflex___state____state.reflex___state____on_load_internal_state.on_load_internal\",\n  \"router_data\": {\n    \"pathname\": \"/details\",\n    \"asPath\": \"/details\"\n  }\n}",
+				"values": ["Details · count 1", "/details", "Resolve Details on-load"]
+			},
+			{
+				"from": 2,
+				"to": 2,
+				"kind": "local",
+				"title": "Run enter_details",
+				"note": "The server updates router metadata, runs the page handler, and completes the on-load chain. Name and count do not change.",
+				"payload": "self.page = \"Details\"\nself.visits += 1\n# Then set_is_hydrated(True)",
+				"values": ["Details · count 1", "/details", "Details · visits 2"]
+			},
+			{
+				"from": 2,
+				"to": 0,
+				"kind": "response",
+				"title": "Send route and page updates",
+				"note": "Several response frames are grouped here: router metadata, page/visits, and is_hydrated=true. The app-field excerpt shows no count reset.",
+				"payload": "{\n  \"delta\": {\n    \"reflex___state____state.flow_lab___flow_lab____lab_state\": {\n      \"page_rx_state_\": \"Details\",\n      \"visits_rx_state_\": 2\n    }\n  }\n}",
+				"values": ["Details · awaiting merge", "/details", "Details · visits 2"]
+			},
+			{
+				"from": 0,
+				"to": 0,
+				"kind": "local",
+				"title": "Finish the new page",
+				"note": "React merges the updates. Count is still 1. Refresh differs: it creates a new document/socket and performs full hydration again.",
+				"payload": "Browser: count=1, page=\"Details\", visits=2\nRoot: is_hydrated=true",
+				"values": ["Details · count 1 · visits 2", "/details", "Details · visits 2"]
+			}
+		]
+	},
+	{
+		"id": "motion-state",
+		"anchor": "sessions",
+		"number": "04",
+		"title": "Why initialState contains more than your counter",
+		"intro": "Follow build-time placeholders as they become session-specific values. Only public fields cross to React.",
+		"nodes": [
+			["Compiler", "Defaults + state structure", "No visitor yet"],
+			["Browser contexts", "Public state by substate", "Generated initialState"],
+			["Python session", "Connection + application data", "Real token and socket"]
+		],
+		"phases": [
+			{
+				"from": 0,
+				"to": 1,
+				"kind": "response",
+				"title": "Ship the default state shape",
+				"note": "The compiler emits both the root and app substates. It knows Ada and count=0, but not this visitor’s headers, URL, token, or SID.",
+				"payload": "{\n  \"root\": {\n    \"is_hydrated\": false,\n    \"router_headers\": {\n      \"host\": \"\"\n    },\n    \"router_session\": {\n      \"client_token\": \"\",\n      \"session_id\": \"\"\n    }\n  },\n  \"LabState\": {\n    \"name\": \"Ada\",\n    \"count\": 0\n  }\n}",
+				"values": ["Built once", "Defaults + empty metadata", "Not synchronized"]
+			},
+			{
+				"from": 1,
+				"to": 2,
+				"kind": "request",
+				"title": "Connect and identify this session",
+				"note": "The socket handshake supplies request headers and the browser’s token. The server associates the token with the connection SID.",
+				"payload": "Host: localhost:8037\nOrigin: http://localhost:3037\nUpgrade: websocket\nConnection query: token=<CLIENT_TOKEN>",
+				"values": ["No per-user lookup", "Socket connected", "Token ↔ SID + headers"]
+			},
+			{
+				"from": 2,
+				"to": 2,
+				"kind": "local",
+				"title": "Build the router context",
+				"note": "Connection metadata combines with event router_data. Headers describe the backend connection; router.url describes the frontend address.",
+				"payload": "headers.host = \"localhost:8037\"\nurl.href = \"http://localhost:3037/\"\nroute_id = \"/index\"\nsession = {client_token: T, session_id: S}",
+				"values": ["No per-user lookup", "Awaiting synchronization", "Router context populated"]
+			},
+			{
+				"from": 2,
+				"to": 1,
+				"kind": "response",
+				"title": "Hydrate public fields",
+				"note": "The session snapshot fills the placeholders. Private fields such as _handled and internal locks are excluded. The diagram uses short names for readability.",
+				"payload": "{\n  \"root\": {\n    \"headers\": {\n      \"host\": \"localhost:8037\"\n    },\n    \"url\": {\n      \"path\": \"/\"\n    },\n    \"session\": {\n      \"client_token\": \"<T>\",\n      \"session_id\": \"<S>\"\n    }\n  },\n  \"LabState\": {\n    \"name\": \"Ada\",\n    \"count\": 0\n  }\n}",
+				"values": ["Defaults unchanged", "Real router + app values", "Private fields stay here"]
+			},
+			{
+				"from": 1,
+				"to": 1,
+				"kind": "local",
+				"title": "Understand the empty internal substates",
+				"note": "An empty object means no public fields, not no behavior. These classes can register handlers and hold backend-only machinery.",
+				"payload": "{\n  \"SharedStateBaseInternal\": {},\n  \"FrontendEventExceptionState\": {},\n  \"OnLoadInternalState\": {},\n  \"UpdateVarsInternalState\": {}\n}",
+				"values": [
+					"State classes registered",
+					"Empty public snapshots",
+					"Handlers + private machinery"
+				]
+			}
+		]
+	}
+]

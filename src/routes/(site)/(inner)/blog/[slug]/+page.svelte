@@ -30,26 +30,30 @@
 	<link rel="canonical" href={`https://farhana.li/blog/${meta.slug}`} />
 </svelte:head>
 
-<ArticleLayout
-	title={meta.title}
-	description={meta.description}
-	date={meta.date}
-	tags={meta.tags}
-	image={meta.image}
-	backHref="/blog"
-	backLabel="All articles"
-	categoryPath="/blog/category"
-	kind="From the blog"
->
-	<Content />
-	{#snippet related()}
-		{#if data.relatedPosts.length}
-			<section aria-labelledby="related-heading">
-				<h2 class="bento-subheading" id="related-heading">Keep exploring.</h2>
-				<div class="bento-list">
-					{#each data.relatedPosts as post (post.slug)}<BlogCard {post} />{/each}
-				</div>
-			</section>
-		{/if}
-	{/snippet}
-</ArticleLayout>
+{#if meta.layout === 'interactive'}
+	{#key meta.slug}<Content />{/key}
+{:else}
+	<ArticleLayout
+		title={meta.title}
+		description={meta.description}
+		date={meta.date}
+		tags={meta.tags}
+		image={meta.image}
+		backHref="/blog"
+		backLabel="All articles"
+		categoryPath="/blog/category"
+		kind="From the blog"
+	>
+		<Content />
+		{#snippet related()}
+			{#if data.relatedPosts.length}
+				<section aria-labelledby="related-heading">
+					<h2 class="bento-subheading" id="related-heading">Keep exploring.</h2>
+					<div class="bento-list">
+						{#each data.relatedPosts as post (post.slug)}<BlogCard {post} />{/each}
+					</div>
+				</section>
+			{/if}
+		{/snippet}
+	</ArticleLayout>
+{/if}

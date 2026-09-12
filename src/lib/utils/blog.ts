@@ -1,7 +1,7 @@
 import type { Post } from '$lib/types';
 
 export async function getAllPosts() {
-    const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
+    const paths = import.meta.glob('/src/content/posts/*/index.{md,svelte}', { eager: true });
     const posts: Post[] = [];
 
     for (const path in paths) {

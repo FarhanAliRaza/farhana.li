@@ -2,7 +2,7 @@ import type { ServerLoadEvent } from '@sveltejs/kit';
 import type { Post } from '$lib/types';
 
 async function getPosts() {
-    const paths = import.meta.glob('/src/content/posts/*/index.md', { eager: true });
+    const paths = import.meta.glob('/src/content/posts/*/index.{md,svelte}', { eager: true });
     const posts: Post[] = [];
 
     for (const path in paths) {

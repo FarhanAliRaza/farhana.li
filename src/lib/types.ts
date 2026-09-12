@@ -1,4 +1,5 @@
 export interface Post {
+    layout?: 'interactive';
     title: string;
     slug: string;
     description: string;
