@@ -16,9 +16,9 @@ export const profile = {
 	title: 'OSS Engineer at Reflex',
 	tagline: 'OSS Engineer at Reflex',
 	description:
-		'Farhan Ali Raza is an OSS engineer at Reflex, founder of Mailjinn, and creator of django-bolt. Building with Python, Django, Rust, and Svelte.',
+		'Farhan Ali Raza is an OSS engineer at Reflex and creator of django-bolt. Building with Python, Django, Rust, and Svelte.',
 	heroBio:
-		"I'm an OSS engineer at Reflex, founder of Mailjinn, and creator of django-bolt. I build web applications and open-source tools with Python, Django, Rust, and Svelte.",
+		"I'm an OSS engineer at Reflex and creator of django-bolt. I build web applications and open-source tools with Python, Django, Rust, and Svelte.",
 	bio: [
 		"Based in Bahawalnagar, Pakistan, I work remotely as an OSS engineer at Reflex, with 140+ merged pull requests across the framework, its enterprise auth plugin, and the xy charting library. I'm also the founder of Mailjinn, a cold email platform that has processed millions of emails.",
 		"I created django-bolt, a Rust-powered Django framework with 1,600+ GitHub stars and 100K+ downloads, optimized to 300K+ requests per second while keeping Django's ORM, authentication, and migrations. Through Google Summer of Code 2025, I shipped template partials to Django core.",

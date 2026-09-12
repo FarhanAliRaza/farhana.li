@@ -47,10 +47,7 @@
 						href="https://reflex.dev"
 						target="_blank"
 						rel="noopener noreferrer">Reflex</a
-					>, founder of
-					<a class="scribble" href="https://mailjinn.com/" target="_blank" rel="noopener noreferrer"
-						>Mailjinn</a
-					>, and creator of
+					> and creator of
 					<a
 						class="scribble"
 						href="https://github.com/FarhanAliRaza/django-bolt"
