@@ -15,41 +15,7 @@ export const siteConfig = {
 	// phone: 'zero three zero three eight two seven nine four five four'
 };
 
-// Navigation links
-export const navLinks = [
-	{
-		title: 'Home',
-		href: '/'
-	},
-	{
-		title: 'About',
-		href: '/about'
-	},
-	{
-		title: 'Projects',
-		href: '/projects'
-	},
-	{
-		title: 'Blog',
-		href: '/blog'
-	}
-];
 
-// Footer links
-export const footerLinks = [
-	{
-		title: 'Privacy Policy',
-		href: '/privacy'
-	},
-	{
-		title: 'Terms of Service',
-		href: '/terms'
-	},
-	{
-		title: 'Contact',
-		href: '/contact'
-	}
-];
 
 // About me content
 export const aboutMe = {

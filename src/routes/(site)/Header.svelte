@@ -20,6 +20,12 @@
 	let aboutOpen = $state(false);
 </script>
 
+{#snippet underline()}
+	<svg class="scribble-line" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+		<path d="M2 7 C 14 2, 26 9, 40 5 S 64 1.5, 78 7 S 92 5, 98 3" pathLength="1" />
+	</svg>
+{/snippet}
+
 <header class="hero" aria-labelledby="hero-heading">
 	<div class="bento-grid">
 		<div class="tile intro-tile">
@@ -46,13 +52,14 @@
 						class="scribble"
 						href="https://reflex.dev"
 						target="_blank"
-						rel="noopener noreferrer">Reflex</a
-					> and creator of
+						rel="noopener noreferrer">Reflex{@render underline()}</a
+					>
+					and creator of
 					<a
 						class="scribble"
 						href="https://github.com/FarhanAliRaza/django-bolt"
 						target="_blank"
-						rel="noopener noreferrer">django-bolt</a
+						rel="noopener noreferrer">django-bolt{@render underline()}</a
 					>. I build web applications and open-source tools with Python, Django, Rust, and Svelte.
 				</p>
 			</div>
@@ -253,21 +260,46 @@
 		color: #b5aebf;
 	}
 	.scribble {
+		position: relative;
 		color: #e3dbea;
 		font-weight: 600;
 		text-decoration: none;
+		white-space: nowrap;
 		padding-bottom: 7px;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M2 7 C 14 2, 26 9, 40 5 S 64 1.5, 78 7 S 92 5, 98 3' fill='none' stroke='%23e9c2ff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
-		background-repeat: no-repeat;
-		background-size: 100% 7px;
-		background-position: 0 100%;
-		transition:
-			color 150ms,
-			background-size 250ms var(--ease-out-soft);
+		transition: color 150ms;
 	}
-	.scribble:hover {
+	.scribble-line {
+		position: absolute;
+		inset-inline: 0;
+		bottom: 0;
+		width: 100%;
+		height: 7px;
+		overflow: visible;
+		pointer-events: none;
+		fill: none;
+		stroke: #e9c2ff;
+		stroke-width: 3;
+		stroke-linecap: round;
+	}
+	.scribble-line path {
+		stroke-dasharray: 1;
+		stroke-dashoffset: 0;
+	}
+	.scribble:hover,
+	.scribble:focus-visible {
 		color: #f2ddff;
-		background-size: 100% 9px;
+	}
+	.scribble:hover .scribble-line path,
+	.scribble:focus-visible .scribble-line path {
+		animation: draw-underline 650ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+	}
+	@keyframes draw-underline {
+		from {
+			stroke-dashoffset: 1;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
 	}
 	.actions {
 		display: flex;
@@ -498,6 +530,10 @@
 		}
 	}
 	@media (prefers-reduced-motion: reduce) {
+		.scribble:hover .scribble-line path,
+		.scribble:focus-visible .scribble-line path {
+			animation: none;
+		}
 		.button,
 		.tile {
 			transition: none;
