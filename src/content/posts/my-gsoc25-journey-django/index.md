@@ -1,7 +1,7 @@
 ---
 title: 'My GSoC 2025 Journey: Bringing Template Partials to Django Core'
 slug: 'my-gsoc25-journey-django'
-description: 'How I spent my Google Summer of Code 2025 bringing django-template-partials into Django core, featuring architecture mysteries, regex nightmares, and the elegant solutiona that was hiding in plain sight all along.'
+description: 'How I spent my Google Summer of Code 2025 bringing django-template-partials into Django core, featuring architecture mysteries, regex nightmares, and the elegant solution that was hiding in plain sight all along.'
 date: '2025-09-11'
 tags:
   [
@@ -11,7 +11,7 @@ tags:
     'open-source',
     'django-template-partials',
     'django-6.0',
-    'django-tempalte-system'
+    'django-template-system'
   ]
 published: true
 ---
@@ -29,7 +29,7 @@ My GSoC project brought the popular django-template-partials package directly in
 - [#19750: Fix interaction issues with comment and verbatim tags](https://github.com/django/django/pull/19750)
 - [Refactored loader and partials handling to support Django 5.1+ extra_data](https://github.com/carltongibson/django-template-partials/pull/72)
 
-  And other small prs.
+And a few other small PRs.
 
 ## Community Bonding Period
 
@@ -62,7 +62,7 @@ Remember when I said it would be mostly copy-pasting? HAHAHA. _laughs in debuggi
 
 First surprise: Partials defined AFTER they're used? Yeah, that's a thing people do. Who knew? 🤷 Solution: [Lazy loading](https://github.com/FarhanAliRaza/django/blob/6bd7bc83e66bd7779628aef237a241f264a49080/django/utils/datastructures.py#L350C1-L365C56) to the rescue!
 
-Second surprise: _Parse time vs render time_. Didn't even think about this when writing my proposal! 🤦. Spent a lot of coding time at start dealing with problems becuase of this.
+Second surprise: _Parse time vs render time_. Didn't even think about this when writing my proposal! 🤦 I spent a lot of my early coding time on problems caused by it.
 
 ### Django's Template System: Crash Course 📚
 
@@ -70,10 +70,10 @@ Let me paint you a picture of how Django templates actually work:
 
 1. **The Lexer** 🔍: Takes your beautiful template string and chops it into tokens (TEXT, VAR, BLOCK - like a word salad)
 2. **The Parser** 🎭: Gobbles up those tokens and spits out a compiled template (basically a list of Node objects)
-3. **The Nodes** 🌳: VariableNode, IfNode, ForNode, PartialNode, PartialDefNode, etc (Actually renders the html for browser with context)
+3. **The Nodes** 🌳: VariableNode, IfNode, ForNode, PartialNode, PartialDefNode, etc. (These actually render the HTML for the browser using the context)
 4. **The Engine** 🚂: The conductor that makes everything work together
-5. **The Loaders** 📦: These bad boys fetch template string from filesystem, memory, cache
-6. **The Backends** 🎨: Django Template Language, Jinja2... pick your poison! (That actually provides tags and syntax sugar for html. They are actually [DSLs](https://en.wikipedia.org/wiki/Domain-specific_language))
+5. **The Loaders** 📦: These bad boys fetch template strings from the filesystem, memory, or cache
+6. **The Backends** 🎨: Django Template Language, Jinja2... pick your poison! (These provide the tags and syntax sugar for HTML. They are really [DSLs](https://en.wikipedia.org/wiki/Domain-specific_language))
 
 Our mission? Sneak partials into the Django backend (the one everyone uses by default).
 
@@ -85,11 +85,11 @@ We put our partial loading logic in `django.template.backends.django.DjangoTempl
 
 The `include` tag was like "Nah, I don't see your partials, bro." 🙈
 
-After much head-scratching and probably too much coffee ☕, and help from my mentor.
+After much head-scratching, probably too much coffee ☕, and help from my mentor, we found the answer.
 
 Instead of the backend, we needed the engine! 🤯 Once we moved it to `django.template.engine.Engine`, everything clicked. Magic! ✨
 
-In `django-template-partial` partial loading works through loaders.
+In `django-template-partials`, partial loading works through loaders.
 
 ### Act 4: The Source Finding Saga (This Is Where It Gets Wild) 🎢
 
@@ -153,12 +153,12 @@ _Chef's kiss_ 👨‍🍳💋
 
 Django has 18,000+ tests. EIGHTEEN THOUSAND! That's not a codebase, that's a fortress! 🏰
 
-I wrote tests for every edge case I could imagine. Then I wrote tests for edge cases I couldn't imagine (Reviewers pointed out). Then I wrote tests for the tests (okay, not really, but you get the idea).
+I wrote tests for every edge case I could imagine. Then I wrote tests for edge cases I couldn't imagine (the reviewers pointed those out). Then I wrote tests for the tests (okay, not really, but you get the idea).
 
 ## What I Actually Learned (Besides Django Internals) 🎓
 
 - **Simple > Complex**: That position tracking solution? _Chef's kiss_
-- **EAFP - Easier to Ask For Forgiveness Than Permission**: Handling Exception (Thanks again to my mentor)
+- **EAFP - Easier to Ask For Forgiveness Than Permission**: Handle the exception instead of checking first (thanks again to my mentor)
 - **Tests are your friends**: who knew?
 - **Community reviews make everything better**: Even when they point out 188 things to fix 😅
 - **Sometimes you need to be wrong**: To find the right solution
@@ -168,10 +168,10 @@ I wrote tests for every edge case I could imagine. Then I wrote tests for edge c
 
 This adventure wouldn't have been possible without these absolute legends:
 
-- **Carlton Gibson** ([noumenal.es](https://noumenal.es/)) - My amazing mentor and Debugging partner 🧙‍♂️
-- **Natalia Bidart** [Github](https://github.com/nessita) - Django Fellow who caught my testing gaps like a ninja 🥷
-- **Nick Pope** [Github](https://github.com/ngnpope)- The reviewer who probably knows Django better than Django knows itself 🔍
-- **Jacob Walls** [Github](https://github.com/jacobtylerwalls) - Django Fellow who found that comment bug and made me question reality 🐛
+- **Carlton Gibson** ([noumenal.es](https://noumenal.es/)) - My amazing mentor and debugging partner 🧙‍♂️
+- **Natalia Bidart** [GitHub](https://github.com/nessita) - Django Fellow who caught my testing gaps like a ninja 🥷
+- **Nick Pope** [GitHub](https://github.com/ngnpope) - The reviewer who probably knows Django better than Django knows itself 🔍
+- **Jacob Walls** [GitHub](https://github.com/jacobtylerwalls) - Django Fellow who found that comment bug and made me question reality 🐛
 - **GSoC and Django Software Foundation** - For letting me break things in the name of science! 🧪
 
 ## The Epic Conclusion 🎭
@@ -188,6 +188,6 @@ Who knew that a summer of code could be this much of a rollercoaster? 🎢
 
 _Want to see template partials in action? Check out Django 6.0 when it drops! Want to contribute? Join us at [github.com/django/django](https://github.com/django/django) - we have cookies!_ 🍪
 
-_Checkout Djangonaut space [Apply for session 5](https://djangonaut.space/sessions/). They are great people. I am one of them so 🕺_
+_Check out Djangonaut Space and [apply for session 5](https://djangonaut.space/sessions/). They are great people. I am one of them, so 🕺_
 
 _P.S. - The regex is still out there somewhere, probably plotting its revenge. If you see any suspicious regular expressions, please report them immediately._ 👀

@@ -2,7 +2,7 @@
 	{
 		"id": "motion-browser",
 		"anchor": "browser-events",
-		"number": "06",
+		"number": "03",
 		"title": "Inside the browser: from DOM click to socket",
 		"intro": "The browser scheduler runs JavaScript. Reflex’s event queue is an array inside that JavaScript, not another thread.",
 		"nodes": [
@@ -106,7 +106,7 @@
 	{
 		"id": "motion-compile",
 		"anchor": "compile",
-		"number": "05",
+		"number": "01",
 		"title": "From Python objects to a runnable browser app",
 		"intro": "Follow the artifacts. UI declarations produce React modules; Python event handlers stay on the backend.",
 		"nodes": [
@@ -192,7 +192,7 @@
 	{
 		"id": "motion-load",
 		"anchor": "load",
-		"number": "01",
+		"number": "02",
 		"title": "From an empty tab to live state",
 		"intro": "HTTP brings the interface. The socket brings this session’s data. Follow both trips.",
 		"nodes": [
@@ -278,7 +278,7 @@
 	{
 		"id": "motion-event",
 		"anchor": "explorer",
-		"number": "02",
+		"number": "04",
 		"title": "A click is a round trip, not new HTML",
 		"intro": "Watch count stay at 0 in the browser until the server’s delta arrives.",
 		"nodes": [
@@ -355,7 +355,7 @@
 	{
 		"id": "motion-route",
 		"anchor": "routing",
-		"number": "03",
+		"number": "05",
 		"title": "New page. Same counter. Same connection.",
 		"intro": "This sequence begins after one click: count is 1 and the Home page has one visit.",
 		"nodes": [
@@ -423,7 +423,7 @@
 	{
 		"id": "motion-state",
 		"anchor": "sessions",
-		"number": "04",
+		"number": "06",
 		"title": "Why initialState contains more than your counter",
 		"intro": "Follow build-time placeholders as they become session-specific values. Only public fields cross to React.",
 		"nodes": [

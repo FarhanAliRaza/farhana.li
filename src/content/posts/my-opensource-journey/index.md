@@ -18,8 +18,6 @@ tags:
 published: true
 ---
 
-_From not knowing programming was a job to contributing to Django's core_
-
 As I write this, I've just passed my midterm evaluations for Google Summer of Code 2025, and I can't help but reflect on how far I've come. Not just in the past few months, but from the very beginning of this unlikely journey that led me to contribute to one of the world's largest Python web frameworks.
 
 ## Where It All Began
@@ -34,7 +32,7 @@ That movie opened up a whole new world. I went down the hacking rabbit hole and 
 
 After pre-med, I shocked everyone by deciding to pursue computer science. When I told my father, his response was priceless: "Do you want to become a computer operator?" He was genuinely thinking of the people who operate computers for government clerks. 😄
 
-Looking back, it's absolutely wild. From not knowing programming was even a career to now contributing to Django, one of the world's largest Python web frameworks.
+Looking back, it's absolutely wild. I went from not knowing programming was even a career to contributing to Django.
 
 ## My GSoC Project
 
@@ -66,7 +64,7 @@ GSoC has been as much about personal development as professional growth. Here ar
 
 ### Don't Take Code Reviews Personally
 
-This was a hard one for me initially. When maintainers pointed out issues in my code, my first instinct was to feel defensive. But I learned that **there's something wrong with your code, not with you**. Every piece of feedback has a reason behind it. Whether it's maintaining consistency, preventing bugs, or improving performance. Embracing this mindset transformed code reviews from stressful experiences into learning opportunities.
+This was a hard one for me initially. When maintainers pointed out issues in my code, my first instinct was to feel defensive. But I learned that **there's something wrong with your code, not with you**. Every piece of feedback has a reason behind it, whether it's maintaining consistency, preventing bugs, or improving performance. Embracing this mindset transformed code reviews from stressful experiences into learning opportunities.
 
 ### The Art of Listening
 
@@ -78,7 +76,7 @@ One of the most humbling realizations has been that **everybody works in their f
 
 ### Community Makes Everything Possible
 
-Technical excellence alone doesn't make a project successful. **Community does**. The welcoming environment in Django, the willingness of maintainers to mentor newcomers, and the collaborative spirit of contributors is what makes the framework thrive. Being part of this community has shown me what sustainable open source looks like.
+Technical excellence alone doesn't make a project successful. **Community does**. The welcoming environment in Django, the willingness of maintainers to mentor newcomers, and the collaborative spirit of contributors are what make the framework thrive. Being part of this community has shown me what sustainable open source looks like.
 
 ### Patience in Large Organizations
 
@@ -94,7 +92,7 @@ As I head into the second half of my GSoC project, I'm carrying these lessons wi
 
 To anyone considering applying for GSoC or getting involved in open source: start with the community first. The technical skills will come. But understanding how to work with others, communicate effectively, and contribute respectfully will serve you throughout your entire career.
 
-The template partials feature I'm building this summer will hopefully make Django more suitable for modern web development patterns. Especially for developers building interactive applications with HTMX and component-based architectures. But the person I'm becoming through this process will hopefully make the open-source community a little bit better too.
+The template partials feature I'm building this summer will hopefully make Django more suitable for modern web development patterns, especially for developers building interactive applications with HTMX and component-based architectures. But the person I'm becoming through this process will hopefully make the open-source community a little bit better too.
 
 ---
 

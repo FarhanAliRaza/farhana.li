@@ -56,19 +56,19 @@ zsh --version
 
 ## Step 2: Change Shell
 
-Check if zsh is available
+Check if zsh is available:
 
 ```bash
 chsh -l
 ```
 
-If it is available then change your default shell to zsh
+If it is listed, make zsh your default shell:
 
 ```bash
 chsh -s /usr/bin/zsh
 ```
 
-Logout and then login again.
+Log out, log back in, and confirm:
 
 ```bash
 echo $SHELL
@@ -77,7 +77,7 @@ echo $SHELL
 
 ## Step 3: Install Fonts
 
-Powerlevel10k requires a Font for proper icon display. Let's install one:
+Powerlevel10k requires a patched font to display its icons. Let's install one:
 
 ### For Ubuntu/Debian (Powerline Font):
 
@@ -91,13 +91,13 @@ fc-cache
 
 ### For Arch Linux:
 
-I like to use [getnf](https://github.com/getnf/getnf) in arch linux to install fonts. Same powerline font may work here also but i have not tried it.
+I like to use [getnf](https://github.com/getnf/getnf) on Arch Linux to install fonts. The same Powerline font may work here too, but I have not tried it.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
 ```
 
-or using aur helper
+or using an AUR helper:
 
 ```bash
 yay -S getnf
@@ -107,7 +107,7 @@ yay -S getnf
 getnf
 ```
 
-and then choose a font of you liking and install it.
+Then choose a font you like and install it.
 
 ```bash
 #remove cache if required
@@ -177,7 +177,7 @@ plugins=(
 )
 ```
 
-Do not use a comma between plugins, i have done that ;)
+Do not put commas between plugins. I have done that ;)
 
 ### Install Additional Plugins:
 
@@ -195,7 +195,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 1. Open Terminal Preferences
 2. Go to your profile settings
-3. In the "Text" tab, change the font to new installed font.
+3. In the "Text" tab, change the font to the newly installed font.
 4. Set font size to 12-14 for optimal readability
 
 ```bash
@@ -204,7 +204,7 @@ fc-list #to see all installed fonts
 
 ### For VS Code and Cursor Terminal:
 
-Set the terminal font to `DroidSansM Nerd Font Mono` or whatever font you installed. in your editor settings:
+Set the terminal font to `DroidSansM Nerd Font Mono` (or whatever font you installed) in your editor settings:
 
 **VS Code**: Settings → Search "terminal font" → Set "Terminal › Integrated: Font Family" to `DroidSansM Nerd Font Mono`
 
@@ -310,7 +310,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 # in lieu of restarting the shell
 \. "$HOME/.nvm/nvm.sh"
 
-# Download and install Node.js. At this time this is the lts version
+# Download and install Node.js. 22 is the LTS version at the time of writing.
 # Visit [Node.js site](https://nodejs.org/en/download) to check lts version:
 nvm install 22
 
@@ -326,8 +326,7 @@ pnpm -v
 
 ```
 
-If for some reason you are still not able to execute pnpm or nvm
-Add this to ~/.zshrc
+If you still can't run pnpm or nvm, add this to `~/.zshrc`:
 
 ```bash
 # NVM (Node Version Manager) configuration
@@ -340,9 +339,9 @@ export NVM_DIR="$HOME/.nvm"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 ```
 
-## Step 11: Git ssh key setup
+## Step 11: Git SSH key setup
 
-Generate your ssh key
+Generate your SSH key:
 
 ```bash
 ssh-keygen -t ed25519 -C "farhan@farhana.li" # your email, this is not a valid email
@@ -357,15 +356,13 @@ eval `ssh-agent`
 ssh-add ~/.ssh/id_ed25519
 ```
 
-Add you public key to your github keys
+Add your public key to your GitHub SSH keys:
 
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 
 For more info, visit [GitHub SSH documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
-
-Finally, you're all done!
 
 ### Performance Issues
 
@@ -375,7 +372,7 @@ If Zsh feels slow:
 2. Use the "instant prompt" feature of Powerlevel10k
 3. Consider using a lighter theme if needed
 
-#### Remember: restarting terminal always helps.
+Remember: restarting the terminal always helps.
 
 ## Step 12: Final Configuration
 
@@ -385,4 +382,4 @@ After all installations, reload your configuration if necessary:
 source ~/.zshrc
 ```
 
-### Congratulations 🎉 You have finally done it. Now bookmark this as you will definitely need this in near future.
+Congratulations 🎉 You're done. Bookmark this; you will need it again.

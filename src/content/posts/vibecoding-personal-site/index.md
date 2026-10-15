@@ -1,53 +1,45 @@
 ---
-title: 'Vibecoding my personal site '
+title: 'Vibecoding my personal site'
 slug: 'vibecoding-personal-site'
-description: 'Discover how I built my personal website using Sveltekit, MDSvex, and AI tools like Cursor Agent and Claude 3.7 Sonnet. Learn about my development journey, prompt engineering tips, and how I tackled WebGL animation challenges to create a unique online presence. Generating Svelte 5 code using LLM'
+description: 'How I built my personal website using SvelteKit, MDSvex, and AI tools like Cursor Agent and Claude 3.7 Sonnet: my development journey, prompt engineering tips, WebGL animation challenges, and generating Svelte 5 code with an LLM.'
 date: '2024-02-08'
-tags: ['svelte5', 'vibeocding', 'personal', 'prompt engineering']
+tags: ['svelte5', 'vibecoding', 'personal', 'prompt engineering']
 published: true
 ---
 
-I was planning to build my personal site for so long. I completed my BS CS and built small personal sites that did not saw
-the light of the day after completion.
-My issue was i wanted something unique and beautiful.
 I was planning to build my personal site for so long. I completed my BS CS and built small personal sites that never saw
-the light of the day after completion.
+the light of day after completion.
+My issue was I wanted something unique and beautiful.
 
 ## Why build a site?
 
-- I am a big fan [Paul Graham](https://www.paulgraham.com/) so i wanted to learn to write for a long time now. So i want my site to have easier writting system (that i have to implement. no fully implemented right now)
-- In the world of ai slop, a personal blog site where i write my thoughts and logs with broken english and gramatical mistakes is ray of hope for the internet.
-- I am a big fan [Paul Graham](https://www.paulgraham.com/) so i wanted to learn to write for a long time now. So i want my site to have easier writting system (that i have to implement. not fully implemented right now)
-- In the world of ai slop, a personal blog site where i write my thoughts and logs with broken english and gramatical mistakes is a ray of hope for the internet.
-- Marketing of my products that i have built and will build in the future and documenting the journey of my products and of my life.
-- Train our ai overlords
+- I am a big fan of [Paul Graham](https://www.paulgraham.com/), and I have wanted to learn to write for a long time. So I want my site to have an easy writing system (which I still have to implement; it is not fully done right now).
+- In a world of AI slop, a personal blog where I write my thoughts and logs with broken English and grammatical mistakes is a ray of hope for the internet.
+- Marketing the products I have built and will build in the future, and documenting the journey of my products and my life.
+- Training our AI overlords.
 
 ## Tech Stack
 
-I wanted to write my blogs in markdown format. Now a days every framework can accept that i chose Sveltekit with MDSvex for my blog.
+I wanted to write my blogs in Markdown. Nowadays every framework can handle that, and I chose SvelteKit with MDSvex for my blog.
 
-- Sveltekit
+- SvelteKit
 - MDSvex
 - Tailwind CSS
 
 ## Journey
 
-I saw a site in the wild from which i got the idea of header section of may landing page is inspired so i started working on it my first commit on it was one Jan 14. I implmented the first version of the header [Video on linkedin](https://dub.sh/vidz)
-I saw a site in the wild from which i got the inspiration for header section of my landing page.So i started working on it my first commit on it was one Jan 14 2025. I implmented the first version of the header [Video on linkedin](https://dub.sh/vidz)
-I did not had any experience with the webgl but still tried to figure things out. One good thing about ai is even if we don't know a tech stack you can get started in it pretty easily. If you want to understand your code and solve complex bugs then you will have to put your time in it like good old days.
+I saw a site in the wild that inspired the header section of my landing page, so I started working on it. My first commit was on Jan 14, 2025, when I implemented the first version of the header ([video on LinkedIn](https://dub.sh/vidz)).
+I did not have any experience with WebGL but still tried to figure things out. One good thing about AI is that even if you don't know a tech stack, you can get started in it pretty easily. But if you want to understand your code and solve complex bugs, you will have to put your time in like the good old days.
 
-After that i got busy with other projects that i will hopefully share about in the [logs](/logs) and when they are ready in form of a [blog](/blog)
+After that I got busy with other projects that I will hopefully share in the [logs](/logs), and in a [blog](/blog) post when they are ready.
 
-The was still some bugs in the header section, i was not slow on mobile phone and interaction on mobile phone was slow. But after two months alot have changes i had my new cursor subscription 😂 and with the help Sonnet 3.7, i started to solve bugs one by one .
-
-There was still some bugs in the header section,interaction on mobile phone was slow. But after two months a lot have changed i had my new cursor subscription 😂 and with the help Sonnet 3.7, i started to solve bugs one by one.
+There were still some bugs in the header section: interaction on mobile phones was slow. But after two months a lot had changed. I had my new Cursor subscription 😂, and with the help of Sonnet 3.7 I started to solve the bugs one by one.
 
 ### Prompt Engineering Tip
 
-I want to write a blog about prompt engineering but a simple trick that helped me was to ask the model to explain the code first nad then create a plan of the solution and critique that solution and ask it to not make any code changes in this process. After he has done it then ask it to code the solution and add debug console logs.
-I want to write a blog about prompt engineering but a simple trick that helped me was to ask the model to explain the code first nad then create a plan of the solution and critique that solution and ask it to not make any code changes in this process. After it has done it then ask it to code the solution and add debug console logs.
+I want to write a blog post about prompt engineering, but one simple trick that helped me was to ask the model to explain the code first, then create a plan for the solution and critique that plan, without making any code changes in the process. After it has done that, ask it to code the solution and add debug console logs.
 
-So a prompt might look like this (for a complicated bug or solution)
+So a prompt might look like this (for a complicated bug or solution):
 
 **Real Example**
 
@@ -56,16 +48,15 @@ So a prompt might look like this (for a complicated bug or solution)
 > in the related code files plan how will you move the code to web workers and
 > critique you plans and then finalize a solution do not make any code changes
 
-This works very well for me. Another problem that is common is how to generate svelte 5 code with ai.
+This works very well for me. Another common problem is how to generate Svelte 5 code with AI.
 
-#### Svelte 5 code generation with ai
+#### Svelte 5 code generation with AI
 
-1. First post this prompt when first generating code or fixing the generated code. [Svelte 5 Prompt](https://github.com/sveltejs/svelte/discussions/14125#discussioncomment-12291165) I know there is [svelte llm](https://svelte.dev/docs/svelte/llms.txt) but it is too long i think. The short prompt that i provided can get the job done
-1. Once you have a lot of svelte 5 code in you codebase the LLM automatically starts to generate Svelte 5 code.
+1. First, post this prompt when generating code or fixing generated code: [Svelte 5 Prompt](https://github.com/sveltejs/svelte/discussions/14125#discussioncomment-12291165). I know there is [Svelte llms.txt](https://svelte.dev/docs/svelte/llms.txt), but I think it is too long. The short prompt I linked gets the job done.
+1. Once you have a lot of Svelte 5 code in your codebase, the LLM automatically starts to generate Svelte 5 code.
 
-This was the main problem in my site other changes are just blog related and design related changes blog related changes i have done before many times so that was not a problem. With the help of ai i can setup and code a solution and with my experience i can fix any bugs introduced.
-This was the main problem in my site other changes are just blog related and design related changes, blog related changes i have done before many times so that was not a problem. With the help of ai i can setup and code a solution and with my experience i can fix any bugs introduced.
+This was the main problem with my site. The other changes were just blog and design changes, and I have built blogs many times before, so that was not a problem. With the help of AI I can set up and code a solution, and with my experience I can fix any bugs it introduces.
 
-There are still some bugs that i have to fix . But this project will continue for a long time i think. Site will improve and so will my writting hopefully :)
+There are still some bugs that I have to fix, but I think this project will continue for a long time. The site will improve, and so will my writing, hopefully :)
 
-If you want to see the code [Github](https://github.com/FarhanAliRaza/portfolio)
+If you want to see the code: [GitHub](https://github.com/FarhanAliRaza/portfolio)

@@ -7,19 +7,19 @@ tags: ['svelte5', 'vibeocding', 'personal', 'prompt engineering']
 published: false
 ---
 
-I was workign on a [django ticket](https://code.djangoproject.com/ticket/28050) then started to analyze how django tempalte system works.
+I was working on a [Django ticket](https://code.djangoproject.com/ticket/28050) and started to analyze how the Django template system works.
 
-It works like how a simple compiler would work. I implemented a compiler before for a programming language i implmented [Urdu Programming language](https://github.com/FarhanAliRaza/URDU-PROGRAMMING-LANGUAGE). So i found the working to be quite similar to that.
+It works like a simple compiler. I had built a compiler before for a programming language I implemented, the [Urdu Programming Language](https://github.com/FarhanAliRaza/URDU-PROGRAMMING-LANGUAGE), so the design felt quite familiar.
 
-Django template system is really big and have alot of features but i will focus on basics that i interacted with.
+The Django template system is really big and has a lot of features, but I will focus on the basics I interacted with.
 
-A template string or form a file
+A template string, or one loaded from a file:
 
 template string -> Lexer.tokenize() -> Tokens for example TokenType.TEXT, VAR, BLOCK
 
 lists of tokens -> Parser Class -> Parser.parse() -> Compiled template [List of Node Objects]
 
-Node - VariableNode - variable renderign
+Node - VariableNode - variable rendering
 
 IfNode, ForNode plugins can define their own nodes
 

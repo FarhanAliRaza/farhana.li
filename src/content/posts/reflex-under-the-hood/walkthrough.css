@@ -285,9 +285,6 @@
 .reflex-walkthrough footer {
 	color: var(--muted);
 }
-.reflex-walkthrough .source-list li {
-	overflow-wrap: anywhere;
-}
 @media (max-width: 700px) {
 	.reflex-walkthrough header,
 	.reflex-walkthrough main,

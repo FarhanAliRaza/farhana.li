@@ -1,30 +1,30 @@
 ---
-title: 'Guide for etag caching in django and svelte'
+title: 'A guide to ETag caching in Django and SvelteKit'
 slug: 'django-etag-caching-sveltekit'
 description: 'Learn how to implement efficient ETag-based client-side caching in Django and SvelteKit applications to reduce bandwidth usage and improve performance for users with slow internet connections.'
 date: '2024-05-04'
-tags: ['djagno', 'caching', 'sveltekit', 'etag-caching']
+tags: ['django', 'caching', 'sveltekit', 'etag-caching']
 published: true
 ---
-I am building a school management system with a built-in AI LMS for students. However, in Pakistan, many schools are in rural areas where the internet is slow. So, I want to make the site use client-side caching heavily, but I don't want to show outdated cached data to users as well.So I implemented etag based cahing sytem in my application.
+I am building a school management system with a built-in AI LMS for students. However, in Pakistan, many schools are in rural areas where the internet is slow. So, I want to make the site use client-side caching heavily, but I don't want to show outdated cached data to users either. So I implemented an ETag-based caching system in my application.
 
 ## Caching Types
 
-There are many ways of caching, mainly **server-side** caching, where queries or html pages are cached (hopefully next blog 🤞)   
-**Client-side** caching is where the result of the HTTP Response are cached on the client side.   
-For my use case, I want to minimize network usage that is why client-side caching makes a lot of sense for me.
+There are many ways of caching, mainly **server-side** caching, where queries or HTML pages are cached (hopefully next blog 🤞)   
+**Client-side** caching is where HTTP responses are cached on the client.   
+For my use case, I want to minimize network usage, which is why client-side caching makes a lot of sense for me.
 
 ### Common Caching Methods
 
 The most common type of caching is sending a cache header. 
 `Cache-Control: public, max-age=31536000`  
-This `public` indicates that this request can also be cached by intermediate proxies between client and server. `private` will only be cached inside the client browser. 
+`public` means the response can also be cached by proxies between the client and server. `private` means it is only cached in the client's browser. 
 
 There are also more conditional caching methods, such as time-based caching, where the browser sends the `If-Modified-Since: Sat, 05 Apr 2025 17:45:57 GMT` header with the request. If the content has changed since that time, the server will respond with the new data; otherwise, the server sends the `304` HTTP code with an empty body. 
 
 ## Etag Caching
 
-Entity tag caching works in the same way as time-based caching, but instead of sending a `If-Modified-Since` header a `If-None-Match:"15f0fff99ed5aae4edffdd6496d7131f` is sent; the server side matches the hash; if the hash is changed it sends the data if not changed, it sends back `304 ` HTTP code with empty body.
+Entity tag caching works in the same way as time-based caching, but instead of an `If-Modified-Since` header, the browser sends `If-None-Match: "15f0fff99ed5aae4edffdd6496d7131f"`. The server compares the hash: if it has changed, it sends the data; if not, it sends back a `304` with an empty body.
 
 ### How I implemented it
 
@@ -59,8 +59,8 @@ def generate_etag_for_collection(queryset, prefix=""):
 ```
 
 
-When a new entity is added or updated, the ETag changes, sending the data to the client side, that will in turn update or add to the cache on the client side.  
-In django rest framework viewset i check and send the ETag header 
+When an entity is added or updated, the ETag changes, so the server sends the data and the client updates its cache.  
+In the Django REST Framework viewset, I check the `If-None-Match` header and send the ETag:
 
 ```python
 def list(self, request, *args, **kwargs):  
@@ -83,12 +83,12 @@ def list(self, request, *args, **kwargs):
         response['ETag'] = etag  
         return response
 ```
-#### Sveltekit
+#### SvelteKit
 
 On the Svelte side, I store my cache data inside the `IndexedDB` and interact with it using the `dexie` library.
 
-This method gets the data from cache before fetching and updates the state. Then request the data in background if the HTTP code is something other than `304`, it updates the state according to the response that was sent.
-```js
+This function reads the data from the cache before fetching, so the state updates immediately. Then the data is requested in the background; if the response is anything other than `304`, the state is updated with the new data.
+```ts
 export async function getCachedData<T>(path: string): Promise<T | null> {  
   try {  
     // First check memory cache  
@@ -140,7 +140,7 @@ export async function getCachedData<T>(path: string): Promise<T | null> {
 ```
 ### Why not wait for HTTP 304 first? 
 
-In my testing on 3G internet, an empty response takes about 2 seconds. So the application does not feel so snappy. I update the state before waiting for the response that may cause some flickering when data updates but i am ok with that for now.
+In my testing on 3G internet, an empty response takes about 2 seconds, so the application would not feel snappy. Instead, I update the state before the response arrives. That can cause some flickering when the data changes, but I am OK with that for now.
 
 ### Edge Cases 
 
@@ -150,7 +150,7 @@ During development, the data format might change and that may cause some client-
 
 #### Performance
 
-Most of my users have low-end Android phones. So I minimize the use of RAM for that, I don't store the cache in memory and when the component unmounts, I clear the state if it was using some global state.  
+Most of my users have low-end Android phones. To minimize RAM use, I don't keep the cache in memory, and when a component unmounts, I clear its state if it was using global state.  
 
 
 ### Result 
@@ -166,6 +166,4 @@ As you can see in the cached response above, data loads instantly from IndexedDB
 ![Non-cached response showing normal network request loading time](/images/non-cached.gif)
 
 In contrast, the non-cached response demonstrates the traditional loading experience, where users must wait for the full network round-trip before seeing any data.
-
-The difference in user experience is significant, especially on slow 3G connections where the cached response provides instant feedback while the non-cached version may take several seconds to load.
 

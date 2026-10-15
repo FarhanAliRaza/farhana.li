@@ -47,10 +47,10 @@
 						: 'HTTP or build output · illustrative representation',
 				body: phase.payload,
 				context: compilation
-					? 'Actual source/output excerpts where identified; illustrative timing. These are compilation artifacts, not event payloads. Full modules and build output are available below.'
+					? 'Compilation artifacts, not event payloads. Excerpts are real; timing is illustrative.'
 					: phase.kind === 'local'
-						? 'This is local processing, not an outgoing Socket.IO payload. Advance to a request or response to inspect a recorded message.'
-						: 'This phase shows an explanatory representation. The recorded Socket.IO frames begin when the backend connection is established.'
+						? 'Local processing; nothing is sent. Step to a request or response to see a recorded message.'
+						: 'Illustrative. Recorded Socket.IO frames start once the backend connection opens.'
 			};
 		}
 		const id = frameIds[Math.min(messageIndex, frameIds.length - 1)];
@@ -75,7 +75,7 @@
 			direction: message.direction,
 			name,
 			body: format === 'raw' ? raw : JSON.stringify(decoded, null, 2),
-			context: `Recorded frame ${id + 1} of ${captures.length} · Volatile identifiers are redacted. ${format === 'raw' ? 'Exact captured WebSocket text, with redactions.' : 'Decoded message body; Raw frame includes the transport prefix and event envelope.'} This is the saved sample trace, not live network traffic.`
+			context: `Recorded frame ${id + 1} of ${captures.length} · IDs redacted.`
 		};
 	});
 	$effect(() => {
@@ -93,7 +93,8 @@
 		drawing?.draw(time);
 	}
 	function advance(now: number) {
-		time = Math.min(duration, time + (now - previousTime) * speed);
+		// rAF's timestamp is the frame start, which can precede the performance.now() taken in start().
+		time = Math.min(duration, time + Math.max(0, now - previousTime) * speed);
 		previousTime = now;
 		drawing?.draw(time);
 		if (time >= duration) stop();
@@ -261,9 +262,8 @@
 		<p class="wire-context">{packet.context}</p>
 	</div>
 	<p class="motion-footnote">
-		Illustrative timing, not measured latency. Pause or drag the timeline to inspect any phase. {spec.id ===
-		'motion-state'
-			? 'Shortened field names in this figure; full generated names remain in the source and captures.'
-			: 'The original source and real captured frames remain below.'}
+		Illustrative timing, not measured latency.{spec.id === 'motion-state'
+			? ' Field names are shortened in this figure.'
+			: ''}
 	</p>
 </figure>

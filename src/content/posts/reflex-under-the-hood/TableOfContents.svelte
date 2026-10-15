@@ -7,7 +7,7 @@
 		['architecture', 'Architecture'],
 		['compile', 'Compilation'],
 		['load', 'First load'],
-		['browser-events', 'Browser event loop'],
+		['browser-events', 'Click to socket'],
 		['explorer', 'Follow a click'],
 		['representations', 'Data formats'],
 		['capture', 'Real messages'],
@@ -15,9 +15,7 @@
 		['render', 'React updates'],
 		['routing', 'Routing'],
 		['sessions', 'Sessions & storage'],
-		['advanced', 'Other paths'],
-		['debug', 'Inspect it yourself'],
-		['sources', 'Source map']
+		['debug', 'Inspect it yourself']
 	];
 	let active = $state('');
 	let expanded = $state(false);
